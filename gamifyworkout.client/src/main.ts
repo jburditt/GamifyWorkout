@@ -2,6 +2,8 @@ import { AppComponent } from '@app/app.component';
 import { APP_INITIALIZER } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { routes } from '@app/app.routes';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
@@ -24,6 +26,7 @@ bootstrapApplication(AppComponent, {
       multi: true,
     },
     provideAnimations(),
+    provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     provideConfigService(),
     provideLoggingService(),

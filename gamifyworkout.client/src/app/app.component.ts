@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
 import { LoggingService } from '@app/core/services/logging/logging-service.interface';
 import { LoggingFactory } from '@app/core/services/logging/logging.factory';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 interface WeatherForecast {
   date: string;
@@ -18,7 +19,9 @@ interface WeatherForecast {
   standalone: true,
   imports: [
     NgIf,
-    NgForOf
+    NgForOf,
+    RouterLink,
+    RouterOutlet
   ]
 })
 export class AppComponent implements OnInit {

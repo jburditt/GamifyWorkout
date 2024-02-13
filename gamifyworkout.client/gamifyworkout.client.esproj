@@ -9,6 +9,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\core\services\logging\" />
+    <Folder Include="src\app\modules\admin\pages\" />
+    <Folder Include="src\app\modules\user\" />
     <Folder Include="src\app\shared\" />
   </ItemGroup>
 </Project>

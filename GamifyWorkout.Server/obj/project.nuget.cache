@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "ePqdI6vCPlo5hYj62GHeHWDlOsrwhL/EqD9e8PLDG7sRWfZ3RV03EJlDJhnruQl69tXw1qbef+gXnNTeI6jKVQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jebbb\\source\\repos\\GamifyWorkout\\GamifyWorkout.Server\\GamifyWorkout.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jebbb\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.1\\microsoft.aspnetcore.spaproxy.8.0.1.nupkg.sha512",
+    "C:\\Users\\jebbb\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\jebbb\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\jebbb\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\jebbb\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\jebbb\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\jebbb\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

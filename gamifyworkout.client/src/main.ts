@@ -5,7 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
-import { provideConfigService } from '@app/shared/providers';
+import { provideConfigService, provideLoggingService } from '@app/shared/providers';
 
 export function initializeApp(configService: ConfigService/*, http: HttpClient, authService: AuthenticationService*/) {
   return (): Observable<void> => {
@@ -26,6 +26,7 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     provideConfigService(),
+    provideLoggingService(),
   ]
 })
   .catch(err => console.error(err));

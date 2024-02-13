@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
-import { ConfigService } from './core/services/config/config-service.interface';
+import { LoggingService } from '@app/core/services/logging/logging-service.interface';
+import { LoggingFactory } from '@app/core/services/logging/logging.factory';
 
 interface WeatherForecast {
   date: string;
@@ -21,12 +22,19 @@ interface WeatherForecast {
   ]
 })
 export class AppComponent implements OnInit {
+
   public forecasts: WeatherForecast[] = [];
 
-  constructor(private http: HttpClient) {}
+  private readonly _loggingService: LoggingService;
+
+  constructor(private http: HttpClient, private loggingFactory: LoggingFactory)
+  {
+    this._loggingService = this.loggingFactory.create(this.constructor.name);
+  }
 
   ngOnInit() {
     this.getForecasts();
+    this._loggingService.debug('AppComponent initialized');
   }
 
   getForecasts() {

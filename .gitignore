@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/gamifyworkout.client/obj
+/GamifyWorkout.Server/bin
+/GamifyWorkout.Server/obj

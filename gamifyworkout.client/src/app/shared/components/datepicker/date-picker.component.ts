@@ -1,3 +1,6 @@
+// TODO currently this component will leave a <date-picker> tag in the DOM which will break the Material CSS
+// to fix, replace <date-picker> with ng-template or similar
+
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';

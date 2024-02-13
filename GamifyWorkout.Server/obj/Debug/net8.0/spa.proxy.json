@@ -1,6 +1,6 @@
 {
 "SpaProxyServer": {
-"ServerUrl": "https://localhost:4200",
+"ServerUrl": "https://localhost:4300",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
 "WorkingDirectory": "C:\\Users\\jebbb\\source\\repos\\GamifyWorkout\\GamifyWorkout.Server\\..\\gamifyworkout.client",

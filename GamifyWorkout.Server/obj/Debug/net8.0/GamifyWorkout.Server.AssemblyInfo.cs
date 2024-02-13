@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GamifyWorkout.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b60a69197039c521489ff3ae716c27472e52a2b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d4415d6b2fcda3a81d8a2345d87c4cdf640674d")]
 [assembly: System.Reflection.AssemblyProductAttribute("GamifyWorkout.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GamifyWorkout.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

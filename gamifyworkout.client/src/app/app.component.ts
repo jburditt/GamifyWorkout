@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
+import { ConfigService } from './core/services/config/config-service.interface';
 
 interface WeatherForecast {
   date: string;

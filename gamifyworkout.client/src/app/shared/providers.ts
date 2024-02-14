@@ -8,6 +8,8 @@ import { LumberjackLoggingService } from "@app/core/services/logging/lumberjack-
 import { provideLumberjack } from "@ngworker/lumberjack";
 import { provideLumberjackConsoleDriver } from "@ngworker/lumberjack/console-driver";
 import { LoggingFactory } from "@app/core/services/logging/logging.factory";
+import { HotToastService, provideHotToastConfig } from "@ngneat/hot-toast";
+import { ToastService } from "@app/core/services/toast/toast-service.interface";
 
 export function provideConfigService(): Provider {
   return {
@@ -27,3 +29,16 @@ export function provideLoggingService(): Provider {
     LoggingFactory,
   ];
 }
+
+export function provideToastService(): Provider {
+  return [
+    provideHotToastConfig({
+      position: 'top-center',
+      dismissible: true
+    }),
+    {
+      provide: ToastService,
+      useClass: HotToastService
+    }
+  ];
+};

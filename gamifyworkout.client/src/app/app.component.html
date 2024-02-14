@@ -1,1 +1,10 @@
+<mat-toolbar color="primary">
+  <menu [items]="menuItemList"></menu>
+  <span>{{ projectName }}</span>
+  <span class="spacer"></span>
+  <!--<button *ngIf="isLoggedIn" mat-icon-button (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>-->
+</mat-toolbar>
+
 <router-outlet></router-outlet>

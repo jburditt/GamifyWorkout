@@ -1,0 +1,3838 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "Configuration",
+            "id": "interface-Configuration-dee70084b89ddb03cd94a0e5a22f944fbe37df65722d7138884a0866963457d78011d79f7e5163765f37323bc1e76a21f13bb583ad61fde7253849f28f26c448",
+            "file": "src/app/core/services/config/config.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface Configuration {\r\n  [key: string]: any;\r\n  baseUrl: string;\r\n  logLevel: string;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "baseUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "logLevel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [
+                {
+                    "id": "index-declaration-dee70084b89ddb03cd94a0e5a22f944fbe37df65722d7138884a0866963457d78011d79f7e5163765f37323bc1e76a21f13bb583ad61fde7253849f28f26c448",
+                    "args": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "any",
+                    "line": 1,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "User",
+            "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
+            "file": "src/stories/user.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {\n  name: string;\n}\n",
+            "properties": [
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "WeatherForecast",
+            "id": "interface-WeatherForecast-dbfa293ed0a89bf0354ef6e225267d420e8800f7d6fa9827123d638944027f782d79227a4c113f8984758ba27355da8cb569ec26eec3737fe33d8d314217f547",
+            "file": "src/app/modules/user/pages/weather.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { HttpClient } from '@angular/common/http';\nimport { Component, OnInit } from '@angular/core';\r\nimport { NgForOf, NgIf } from '@angular/common';\r\nimport { LoggingService } from '@app/core/services/logging/logging-service.interface';\r\nimport { LoggingFactory } from '@app/core/services/logging/logging.factory';\r\nimport { RouterLink, RouterOutlet } from '@angular/router';\r\n\r\ninterface WeatherForecast {\r\n  date: string;\r\n  temperatureC: number;\r\n  temperatureF: number;\r\n  summary: string;\r\n}\n\n@Component({\n  templateUrl: './weather.component.html',\n  styleUrls: ['./weather.component.css'],\n  standalone: true,\n  imports: [\n    NgIf,\n    NgForOf,\n    RouterLink,\n    RouterOutlet\n  ]\n})\nexport class WeatherPageComponent implements OnInit {\r\n\r\n  public forecasts: WeatherForecast[] = [];\r\n\r\n  private readonly _loggingService: LoggingService;\r\n\r\n  constructor(private http: HttpClient, private loggingFactory: LoggingFactory) {\r\n    this._loggingService = this.loggingFactory.create(this.constructor.name);\r\n  }\r\n\r\n  ngOnInit() {\r\n    this.getForecasts();\r\n    this._loggingService.debug('Weather page initialized');\r\n  }\r\n\r\n  getForecasts() {\r\n    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(\r\n      (result) => {\r\n        this.forecasts = result;\r\n      },\r\n      (error) => {\r\n        console.error(error);\r\n      }\r\n    );\r\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "date",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "summary",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "temperatureC",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "temperatureF",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "ConfigService",
+            "id": "injectable-ConfigService-5f55b1935533c1c13939983ff0d96934135fcec727b7c571c034b485521783f87c7a2fb309713f3f13ab68ee4a75a80a82ea14ddd60219152cf5c44416771d13",
+            "file": "src/app/core/services/config/config-service.interface.ts",
+            "properties": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Configuration",
+                    "optional": false,
+                    "description": "",
+                    "line": 7,
+                    "modifierKind": [
+                        128
+                    ]
+                },
+                {
+                    "name": "isLoaded$",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "BehaviorSubject<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        128
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getEndpoint",
+                    "args": [
+                        {
+                            "name": "controller",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 10,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "controller",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "loadConfig",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<void>",
+                    "typeParameters": [],
+                    "line": 9,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from \"@angular/core\";\r\nimport { BehaviorSubject, Observable } from \"rxjs\";\r\nimport { Configuration } from \"./config.interface\";\r\n\r\n@Injectable()\r\nexport abstract class ConfigService {\r\n  abstract config: Configuration;\r\n  abstract isLoaded$: BehaviorSubject<boolean>;\r\n  abstract loadConfig(): Observable<void>;\r\n  abstract getEndpoint(controller: string, path: string): string;\r\n}\r\n",
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "ErrorHandlerService",
+            "id": "injectable-ErrorHandlerService-8df34735241b54bfa5e5de577631e0115da1fba666a1dcc840d93bc2af013f8f04cb85b2970abf49e1b9e3a59e33bb1bad1a2c77de4b50812da4ee508a226209",
+            "file": "src/app/core/services/error-handler-service.ts",
+            "properties": [
+                {
+                    "name": "_loggingService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "LoggingService",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "handleError",
+                    "args": [
+                        {
+                            "name": "error",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        164
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "error",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { ErrorHandler, Injectable } from '@angular/core';\r\nimport { LoggingService } from './logging/logging-service.interface';\r\nimport { LoggingFactory } from './logging/logging.factory';\r\n\r\n@Injectable()\r\nexport class ErrorHandlerService extends ErrorHandler {\r\n\r\n  private readonly _loggingService: LoggingService;\r\n\r\n  constructor(\r\n    private loggingFactory: LoggingFactory\r\n  ) {\r\n    super();\r\n\r\n    this._loggingService = this.loggingFactory.create(this.constructor.name);\r\n  }\r\n\r\n  override handleError(error: any) {\r\n    this._loggingService.error(\"ErrorHandler\", error);\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 8,
+                "jsdoctags": [
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [
+                "ErrorHandler"
+            ],
+            "type": "injectable"
+        },
+        {
+            "name": "HotToastService",
+            "id": "injectable-HotToastService-e69983cdf4717a6e436a13416085153029c3b71955e7befae4eb8c96062344467b76c6eb8e672bff9abe424bb151869ba5e339330d938ed9422686c9ec4cd64f",
+            "file": "src/app/core/services/toast/hot-toast.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "error",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "info",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 10,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "warning",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HotToastService as NgNeatHotToastService } from '@ngneat/hot-toast';\r\nimport { ToastService } from './toast-service.interface';\r\n\r\n@Injectable()\r\nexport class HotToastService implements ToastService {\r\n\r\n    constructor(private hotToastService: NgNeatHotToastService) {}\r\n\r\n    info(message: string) {\r\n        this.hotToastService.info(message);\r\n    }\r\n\r\n    error(message: string) {\r\n        this.hotToastService.error(message);\r\n    }\r\n\r\n    warning(message: string) {\r\n        this.hotToastService.warning(message);\r\n    }\r\n\r\n    show(message: string) {\r\n        this.hotToastService.show(message);\r\n    }\r\n\r\n    success(message: string) {\r\n        this.hotToastService.success(message);\r\n    }\r\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "hotToastService",
+                        "type": "NgNeatHotToastService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 6,
+                "jsdoctags": [
+                    {
+                        "name": "hotToastService",
+                        "type": "NgNeatHotToastService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "JsonConfigService",
+            "id": "injectable-JsonConfigService-a82535b9afcf11a4afb4b8c73fcdabceaab81166ef6167a7bc396c08b6acd8a6b001ab42f91c9d22d0e44c7afa590afd7526369aa1ab57489c256d34a2bce1f1",
+            "file": "src/app/core/services/config/json-config.service.ts",
+            "properties": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Configuration",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "isLoaded$",
+                    "defaultValue": "new BehaviorSubject<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "BehaviorSubject<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getEndpoint",
+                    "args": [
+                        {
+                            "name": "controller",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "controller",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "loadConfig",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<void>",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient, HttpErrorResponse } from '@angular/common/http';\r\nimport { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';\r\nimport { ConfigService } from './config-service.interface';\r\nimport { Configuration } from './config.interface';\r\nimport { Location } from '@angular/common';\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class JsonConfigService implements ConfigService {\r\n  config!: Configuration;\r\n  isLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);\r\n\r\n  constructor(private readonly http: HttpClient) { }\r\n\r\n  loadConfig(): Observable<void> {\r\n    return this.http.get('assets/config.json')\r\n      .pipe(map((data: any) => {\r\n        this.config = data;\r\n        this.isLoaded$.next(true);\r\n      }), catchError((error: HttpErrorResponse) => {\r\n        return throwError(() => error);\r\n      }));\r\n  }\r\n\r\n  getEndpoint(controller: string, path: string): string {\r\n    return Location.joinWithSlash(Location.joinWithSlash(this.config.baseUrl, controller), path);\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 13,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "LoggingFactory",
+            "id": "injectable-LoggingFactory-c1098d84c55ae0dc950d23867bb45a5803cf0197856993dd50c2cfea10d05bab14317ce0bee08f260a200ec856a01e9b178eca3343bec7a69627e4cbdfb9b022",
+            "file": "src/app/core/services/logging/logging.factory.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "create",
+                    "args": [
+                        {
+                            "name": "scope",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "LoggingService",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "scope",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from \"@angular/core\";\r\nimport { LogLevel, LoggingService } from \"./logging-service.interface\";\r\nimport { ConfigService } from '@app/core/services/config/config-service.interface';\r\nimport { filter } from \"rxjs\";\r\n\r\n@Injectable()\r\nexport class LoggingFactory {\r\n\r\n  constructor(\r\n    private readonly configService: ConfigService,\r\n    private loggingService: LoggingService\r\n  ) { }\r\n\r\n  create(scope: string): LoggingService {\r\n    // some services are initialized before configService is loaded, set logLevel after configService is loaded\r\n    // NOTE this could lead to some extra logs on all levels on application startup\r\n    if (!this.configService.config?.logLevel) {\r\n      this.configService.isLoaded$\r\n        .pipe(filter((isLoaded: boolean) => isLoaded))\r\n        .subscribe(() => this.loggingService.logLevel = (<any>LogLevel)[this.configService.config.logLevel]);\r\n    } else {\r\n      this.loggingService.logLevel = (<any>LogLevel)[this.configService.config.logLevel];\r\n    }\r\n    this.loggingService.scope = scope;\r\n    return this.loggingService;\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "configService",
+                        "type": "ConfigService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "loggingService",
+                        "type": "LoggingService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 7,
+                "jsdoctags": [
+                    {
+                        "name": "configService",
+                        "type": "ConfigService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "loggingService",
+                        "type": "LoggingService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "LoggingService",
+            "id": "injectable-LoggingService-eb7cef6da7859b54b6fb9fed7114de8f7cdeab4b2fa987a5c4557f679e9141a6a3d021dbb18b436f573f31defbcda921c6970ca94afd07d0fffc5751f6456e0d",
+            "file": "src/app/core/services/logging/logging-service.interface.ts",
+            "properties": [
+                {
+                    "name": "logLevel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "LogLevel",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        128
+                    ]
+                },
+                {
+                    "name": "scope",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        128
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "debug",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "fatal",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "info",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "warn",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\n\r\nexport enum LogLevel {\r\n  All = 0,\r\n  Debug = 1,\r\n  Info = 2,\r\n  Warn = 3,\r\n  Error = 4,\r\n  Fatal = 5,\r\n  Off = 6\r\n}\r\n\r\n@Injectable()\r\nexport abstract class LoggingService {\r\n  abstract scope?: string;\r\n  abstract logLevel: LogLevel;\r\n  abstract debug(message: string, payload?: any): void;\r\n  abstract info(message: string, payload?: any): void;\r\n  abstract warn(message: string, payload?: any): void;\r\n  abstract error(message: string, payload?: any): void;\r\n  abstract fatal(message: string, payload?: any): void;\r\n}\r\n",
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "LumberjackLoggingService",
+            "id": "injectable-LumberjackLoggingService-08ecf0ebe1084148bac488b3f7972c22d40c9e9e34175a7f769e23ba70572f2f08d227d92e86a700e9a0a1ed537295cfe1f79535c0ec008e7e7ce4b229ce9cfc",
+            "file": "src/app/core/services/logging/lumberjack-logging.service.ts",
+            "properties": [
+                {
+                    "name": "logLevel",
+                    "defaultValue": "LogLevel.All",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "LogLevel",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "scope",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methods": [
+                {
+                    "name": "debug",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "fatal",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "info",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "warn",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "writeToLog",
+                    "args": [
+                        {
+                            "name": "logLevel",
+                            "type": "LogLevel",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "logLevel",
+                            "type": "LogLevel",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { LumberjackService, LumberjackLevel, LumberjackTimeService, provideLumberjack } from '@ngworker/lumberjack';\r\nimport { Injectable } from '@angular/core';\r\nimport { LogLevel, LoggingService } from './logging-service.interface';\r\n\r\n@Injectable()\r\nexport class LumberjackLoggingService implements LoggingService {\r\n  constructor(\r\n    private readonly lumberjackService: LumberjackService,\r\n    private lumberjackTimeService: LumberjackTimeService\r\n  ) { }\r\n\r\n  scope?: string;\r\n  logLevel: LogLevel = LogLevel.All;\r\n\r\n  debug(message: string, payload?: any) {\r\n    if (this.logLevel <= LogLevel.Debug)\r\n      this.writeToLog(LogLevel.Debug, message, payload);\r\n  }\r\n\r\n  info(message: string, payload?: any) {\r\n    if (this.logLevel <= LogLevel.Info)\r\n      this.writeToLog(LogLevel.Info, message, payload);\r\n  }\r\n\r\n  warn(message: string, payload?: any) {\r\n    if (this.logLevel <= LogLevel.Warn)\r\n      this.writeToLog(LogLevel.Warn, message, payload);\r\n  }\r\n\r\n  error(message: string, payload?: any) {\r\n    if (this.logLevel <= LogLevel.Error)\r\n      this.writeToLog(LogLevel.Error, message, payload);\r\n  }\r\n\r\n  fatal(message: string, payload?: any) {\r\n    if (this.logLevel <= LogLevel.Fatal)\r\n      this.writeToLog(LogLevel.Fatal, message, payload);\r\n  }\r\n\r\n  private writeToLog(logLevel: LogLevel, message: string, payload?: any) {\r\n    let lumberjackLevel: LumberjackLevel = LumberjackLevel.Debug;\r\n    switch (logLevel) {\r\n      case LogLevel.Debug:\r\n        lumberjackLevel = LumberjackLevel.Debug;\r\n        break;\r\n      case LogLevel.Info:\r\n        lumberjackLevel = LumberjackLevel.Info;\r\n        break;\r\n      case LogLevel.Warn:\r\n        lumberjackLevel = LumberjackLevel.Warning;\r\n        break;\r\n      case LogLevel.Error:\r\n        lumberjackLevel = LumberjackLevel.Error;\r\n        break;\r\n      case LogLevel.Fatal, LogLevel.Off:\r\n        lumberjackLevel = LumberjackLevel.Critical;\r\n        break;\r\n    }\r\n\r\n    this.lumberjackService.log({\r\n      level: lumberjackLevel,\r\n      message: message,\r\n      payload: payload,\r\n      scope: this.scope,\r\n      createdAt: this.lumberjackTimeService.getUnixEpochTicks(),\r\n    });\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "lumberjackService",
+                        "type": "LumberjackService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "lumberjackTimeService",
+                        "type": "LumberjackTimeService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 6,
+                "jsdoctags": [
+                    {
+                        "name": "lumberjackService",
+                        "type": "LumberjackService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "lumberjackTimeService",
+                        "type": "LumberjackTimeService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        },
+        {
+            "name": "ToastService",
+            "id": "injectable-ToastService-7b4bd25d766e78781f58896c9745acc7597cf3aee1e2947086f31deeb8bada5aec590a364afdf3f93441d8c88303a9b56d46adeebd3b6345060795904bbafd11",
+            "file": "src/app/core/services/toast/toast-service.interface.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "error",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 6,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "info",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 5,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 8,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 9,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "warning",
+                    "args": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 7,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        128
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\n\r\n@Injectable()\r\nexport abstract class ToastService {\r\n    abstract info(message: string): void;\r\n    abstract error(message: string): void;\r\n    abstract warning(message: string): void;\r\n    abstract show(message: string): void;\r\n    abstract success(message: string): void;\r\n}",
+            "extends": [],
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [
+        {
+            "name": "HttpConfigInterceptor",
+            "id": "injectable-HttpConfigInterceptor-0a593d25f65f40c1c9126b175e12644d97c03473ed0886e6290e678516d5a0dbe88bbdb7b6cb6e1dae4c23ec671020a53342ff6fce9e6e1db41072e08f372cd6",
+            "file": "src/app/core/interceptors/httpconfig.interceptor.ts",
+            "properties": [
+                {
+                    "name": "_loggingService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "LoggingService",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "intercept",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<any>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "next",
+                            "type": "HttpHandler",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<HttpEvent<any>>",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<any>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "next",
+                            "type": "HttpHandler",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\nimport { map, catchError, retry } from 'rxjs/operators';\r\nimport { LoggingService } from '../services/logging/logging-service.interface';\r\nimport { LoggingFactory } from '../services/logging/logging.factory';\r\n\r\n@Injectable()\r\nexport class HttpConfigInterceptor implements HttpInterceptor {\r\n\r\n  private readonly _loggingService: LoggingService;\r\n\r\n  constructor(\r\n    private loggingFactory: LoggingFactory\r\n  ) {\r\n    this._loggingService = this.loggingFactory.create(this.constructor.name);\r\n  }\r\n\r\n  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {\r\n    return next.handle(request).pipe(\r\n      retry(2), // retry 2 times after request failed\r\n      map((event: HttpEvent<any>) => {\r\n        if (event instanceof HttpResponse) {\r\n          this._loggingService.info(\"HttpEvent\", event)\r\n        }\r\n        return event;\r\n      }),\r\n      catchError((error: HttpErrorResponse) => {\r\n        this._loggingService.error(\"HttpEvent Error\", error)\r\n        throw error;\r\n      })\r\n    );\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "interceptor"
+        }
+    ],
+    "classes": [
+        {
+            "name": "AdminRoutes",
+            "id": "class-AdminRoutes-5c80ddc70ab7a1cfe4caacc814bb4a05ba05e5909eb096e7e055f6cd233dcea98393064f6bd9e9a398c56383634dc6032b3ad86cec3350accc4362996588b14e",
+            "file": "src/app/modules/admin/admin.routes.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import { Route } from \"@angular/router\";\r\nimport { WorkoutsPageComponent } from \"@app/modules/admin/pages/workouts.component\";\r\n\r\nexport class AdminRoutes {\r\n  public static HOME = '';\r\n}\r\n\r\nexport default [\r\n  {\r\n    path: AdminRoutes.HOME,\r\n    component: WorkoutsPageComponent,\r\n  }\r\n] satisfies Route[];\r\n",
+            "properties": [
+                {
+                    "name": "HOME",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 5,
+                    "modifierKind": [
+                        126
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "MenuItem",
+            "id": "class-MenuItem-a0647a2a2a77e92cf5f25e16b20811ee9946a37dc4addaf55d25892fe9168b855186ef527305e969d620e36db5f3ef2a1452224303a38e0d7ef311fe3afefdf2",
+            "file": "src/app/shared/models/menu-item.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "export class MenuItem {\r\n    displayName: string;\r\n    routerLink: string;\r\n    icon: string | null;\r\n    children: Array<MenuItem> | null = null;\r\n  \r\n    constructor(displayName: string, routerLink: string, icon: string | null = null, children?: Array<MenuItem> | null) {\r\n        this.displayName = displayName;\r\n        this.routerLink = routerLink;\r\n        this.icon = icon;\r\n        this.children = children ?? null;\r\n    }\r\n  }",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "displayName",
+                        "type": "string",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "routerLink",
+                        "type": "string",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "icon",
+                        "type": "string | null",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "defaultValue": "null"
+                    },
+                    {
+                        "name": "children",
+                        "type": "Array<MenuItem> | null",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "optional": true
+                    }
+                ],
+                "line": 5,
+                "jsdoctags": [
+                    {
+                        "name": "displayName",
+                        "type": "string",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "routerLink",
+                        "type": "string",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "icon",
+                        "type": "string | null",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "defaultValue": "null",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "children",
+                        "type": "Array<MenuItem> | null",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "optional": true,
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "children",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<MenuItem> | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "displayName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "routerLink",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "UserRoutes",
+            "id": "class-UserRoutes-1e597dca95e70829334ba96f95afe2b02e7f8dc3c7222e5fa0abd7727952f95eeb549fc46d1e3af752f8640da905f77c1472bcb865f60fa594c8d32c53256c5c",
+            "file": "src/app/modules/user/user.routes.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import { Route } from \"@angular/router\";\r\nimport { FormPageComponent } from \"@app/modules/user/pages/form.component\";\r\nimport { WeatherPageComponent } from \"@app/modules/user/pages/weather.component\";\r\n\r\nexport class UserRoutes {\r\n  public static HOME = '';\r\n  public static WEATHER = 'weather';\r\n}\r\n\r\nexport default [\r\n  {\r\n    path: UserRoutes.HOME,\r\n    component: FormPageComponent,\r\n  },\r\n  {\r\n    path: UserRoutes.WEATHER,\r\n    component: WeatherPageComponent,\r\n  }\r\n] satisfies Route[];\r\n",
+            "properties": [
+                {
+                    "name": "HOME",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 6,
+                    "modifierKind": [
+                        126
+                    ]
+                },
+                {
+                    "name": "WEATHER",
+                    "defaultValue": "'weather'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 7,
+                    "modifierKind": [
+                        126
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-c33a4975f57942db3bfc9b328ceb340e727b8770e0e786a8f941770b5f515534f4d762bf07798ede822c8980d1c0ed21897cba3852503b659d1b47dd95492040",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "_loggingService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "LoggingService",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "menuItemList",
+                    "defaultValue": "[\r\n    new MenuItem('Weather', '/user/weather', 'assignment'),\r\n    new MenuItem('Admin', '/admin', 'settings'),\r\n    new MenuItem('User', '/user', 'contact_mail'),\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<MenuItem>",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "projectName",
+                    "defaultValue": "'Maverick'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 26,
+                    "modifierKind": [
+                        125
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "NgForOf"
+                },
+                {
+                    "name": "RouterLink"
+                },
+                {
+                    "name": "RouterOutlet"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatToolbarModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MenuComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { HttpClient } from '@angular/common/http';\r\nimport { Component, OnInit } from '@angular/core';\r\nimport { NgForOf, NgIf } from '@angular/common';\r\nimport { LoggingService } from '@app/core/services/logging/logging-service.interface';\r\nimport { LoggingFactory } from '@app/core/services/logging/logging.factory';\r\nimport { RouterLink, RouterOutlet } from '@angular/router';\r\nimport { MenuItem } from '@app/shared/models/menu-item.model';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MenuComponent } from './shared/components/menu/menu.component';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n  standalone: true,\r\n  imports: [\r\n    NgIf, NgForOf,\r\n    RouterLink, RouterOutlet,\r\n    MatIconModule, MatToolbarModule, MatButtonModule,\r\n    MenuComponent\r\n  ]\r\n})\r\nexport class AppComponent implements OnInit {\r\n\r\n  public projectName: string = 'Maverick';\r\n\r\n  private readonly _loggingService: LoggingService;\r\n\r\n  menuItemList: Array<MenuItem> = [\r\n    new MenuItem('Weather', '/user/weather', 'assignment'),\r\n    new MenuItem('Admin', '/admin', 'settings'),\r\n    new MenuItem('User', '/user', 'contact_mail'),\r\n  ];\r\n\r\n  constructor(private loggingFactory: LoggingFactory)\r\n  {\r\n    this._loggingService = this.loggingFactory.create(this.constructor.name);\r\n  }\r\n\r\n  ngOnInit() {\r\n    this._loggingService.debug('AppComponent initialized');\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 34,
+                "jsdoctags": [
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<mat-toolbar color=\"primary\">\r\n  <menu [items]=\"menuItemList\"></menu>\r\n  <span>{{ projectName }}</span>\r\n  <span class=\"spacer\"></span>\r\n  <!--<button *ngIf=\"isLoggedIn\" mat-icon-button (click)=\"logout()\">\r\n    <mat-icon>logout</mat-icon>\r\n  </button>-->\r\n</mat-toolbar>\r\n\r\n<router-outlet></router-outlet>\r\n"
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-86e2311c54fbca7431c12e070d0fd5b0ebe343eec0553a392f182ba0e04a8f86613233d26ee47718fd0e7a65078f580c76a1fcc928ce55de81193d6618025bc4",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nWhat background color to use\n",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 29,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 798,
+                            "end": 811,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 799,
+                                "end": 807,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "\n\nButton contents\n\n",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 43,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIs this the principal call to action on the page?\n",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 23,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nHow large should the button be?\n",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 35,
+                    "type": "\"small\" | \"medium\" | \"large\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nOptional click handler\n",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 49,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  standalone: true,\n  imports: [CommonModule],\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 51
+                    }
+                }
+            }
+        },
+        {
+            "name": "DatePickerComponent",
+            "id": "component-DatePickerComponent-a980a95b1aa864f835e72c0913f6f6e0211b9f639812e6c9d766213d095fe502f32045697ec201613cc3ec918c9ccc91d6f48eb050c885165ed48f2bf4451c11",
+            "file": "src/app/shared/components/datepicker/date-picker.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "[datePickerFormControl] date-picker",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./date-picker.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "datePickerFormControl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "FormControl",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "MatDatepickerModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { NgIf } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { MatDatepickerModule } from '@angular/material/datepicker';\r\nimport { MatInputModule } from '@angular/material/input';\r\n\r\n@Component({\r\n  standalone: true,\r\n  selector: '[datePickerFormControl] date-picker',\r\n  templateUrl: './date-picker.component.html',\r\n  imports: [\r\n    FormsModule, ReactiveFormsModule, \r\n    NgIf,\r\n    MatDatepickerModule, MatInputModule\r\n  ],\r\n})\r\nexport class DatePickerComponent  {\r\n    @Input() title!: string;\r\n    @Input() datePickerFormControl!: FormControl;\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<mat-form-field>\r\n    <mat-label>{{ title }}</mat-label>\r\n    <input matInput [matDatepicker]=\"picker\" [formControl]=\"datePickerFormControl\">\r\n    <mat-hint>MM/DD/YYYY</mat-hint>\r\n    <mat-datepicker-toggle matIconSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n    <mat-datepicker #picker></mat-datepicker>\r\n    <mat-error *ngIf=\"datePickerFormControl.hasError('matDatepickerParse')\">\r\n        Must be in MM/DD/YYYY format\r\n    </mat-error>\r\n</mat-form-field>"
+        },
+        {
+            "name": "FormPageComponent",
+            "id": "component-FormPageComponent-a8e70cd1a4c77ac82c6fd7ed79df41137fc931355759c25e5a83d20029adbc979fda309de521f067d5773b93c58724c07a34e2590908369c331a777bb12c4975",
+            "file": "src/app/modules/user/pages/form.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "form.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "searchForm",
+                    "defaultValue": "new FormGroup({\r\n    date: new FormControl('', []),\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatDatepickerModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatNativeDateModule",
+                    "type": "module"
+                },
+                {
+                    "name": "DatePickerComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { MatNativeDateModule } from '@angular/material/core';\r\nimport { MatDatepickerModule } from '@angular/material/datepicker';\r\nimport { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';\r\n\r\n@Component({\r\n  standalone: true,\r\n  templateUrl: 'form.component.html',\r\n  imports: [\r\n    FormsModule, ReactiveFormsModule,\r\n    MatDatepickerModule,\r\n    MatNativeDateModule,\r\n    DatePickerComponent\r\n  ]\r\n})\r\nexport class FormPageComponent {\r\n  searchForm = new FormGroup({\r\n    date: new FormControl('', []),\r\n  });\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<h1>Form</h1>\r\n\r\n<date-picker title=\"Date\" [datePickerFormControl]=\"$any(searchForm.get('date'))\"></date-picker>\r\n"
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-cad94b233ec8e80ceb541e7972c5f9737e08237b4e137112f3987ca48ee0cce5c0d57798d41daa5d4d24d6bdbb2df1606ab68cca2aa0a1785e38f99f3cac0729",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            [primary]=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 69,
+                    "type": "User | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 78,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 72,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 75,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { ButtonComponent } from './button.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-header',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  template: `<header>\n    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            [primary]=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-header {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  color: #333;\n  font-size: 14px;\n  margin-right: 10px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MenuComponent",
+            "id": "component-MenuComponent-ac9c036deb987f2d2d7b2e53955efa04534f84d65e80999f5d19a6d0a963ab3e88090bae6c1d9a58f9dbfa10cd205747bd16216a37214956cf623e392090631e",
+            "file": "src/app/shared/components/menu/menu.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "menu",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./menu.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "Array<MenuItem>",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "RouterLink"
+                },
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "NgForOf"
+                },
+                {
+                    "name": "MatMenuModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { NgForOf, NgIf } from '@angular/common';\r\nimport { Component, Input } from '@angular/core';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatMenuModule } from '@angular/material/menu';\r\nimport { RouterLink } from '@angular/router';\r\nimport { MenuItem } from '@app/shared/models/menu-item.model';\r\n\r\n@Component({\r\n  standalone: true,\r\n  selector: 'menu',\r\n  templateUrl: './menu.component.html',\r\n  imports: [\r\n    RouterLink, \r\n    NgIf, NgForOf,\r\n    MatMenuModule, MatIconModule, MatButtonModule\r\n  ]\r\n})\r\nexport class MenuComponent { \r\n    @Input() items: Array<MenuItem> = [];\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<button mat-icon-button [matMenuTriggerFor]=\"menu\">\r\n    <mat-icon>menu</mat-icon>\r\n</button>\r\n<mat-menu #menu=\"matMenu\">\r\n    <button mat-menu-item *ngFor=\"let menuItem of items\" routerLink=\"{{menuItem.routerLink}}\">\r\n        <mat-icon *ngIf=\"menuItem.icon\">{{menuItem.icon}}</mat-icon>\r\n        <span>{{menuItem.displayName}}</span>\r\n    </button>\r\n</mat-menu>\r\n"
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-d32b0f19628254ea3fc5526c4d4564ada1cc83cf936759006d90a46f5874b02a3359e331bddda20b22e74a616a6443c660602ba74dd38ebe1160759e0de6f7ba",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "User | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 69
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "doCreateAccount",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "HeaderComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { HeaderComponent } from './header.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-page',\n  standalone: true,\n  imports: [CommonModule, HeaderComponent],\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-page {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\n.storybook-page h2 {\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\n.storybook-page ul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.storybook-page .tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "WeatherPageComponent",
+            "id": "component-WeatherPageComponent-dbfa293ed0a89bf0354ef6e225267d420e8800f7d6fa9827123d638944027f782d79227a4c113f8984758ba27355da8cb569ec26eec3737fe33d8d314217f547",
+            "file": "src/app/modules/user/pages/weather.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "styleUrls": [
+                "./weather.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./weather.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "_loggingService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "LoggingService",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "forecasts",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "WeatherForecast[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        125
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getForecasts",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "NgForOf"
+                },
+                {
+                    "name": "RouterLink"
+                },
+                {
+                    "name": "RouterOutlet"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { HttpClient } from '@angular/common/http';\nimport { Component, OnInit } from '@angular/core';\r\nimport { NgForOf, NgIf } from '@angular/common';\r\nimport { LoggingService } from '@app/core/services/logging/logging-service.interface';\r\nimport { LoggingFactory } from '@app/core/services/logging/logging.factory';\r\nimport { RouterLink, RouterOutlet } from '@angular/router';\r\n\r\ninterface WeatherForecast {\r\n  date: string;\r\n  temperatureC: number;\r\n  temperatureF: number;\r\n  summary: string;\r\n}\n\n@Component({\n  templateUrl: './weather.component.html',\n  styleUrls: ['./weather.component.css'],\n  standalone: true,\n  imports: [\n    NgIf,\n    NgForOf,\n    RouterLink,\n    RouterOutlet\n  ]\n})\nexport class WeatherPageComponent implements OnInit {\r\n\r\n  public forecasts: WeatherForecast[] = [];\r\n\r\n  private readonly _loggingService: LoggingService;\r\n\r\n  constructor(private http: HttpClient, private loggingFactory: LoggingFactory) {\r\n    this._loggingService = this.loggingFactory.create(this.constructor.name);\r\n  }\r\n\r\n  ngOnInit() {\r\n    this.getForecasts();\r\n    this._loggingService.debug('Weather page initialized');\r\n  }\r\n\r\n  getForecasts() {\r\n    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(\r\n      (result) => {\r\n        this.forecasts = result;\r\n      },\r\n      (error) => {\r\n        console.error(error);\r\n      }\r\n    );\r\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "﻿:host {\r\n    max-width: 1280px;\r\n    padding: 2rem;\r\n    text-align: center;\r\n}\r\n\r\ntr:nth-child(even) {\r\n    background: #F2F2F2;\r\n}\r\n\r\ntr:nth-child(odd) {\r\n    background: #FFF;\r\n}\r\n\r\nth, td {\r\n    padding-left: 1rem;\r\n    padding-right: 1rem;\r\n}\r\n\r\ntable {\r\n    margin: 0 auto;\r\n}\r\n",
+                    "styleUrl": "./weather.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 30,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "loggingFactory",
+                        "type": "LoggingFactory",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<h1 id=\"tableLabel\">Weather forecast</h1>\r\n\r\n<p>This component demonstrates fetching data from the server.</p>\r\n\r\n<p *ngIf=\"!forecasts\"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href=\"https://aka.ms/jspsintegrationangular\">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>\r\n\r\n<table *ngIf=\"forecasts\">\r\n  <thead>\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Temp. (C)</th>\r\n      <th>Temp. (F)</th>\r\n      <th>Summary</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let forecast of forecasts\">\r\n      <td>{{ forecast.date }}</td>\r\n      <td>{{ forecast.temperatureC }}</td>\r\n      <td>{{ forecast.temperatureF }}</td>\r\n      <td>{{ forecast.summary }}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n"
+        },
+        {
+            "name": "WorkoutsPageComponent",
+            "id": "component-WorkoutsPageComponent-96427d4395922da4547421340deb08add1cad07ede7aff0bc0b17465aaba1d593aeee290ec13277fb237b9dbf0809a30b858502177516063fc78d37cfb78bc10",
+            "file": "src/app/modules/admin/pages/workouts.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "workouts.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  standalone: true,\r\n  templateUrl: 'workouts.component.html',\r\n})\r\nexport class WorkoutsPageComponent { }\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<h1>Workouts</h1>\r\n"
+        }
+    ],
+    "modules": [],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ButtonComponent>",
+                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  render: (args: ButtonComponent) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<HeaderComponent>",
+                "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<PageComponent>",
+                "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<>",
+                "defaultValue": "{\r\n    title: 'Menu',\r\n    component: MenuComponent,\r\n    tags: ['autodocs'],\r\n    decorators: [\r\n        applicationConfig({\r\n             providers: [provideAnimations(), provideRouter(routes)],\r\n        }),\r\n        moduleMetadata({\r\n            imports: [NgFor, RouterLink]\r\n        })\r\n    ]\r\n}"
+            },
+            {
+                "name": "NoIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    render: () => ({\r\n        props: {\r\n            items: [\r\n                new MenuItem('Home', '/home', 'home'),\r\n                new MenuItem('About', '/about', 'info'),\r\n                new MenuItem('No Icon', '/contact'),\r\n            ]\r\n        },\r\n    }),\r\n}"
+            },
+            {
+                "name": "preview",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": ".storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Preview",
+                "defaultValue": "{\n  parameters: {\n    actions: { argTypesRegex: \"^on[A-Z].*\" },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    render: () => ({\r\n        props: {\r\n            items: [\r\n                new MenuItem('Home', '/home', 'home'),\r\n                new MenuItem('About', '/about', 'info'),\r\n                new MenuItem('Contact', '/contact', 'contact_mail'),\r\n            ]\r\n        },\r\n    }),\r\n}"
+            },
+            {
+                "name": "routes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n    { path: 'home', component: MenuComponent },\r\n    { path: 'about', component: MenuComponent },\r\n    { path: 'contact', component: MenuComponent },\r\n]"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+            }
+        ],
+        "functions": [
+            {
+                "name": "initializeApp",
+                "file": "src/main.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "configService",
+                        "type": "ConfigService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "configService",
+                        "type": "ConfigService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "provideConfigService",
+                "file": "src/app/shared/providers.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "Provider"
+            },
+            {
+                "name": "provideErrorHandler",
+                "file": "src/app/shared/providers.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "Provider"
+            },
+            {
+                "name": "provideHttpInterceptor",
+                "file": "src/app/shared/providers.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "Provider"
+            },
+            {
+                "name": "provideLoggingService",
+                "file": "src/app/shared/providers.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "Provider"
+            },
+            {
+                "name": "provideToastService",
+                "file": "src/app/shared/providers.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "Provider"
+            }
+        ],
+        "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<HeaderComponent>",
+                "file": "src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<PageComponent>",
+                "file": "src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MenuComponent>",
+                "file": "src/app/shared/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            }
+        ],
+        "enumerations": [
+            {
+                "name": "LogLevel",
+                "childs": [
+                    {
+                        "name": "All",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 0
+                    },
+                    {
+                        "name": "Debug",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 1
+                    },
+                    {
+                        "name": "Info",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 2
+                    },
+                    {
+                        "name": "Warn",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 3
+                    },
+                    {
+                        "name": "Error",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 4
+                    },
+                    {
+                        "name": "Fatal",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 5
+                    },
+                    {
+                        "name": "Off",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 6
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/core/services/logging/logging-service.interface.ts"
+            }
+        ],
+        "groupedVariables": {
+            "src/stories/button.stories.ts": [
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ButtonComponent>",
+                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  render: (args: ButtonComponent) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                }
+            ],
+            "src/stories/header.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<HeaderComponent>",
+                    "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                }
+            ],
+            "src/stories/page.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<PageComponent>",
+                    "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                }
+            ],
+            "src/app/shared/components/menu/menu.stories.ts": [
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<>",
+                    "defaultValue": "{\r\n    title: 'Menu',\r\n    component: MenuComponent,\r\n    tags: ['autodocs'],\r\n    decorators: [\r\n        applicationConfig({\r\n             providers: [provideAnimations(), provideRouter(routes)],\r\n        }),\r\n        moduleMetadata({\r\n            imports: [NgFor, RouterLink]\r\n        })\r\n    ]\r\n}"
+                },
+                {
+                    "name": "NoIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    render: () => ({\r\n        props: {\r\n            items: [\r\n                new MenuItem('Home', '/home', 'home'),\r\n                new MenuItem('About', '/about', 'info'),\r\n                new MenuItem('No Icon', '/contact'),\r\n            ]\r\n        },\r\n    }),\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    render: () => ({\r\n        props: {\r\n            items: [\r\n                new MenuItem('Home', '/home', 'home'),\r\n                new MenuItem('About', '/about', 'info'),\r\n                new MenuItem('Contact', '/contact', 'contact_mail'),\r\n            ]\r\n        },\r\n    }),\r\n}"
+                },
+                {
+                    "name": "routes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n    { path: 'home', component: MenuComponent },\r\n    { path: 'about', component: MenuComponent },\r\n    { path: 'contact', component: MenuComponent },\r\n]"
+                }
+            ],
+            ".storybook/preview.ts": [
+                {
+                    "name": "preview",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": ".storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Preview",
+                    "defaultValue": "{\n  parameters: {\n    actions: { argTypesRegex: \"^on[A-Z].*\" },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "src/main.ts": [
+                {
+                    "name": "initializeApp",
+                    "file": "src/main.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "configService",
+                            "type": "ConfigService",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "configService",
+                            "type": "ConfigService",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "src/app/shared/providers.ts": [
+                {
+                    "name": "provideConfigService",
+                    "file": "src/app/shared/providers.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "Provider"
+                },
+                {
+                    "name": "provideErrorHandler",
+                    "file": "src/app/shared/providers.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "Provider"
+                },
+                {
+                    "name": "provideHttpInterceptor",
+                    "file": "src/app/shared/providers.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "Provider"
+                },
+                {
+                    "name": "provideLoggingService",
+                    "file": "src/app/shared/providers.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "Provider"
+                },
+                {
+                    "name": "provideToastService",
+                    "file": "src/app/shared/providers.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "Provider"
+                }
+            ]
+        },
+        "groupedEnumerations": {
+            "src/app/core/services/logging/logging-service.interface.ts": [
+                {
+                    "name": "LogLevel",
+                    "childs": [
+                        {
+                            "name": "All",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 0
+                        },
+                        {
+                            "name": "Debug",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 1
+                        },
+                        {
+                            "name": "Info",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 2
+                        },
+                        {
+                            "name": "Warn",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 3
+                        },
+                        {
+                            "name": "Error",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 4
+                        },
+                        {
+                            "name": "Fatal",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 5
+                        },
+                        {
+                            "name": "Off",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 6
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/core/services/logging/logging-service.interface.ts"
+                }
+            ]
+        },
+        "groupedTypeAliases": {
+            "src/stories/button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "src/stories/header.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<HeaderComponent>",
+                    "file": "src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "src/stories/page.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<PageComponent>",
+                    "file": "src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "src/app/shared/components/menu/menu.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MenuComponent>",
+                    "file": "src/app/shared/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ]
+        }
+    },
+    "routes": [],
+    "coverage": {
+        "count": 1,
+        "status": "low",
+        "files": [
+            {
+                "filePath": ".storybook/preview.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/interceptors/httpconfig.interceptor.ts",
+                "type": "interceptor",
+                "linktype": "interceptor",
+                "name": "HttpConfigInterceptor",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/config/config-service.interface.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ConfigService",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/config/config.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Configuration",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/config/json-config.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "JsonConfigService",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/error-handler-service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ErrorHandlerService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/logging/logging-service.interface.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "LoggingService",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/logging/logging.factory.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "LoggingFactory",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/logging/lumberjack-logging.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "LumberjackLoggingService",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/toast/hot-toast.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "HotToastService",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/services/toast/toast-service.interface.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ToastService",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/admin/admin.routes.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AdminRoutes",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/admin/pages/workouts.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "WorkoutsPageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/user/pages/form.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FormPageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/user/pages/weather.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "WeatherPageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/user/pages/weather.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "WeatherForecast",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/user/user.routes.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "UserRoutes",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/datepicker/date-picker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DatePickerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/menu/menu.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MenuComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/menu/menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/menu/menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "NoIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/menu/menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/menu/menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "routes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/menu-item.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/providers.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "provideConfigService",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/providers.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "provideErrorHandler",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/providers.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "provideHttpInterceptor",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/providers.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "provideLoggingService",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/providers.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "provideToastService",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/main.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "initializeApp",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/user.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            }
+        ]
+    }
+}

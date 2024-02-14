@@ -8,6 +8,7 @@
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist\gamifyworkout.client\</PublishAssetsDirectory>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\app\core\interceptors\" />
     <Folder Include="src\app\core\services\logging\" />
     <Folder Include="src\app\modules\admin\pages\" />
     <Folder Include="src\app\shared\components\datepicker\" />

@@ -21,11 +21,12 @@ builder.Services
     .AddControllers()
     .AddOData(options => options.EnableQueryFeatures(100).AddRouteComponents(odataRootPath, edmModel));
 
+builder.Services.AddCorsPolicy();
 builder.Services.RegisterServices(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 

@@ -7,24 +7,21 @@ using Microsoft.OData.ModelBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Console.WriteLine($"Starting, Environment: {builder.Environment.EnvironmentName}");
-
-// Create the service EDM model for OData
+// odata
+var odataRootPath = $"api/v1/odata";
 var modelBuilder = new ODataConventionModelBuilder();
 modelBuilder.EntitySet<User>("Users");
 var edmModel = modelBuilder
     .EnableLowerCamelCase()
     .GetEdmModel();
-var odataRootPath = $"api/v1/odata";
-
 builder.Services
     .AddControllers()
     .AddOData(options => options.EnableQueryFeatures(100).AddRouteComponents(odataRootPath, edmModel));
 
-builder.Services.AddCorsPolicy();
+var corsPolicyName = "MyAllowedCorsOrigins";
+builder.Services.AddCorsPolicy(corsPolicyName);
 builder.Services.RegisterServices(builder.Configuration);
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.ConfigureAuthentication(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger();
 
@@ -33,7 +30,6 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -41,14 +37,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(corsPolicyName);
+app.UseAuthentication();
+app.UseMiddleware<UsersMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.MapFallbackToFile("/index.html");
-
-Console.WriteLine("EF Migrations starting");
 
 using (var scope = app.Services.CreateScope())
 {
@@ -56,7 +51,5 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<EfDbContext>();
     context.Database.Migrate();
 }
-
-Console.WriteLine("EF Migrations complete");
 
 app.Run();

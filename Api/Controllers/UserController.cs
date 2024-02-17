@@ -25,7 +25,7 @@ public class UsersController : ODataController
     }
 
     [HttpGet("{id}")]
-    public ActionResult<User> Get(long id)
+    public ActionResult<User> Get(Guid id)
     {
         var context = _contextFactory.CreateDbContext();
         var user = context.Users.FirstOrDefault(u => u.Id == id);

@@ -13,7 +13,7 @@ namespace Api
             var connectionString = configuration.GetConnectionString("AzureBlobStorage");
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new MissingFieldException("AzureBlobStorage connection string is missing.");
+                throw new MissingFieldException($"{nameof(AzureBlobStorageService)} connection string is missing.");
             }
 
             var storageAccount = CloudStorageAccount.Parse(connectionString);

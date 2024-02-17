@@ -10,22 +10,14 @@ namespace Api
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextFactory<EfDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextFactory<EfDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<IStorageService>(provider => new AzureBlobStorageService(configuration, "workouts"));
 
             services.AddSingleton<IMappingService, AutoMapperService>();
-            var mapper = new MapperConfiguration(cfg =>
-            {
-
-            });
-            services.AddSingleton(mapper.CreateMapper());
-
-            services.AddSingleton<IStorageService>(provider =>
-            {
-                var configuration = provider.GetRequiredService<IConfiguration>();
-                var containerName = "uploads"; // Adjust as needed
-                return new AzureBlobStorageService(configuration, containerName);
-            });
+            services.AddSingleton(new MapperConfiguration(cfg => { })
+                .CreateMapper()
+            );
         }
 
         public static void AddSwagger(this IServiceCollection services)
@@ -36,19 +28,61 @@ namespace Api
             });
         }
 
-        public static void AddCorsPolicy(this IServiceCollection services)
+        public static void AddCorsPolicy(this IServiceCollection services, string corsPolicyName)
         {
             services.AddCors(options =>
             {
                 options.AddPolicy(
-                  name: "MyAllowedSpecificOrigins",
-                  policy =>
-                  {
-                      policy.WithOrigins("http://localhost:4200")
-                      .AllowAnyHeader()
-                      .AllowAnyMethod()
-                      .AllowCredentials();
-                  });
+                    corsPolicyName,
+                    policy =>
+                    {
+                        policy
+                            .WithOrigins("http://localhost:4200")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials();
+                    });
+            });
+        }
+
+        public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var authConfig = configuration
+                .GetSection(AuthConfig.Name)
+                .Get<AuthConfig>();
+
+            var defaultScheme = "defaultScheme";
+
+            var authBuilder = services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = defaultScheme;
+                options.DefaultChallengeScheme = defaultScheme;
+            });
+
+            authBuilder.AddJwtBearer(AuthConfig.AuthSchemeName, options =>
+            {
+                options.MetadataAddress = $"{authConfig.Authority}/.well-known/openid-configuration";
+                options.Authority = authConfig.Authority;
+                options.RequireHttpsMetadata = true;
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidateAudience = true,
+                    ValidAudiences = authConfig.Audiences,
+                    ValidateIssuer = true,
+                    ValidIssuers = new[] { authConfig.Issuer },
+                    ValidateIssuerSigningKey = true,
+                    RequireExpirationTime = true,
+                    ValidateLifetime = true,
+                    RequireSignedTokens = true,
+                };
+            });
+
+            authBuilder.AddPolicyScheme(defaultScheme, defaultScheme, options =>
+            {
+                options.ForwardDefaultSelector = context =>
+                {
+                    return AuthConfig.AuthSchemeName;
+                };
             });
         }
     }

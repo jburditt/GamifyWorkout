@@ -18,7 +18,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      retry(2), // retry 2 times after request failed
+      retry(2),
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           this._loggingService.info("HttpEvent", event)

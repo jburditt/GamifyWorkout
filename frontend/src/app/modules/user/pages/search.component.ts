@@ -30,19 +30,12 @@ export class SearchPageComponent implements AfterViewInit {
   searchForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    createdFromDate: new FormControl('', []),
-    createdToDate: new FormControl('', []),
-    ceaseFromDate: new FormControl('', []),
-    ceaseToDate: new FormControl('', []),
-    userId: new FormControl(''),
-    displayName: new FormControl(''),
-    employeeId: new FormControl(''),
   });
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'userId', 'employeeId', 'edit'];
-  dataSource = new MatTableDataSource<UserResponse>();
+  displayedColumns: string[] = ['firstName', 'lastName', 'edit'];
+  dataSource = new MatTableDataSource<any>();
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(/*private userService: UserService, */private router: Router) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -55,15 +48,14 @@ export class SearchPageComponent implements AfterViewInit {
     if (!this.searchForm.valid) {
       return;
     }
-    // TODO remove console.logs when search results are completed
     console.log("searchForm", this.searchForm.value);
-    this.userService.search(this.searchForm.value).then(data => {
-      this.dataSource.data = data;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    // this.userService.search(this.searchForm.value).then(data => {
+    //   this.dataSource.data = data;
+    //   this.dataSource.paginator = this.paginator;
+    //   this.dataSource.sort = this.sort;
 
-      console.log("data", data);
-    });
+    //   console.log("data", data);
+    // });
   }
 
   edit(id: number) {

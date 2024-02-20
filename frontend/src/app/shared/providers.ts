@@ -1,5 +1,3 @@
-// dependency injection wireup for services that can be changed or customized for different environments
-
 import { ErrorHandler, Provider } from "@angular/core";
 import { ConfigService } from "@app/core/services/config/config-service.interface";
 import { JsonConfigService } from "@app/core/services/config/json-config.service";
@@ -13,6 +11,10 @@ import { ToastService } from "@app/core/services/toast/toast-service.interface";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ErrorHandlerService } from "@app/core/services/error-handler-service";
 import { HttpConfigInterceptor } from "@app/core/interceptors/httpconfig.interceptor";
+import { TokenInterceptor } from "@app/core/interceptors/token.interceptor";
+import { AuthService } from "@app/core/auth/auth.interface";
+import { AzureOAuthService } from "@app/core/auth/oauth.service";
+import { provideOAuthClient } from "angular-oauth2-oidc";
 
 export function provideHttpInterceptor(): Provider {
   return {
@@ -20,6 +22,19 @@ export function provideHttpInterceptor(): Provider {
     useClass: HttpConfigInterceptor,
     multi: true
   }
+}
+
+export function provideOAuthService(): any[] {
+  return [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
+  {
+    provide: AuthService,
+    useClass: AzureOAuthService
+  },
+  provideOAuthClient()];
 }
 
 export function provideErrorHandler(): Provider {

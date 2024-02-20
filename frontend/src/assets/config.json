@@ -1,4 +1,4 @@
 {
-  "baseUrl": "https://localhost:4300/api",
+  "baseUrl": "https://localhost:8080/api",
   "logLevel": "All"
 }

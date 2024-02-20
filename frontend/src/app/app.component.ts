@@ -23,7 +23,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
 })
 export class AppComponent implements OnInit {
 
-  public projectName: string = 'Maverick';
+  public projectName: string = 'Gamify Workout';
 
   private readonly _loggingService: LoggingService;
 

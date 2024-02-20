@@ -21,7 +21,7 @@ builder.Services
 var corsPolicyName = "MyAllowedCorsOrigins";
 builder.Services.AddCorsPolicy(corsPolicyName);
 builder.Services.RegisterServices(builder.Configuration);
-builder.Services.ConfigureAuthentication(builder.Configuration);
+builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger();
 

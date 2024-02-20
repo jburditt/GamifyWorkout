@@ -3,6 +3,7 @@ using Core;
 using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Security.Principal;
 
 namespace Api
 {
@@ -10,10 +11,17 @@ namespace Api
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // database
             services.AddDbContextFactory<EfDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+            // authentication
+            services.AddHttpContextAccessor();
+            services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>()?.HttpContext?.User);
+
+            // blob storage
             services.AddSingleton<IStorageService>(provider => new AzureBlobStorageService(configuration, "workouts"));
 
+            // mapping service
             services.AddSingleton<IMappingService, AutoMapperService>();
             services.AddSingleton(new MapperConfiguration(cfg => { })
                 .CreateMapper()
@@ -24,6 +32,7 @@ namespace Api
         {
             services.AddSwaggerGen(swaggerGenOptions =>
             {
+                // TODO add api versioning to configuration
                 swaggerGenOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
         }
@@ -37,7 +46,8 @@ namespace Api
                     policy =>
                     {
                         policy
-                            .WithOrigins("http://localhost:4200")
+                            // TODO move this to configuration
+                            .WithOrigins("https://localhost:4200")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials();
@@ -45,7 +55,7 @@ namespace Api
             });
         }
 
-        public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
         {
             var authConfig = configuration
                 .GetSection(AuthConfig.Name)
@@ -61,6 +71,7 @@ namespace Api
 
             authBuilder.AddJwtBearer(AuthConfig.AuthSchemeName, options =>
             {
+                // TODO move url to configuration
                 options.MetadataAddress = $"{authConfig.Authority}/.well-known/openid-configuration";
                 options.Authority = authConfig.Authority;
                 options.RequireHttpsMetadata = true;

@@ -28,17 +28,17 @@ export class ApiAuthenticationService extends BaseService {
     }
 
     whoAmI(azureUserInfo: any): Observable<any> {
-		return this.http.get<UserResponse>(this.getApiUrl(this._apiWhoAmIEndpoint))
-            .pipe(
-                map((result: UserResponse) => {
-                    this._loggingService.debug("azureUserInfo.info", azureUserInfo.info)
-                    this._loggingService.debug("UserResponse result", result)
-                    let userResponse = Object.assign(azureUserInfo.info, result);
-                    // save userReponse to store
-                    return result;
-                }), catchError((error: HttpErrorResponse) => {
-                    return throwError(() => error);
-                })
-            );
+		  return this.http.get<UserResponse>(this.getApiUrl(this._apiWhoAmIEndpoint))
+          .pipe(
+              map((result: UserResponse) => {
+                  this._loggingService.debug("azureUserInfo.info", azureUserInfo.info)
+                  this._loggingService.debug("UserResponse result", result)
+                  let userResponse = Object.assign(azureUserInfo.info, result);
+                  // save userReponse to store
+                  return result;
+              }), catchError((error: HttpErrorResponse) => {
+                  return throwError(() => error);
+              })
+          );
     }
 }

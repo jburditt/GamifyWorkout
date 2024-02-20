@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 })
 export class FakeConfigService implements ConfigService {
   config: Configuration = {
-    "baseUrl": "https://localhost:4300/api",
+    "baseUrl": "https://localhost:4200/api",
     "logLevel": "All"
   } as Configuration;
   isLoaded$!: BehaviorSubject<boolean>;

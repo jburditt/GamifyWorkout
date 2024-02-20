@@ -9,18 +9,18 @@ namespace Api
     /// </summary>
     public class UsersMiddleware
     {
-        private readonly RequestDelegate next;
+        private readonly RequestDelegate _next;
 
         public UsersMiddleware(RequestDelegate next)
         {
-            this.next = next;
+            this._next = next;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
             if (context.User.Identity == null || !context.User.Identity.IsAuthenticated || IsBlacklisted(context))
             {
-                await next(context);
+                await _next(context);
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace Api
                 }
             }
 
-            await next(context);
+            await _next(context);
         }
 
         // blacklist endpoints that do not need authentication

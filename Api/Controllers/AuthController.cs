@@ -22,5 +22,13 @@ namespace Api
         {
             return principal.GetUser();
         }
+
+        [Route("logout")]
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            principal.Clear();
+            return Ok();
+        }
     }
 }

@@ -33,18 +33,30 @@ namespace Api
             if (jwtHandler.CanReadToken(token))
             {
                 var jwt = jwtHandler.ReadJwtToken(token);
-                var names = jwt.Claims
+
+                string firstName = null;
+                string lastName = null;
+                var name = jwt.Claims
                     .First(c => c.Type == "name")
-                    .Value
-                    .Split(',');
+                    .Value;
+                string[] names = null;
+                if (name.Contains(",")) {
+                    names = name.Split(',');
+                    firstName = names[1];
+                    lastName = names[0];
+                } else if (name.Contains(" ")) {
+                    names = name.Split(' ');
+                    firstName = names[0];
+                    lastName = names[1];
+                }
 
                 try
                 {
                     context.User.Clear();
                     context.User.Upsert(AzureAdClaimTypes.Id, jwt.Claims.First(c => c.Type == "oid").Value);
                     context.User.Upsert(AzureAdClaimTypes.UserName, jwt.Claims.First(c => c.Type == AzureAdClaimTypes.UserName).Value);
-                    context.User.Upsert(ClaimTypes.GivenName, names[1]);
-                    context.User.Upsert(ClaimTypes.Surname, names[0]);
+                    context.User.Upsert(ClaimTypes.GivenName, firstName);
+                    context.User.Upsert(ClaimTypes.Surname, lastName);
                     context.User.Upsert(ClaimTypes.Email, jwt.Claims.First(c => c.Type == "email").Value);
                 }
                 catch

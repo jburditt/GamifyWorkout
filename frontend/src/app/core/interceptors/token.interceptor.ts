@@ -18,7 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
 		if (![/\/api\/.+$/].some((regexp) => regexp.test(url)))
 			return next.handle(req);
 
-		let token = this.authStorage.getItem('id_token');
+    let token = this.authStorage.getItem('id_token');
 		let header = 'Bearer ' + token;
 
 		let headers = req.headers.set('Authorization', header);

@@ -5,6 +5,24 @@ namespace Api
 {
     public static class IPrincipalExtensions
     {
+        public static void Clear(this IPrincipal principal)
+        {
+            if (principal == null)
+                return;
+
+            var currentPrincipal = principal as ClaimsPrincipal;
+
+            foreach (var claim in currentPrincipal.Claims)
+            {
+                if (claim.Type == ClaimTypes.NameIdentifier)
+                {
+                    continue;
+                }
+
+                (currentPrincipal.Identity as ClaimsIdentity).RemoveClaim(claim);
+            }
+        }
+
         public static UserResponse GetUser(this IPrincipal principal)
         {
             var currentPrincipal = principal as ClaimsPrincipal;

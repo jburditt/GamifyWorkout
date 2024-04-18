@@ -5,7 +5,7 @@ import { LoggingService } from '@app/core/services/logging/logging-service.inter
 import { AuthService } from '@app/core/auth/auth.interface';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
-import { ApiAuthenticationService as AuthenticationApi } from '@app/api/services/auth.service';
+import { ApiAuthenticationService as AuthenticationApi } from '@app/core/auth/auth.service';
 
 @Injectable()
 export class AzureOAuthService implements AuthService {

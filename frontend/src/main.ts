@@ -7,9 +7,10 @@ import { routes } from '@app/app.routes';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
-import { provideConfigService, provideErrorHandler, provideHttpInterceptor, provideLoggingService, provideOAuthService, provideToastService } from '@app/shared/providers';
+import { provideConfigService, provideErrorHandler, provideHttpInterceptor, provideLoggingService, provideToastService } from '@app/shared/providers';
 import { AuthService } from '@app/core/auth/auth.interface';
-import { ApiAuthenticationService } from '@app/api/services/auth.service';
+import { ApiAuthenticationService } from '@app/core/auth/auth.service';
+import { provideOAuthService } from "@app/core/auth/auth.provider";
 
 export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthService) {
   return (): Observable<void> => {

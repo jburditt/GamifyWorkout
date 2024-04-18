@@ -29,6 +29,7 @@ namespace Api
 
             return new UserResponse
             {
+                // TODO
                 OAuthId = currentPrincipal.Get(AzureAdClaimTypes.Id),
                 FirstName = currentPrincipal.Get(ClaimTypes.GivenName),
                 LastName = currentPrincipal.Get(ClaimTypes.Surname),

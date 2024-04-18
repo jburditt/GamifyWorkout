@@ -39,3 +39,25 @@ npm install -g @angular/cli
     - Authority (tenant)
     - Issuer (tenant)
     - Audiences (client)
+
+To remove/replace Azure OAuth, delete the contents of folder /frontend/src/app/core/auth and /Api/Modules/Auth
+
+# Template
+
+The template is in folder /frontend/src/app/shared/template
+
+Verify if you need to install sub npm packages `npm i` (in folder /frontend/src/app/shared/template)
+Verify what I did wrong, I manually deleted template/node_modules/common,router (exists in sub node_modules and root, maybe try using prefix instead of npm i in the sub folder)
+
+To remove the template
+- Delete /frontend/src/app/shared/template folder
+- Run `npm uninstall @ng-matero/extensions`
+- Delete architect/build/styles `"src/app/shared/template/styles.scss"` from angular.json
+- Delete ng-matero paths from tsconfig.json
+
+To install a template npm package, run `npm i --prefix src/app/shared/template @ngx-translate/http-loader`
+
+## Pull Latest Changes
+
+cd /frontend/src/app/shared/template
+git checkout blah.git .

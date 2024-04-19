@@ -55,9 +55,23 @@ To remove the template
 - Delete architect/build/styles `"src/app/shared/template/styles.scss"` from angular.json
 - Delete ng-matero paths from tsconfig.json
 
-To install a template npm package, run `npm i --prefix src/app/shared/template @ngx-translate/http-loader`
+TODO check if there is a way to install package without installing package dependencies, since you will need to delete them from the template/node_modules and install in the root node_modules
 
 ## Pull Latest Changes
 
+To install a npm package for ng-matero
+- Run `./npm_download.sh photoviewer`
+- Copy the package.json values from github ng-matero
+NOTE if you run `npm i --prefix src/app/shared/template @ng-matero/extensions` it will install package dependencies in the subfolder node_modules and cause compilation errors
+
 cd /frontend/src/app/shared/template
 git checkout blah.git .
+TODO main.ts sections
+
+angular.json
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/app/shared/template/assets",
+                "output": "/assets"
+              },

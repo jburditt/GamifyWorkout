@@ -44,6 +44,8 @@ To remove/replace Azure OAuth, delete the contents of folder /frontend/src/app/c
 
 # Template
 
+https://github.com/ng-matero/ng-matero
+
 The template is in folder /frontend/src/app/shared/template
 
 Verify if you need to install sub npm packages `npm i` (in folder /frontend/src/app/shared/template)

@@ -1,5 +1,5 @@
 import { AppComponent } from '@app/app.component';
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
@@ -11,6 +11,14 @@ import { provideConfigService, provideErrorHandler, provideHttpInterceptor, prov
 import { AuthService } from '@app/core/auth/auth.interface';
 import { ApiAuthenticationService } from '@app/core/auth/auth.service';
 import { provideOAuthService } from "@app/core/auth/auth.provider";
+
+// TODO add @theme
+import { TranslateService, TranslateStore, TranslateLoader, TranslateModule } from '@app/shared/template/node_modules/@ngx-translate/core';
+import { TranslateHttpLoader } from '@app/shared/template/node_modules/@ngx-translate/http-loader';
+// Required for AOT compilation
+export function TranslateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthService) {
   return (): Observable<void> => {
@@ -37,6 +45,17 @@ bootstrapApplication(AppComponent, {
     provideConfigService(),
     provideLoggingService(),
     provideToastService(),
+    // TODO
+    TranslateService, TranslateStore,
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: TranslateHttpLoaderFactory,
+          deps: [HttpClient],
+        },
+      })
+    ),
   ]
 })
   .catch(err => console.error(err));

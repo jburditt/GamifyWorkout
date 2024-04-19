@@ -6,11 +6,22 @@
     "outDir": "./dist/out-tsc",
     "paths": {
       "@node_modules/*": [ "node_modules/*" ],
-      "@app/*": [ "src/app/*" ]
+      "@app/*": [ "src/app/*" ],
+      // ng-matero paths
+      "@core": ["src/app/shared/template/app/core"],
+      "@core/*": ["src/app/shared/template/app/core/*"],
+      "@shared": ["src/app/shared/template/app/shared"],
+      "@shared/*": ["src/app/shared/template/app/shared/*"],
+      "@theme": ["src/app/shared/template/app/theme"],
+      "@theme/*": ["src/app/shared/template/app/theme/*"],
+      "@testing": ["src/app/shared/template/testing"],
+      "@testing/*": ["src/app/shared/template/testing/*"],
+      "@env": ["src/app/shared/template/environments"],
+      "@env/*": ["src/app/shared/template/environments/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
+    //"noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

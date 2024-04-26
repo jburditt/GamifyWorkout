@@ -31,3 +31,22 @@ openssl req -new -x509 -newkey rsa:2048 -sha256 -nodes -keyout localhost.key -da
 - Expand Trust
 - Select the option Always Trust in When using this certificate
 - Close the certificate window
+
+## Angular
+
+Reference: https://stackoverflow.com/questions/39210467/get-angular-cli-to-ng-serve-over-https
+
+To add HTTPS and use the certificate generated above, add the following to Angular.json:
+```json
+{
+  "projects": {
+    "<PROJECT_NAME>": {
+      "architect": {
+        "options": {
+          "ssl": true,
+          "sslKey": "./ssl/localhost.key",
+          "sslCert": "./ssl/localhost.crt"
+        }
+        ...
+}
+```

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HotToastService as NgNeatHotToastService } from '@ngneat/hot-toast';
+import { HotToastService as NgNeatHotToastService } from '@ngxpert/hot-toast';
 import { ToastService } from './toast-service.interface';
 
 @Injectable()

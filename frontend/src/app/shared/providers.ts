@@ -6,7 +6,7 @@ import { LumberjackLoggingService } from "@app/core/services/logging/lumberjack-
 import { provideLumberjack } from "@ngworker/lumberjack";
 import { provideLumberjackConsoleDriver } from "@ngworker/lumberjack/console-driver";
 import { LoggingFactory } from "@app/core/services/logging/logging.factory";
-import { HotToastService, provideHotToastConfig } from "@ngneat/hot-toast";
+import { HotToastService, provideHotToastConfig } from "@ngxpert/hot-toast";
 import { ToastService } from "@app/core/services/toast/toast-service.interface";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ErrorHandlerService } from "@app/core/services/error-handler-service";

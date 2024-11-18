@@ -9,6 +9,6 @@ export class AdminRoutes {
 export default [
   {
     path: AdminRoutes.HOME,
-    component: AdminLayoutComponent,
+    component: AdminLayoutComponent
   }
 ] satisfies Route[];

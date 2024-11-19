@@ -12,6 +12,10 @@ import { AuthService } from '@app/core/auth/auth.interface';
 import { ApiAuthenticationService } from '@app/core/auth/auth.service';
 import { provideOAuthService } from "@app/core/auth/auth.provider";
 
+// ngrx/store
+import { provideStore, provideState } from '@ngrx/store';
+import { playerReducer } from "@features/rpg/store/player.reducer";
+
 // TODO add @theme
 import { TranslateService, TranslateStore, TranslateLoader, TranslateModule } from '@app/shared/template/node_modules/@ngx-translate/core';
 import { TranslateHttpLoader } from '@app/shared/template/node_modules/@ngx-translate/http-loader';
@@ -30,10 +34,10 @@ export function initializeApp(configService: ConfigService, http: HttpClient, au
 bootstrapApplication(AppComponent, {
   providers: [
     {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      deps: [ConfigService, HttpClient, AuthService],
-      multi: true,
+        provide: APP_INITIALIZER,
+        useFactory: initializeApp,
+        deps: [ConfigService, HttpClient, AuthService],
+        multi: true,
     },
     ApiAuthenticationService,
     provideOAuthService(),
@@ -45,17 +49,19 @@ bootstrapApplication(AppComponent, {
     provideConfigService(),
     provideLoggingService(),
     provideToastService(),
+    // ngrx/store
+    provideStore(),
+    provideState({ name: 'player', reducer: playerReducer }),
     // TODO
     TranslateService, TranslateStore,
-    importProvidersFrom(
-      TranslateModule.forRoot({
+    importProvidersFrom(TranslateModule.forRoot({
         loader: {
-          provide: TranslateLoader,
-          useFactory: TranslateHttpLoaderFactory,
-          deps: [HttpClient],
+            provide: TranslateLoader,
+            useFactory: TranslateHttpLoaderFactory,
+            deps: [HttpClient],
         },
-      })
-    ),
-  ]
+    })),
+    provideStore()
+]
 })
   .catch(err => console.error(err));

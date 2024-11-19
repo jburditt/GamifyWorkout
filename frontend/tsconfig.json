@@ -7,6 +7,7 @@
     "paths": {
       "@node_modules/*": [ "node_modules/*" ],
       "@app/*": [ "src/app/*" ],
+      "@features/*": [ "src/app/features/*" ],
       // ng-matero paths
       "@core": ["src/app/shared/template/app/core"],
       "@core/*": ["src/app/shared/template/app/core/*"],

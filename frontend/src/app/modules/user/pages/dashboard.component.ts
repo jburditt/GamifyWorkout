@@ -19,7 +19,7 @@ export class DashboardPageComponent {
   }
 
   damage() {
-    //this.store.dispatch(damage());
+    this.store.dispatch(damage({ damageHp: 1 }));
   }
 
   heal() {

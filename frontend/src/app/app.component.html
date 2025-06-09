@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
   <menu [items]="menuItemList"></menu>
-  <span>{{ projectName }}</span>
+  <span>
+    HP {{ player.hp + 1 }} / {{ player.maxHp }} MP {{ player.mp }} / {{ player.maxMp }} EXP {{ player.experience }} / {{ player.maxExperience }} LVL {{ player.level }}
+  </span>
   <span class="spacer"></span>
   <!--<button *ngIf="isLoggedIn" mat-icon-button (click)="logout()">
     <mat-icon>logout</mat-icon>

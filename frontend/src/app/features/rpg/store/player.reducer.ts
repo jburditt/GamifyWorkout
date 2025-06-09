@@ -1,11 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 import { damage, heal } from './player.actions';
 
+export const initialState: State = {
+  hp: 100,
+  maxHp: 100,
+  mp: 100,
+  maxMp: 100,
+  experience: 0,
+  level: 1
+};
+
 export const playerReducer = createReducer(
-  100,
-  //on(damage, (state, { damageHp }) => ({ ...state, hp: state.hp - damageHp })),
-  on(damage, (state, { damageHp }) => state - damageHp),
-  on(heal, state => state + 10)
+  initialState,
+  on(damage, (state, { damageHp }) => ({ ...state, hp: state.hp - damageHp })),
+  on(heal, (state) => ({...state, hp: state.hp + 10}))
 );
 
 export interface State {
@@ -17,11 +25,4 @@ export interface State {
   level: number;
 }
 
-export const initialState: State = {
-  hp: 100,
-  maxHp: 100,
-  mp: 100,
-  maxMp: 100,
-  experience: 0,
-  level: 1
-};
+

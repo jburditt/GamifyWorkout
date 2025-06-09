@@ -5,32 +5,26 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "@node_modules/*": [ "node_modules/*" ],
-      "@app/*": [ "src/app/*" ],
-      "@features/*": [ "src/app/features/*" ],
-      // ng-matero paths
-      "@core": ["src/app/shared/template/app/core"],
-      "@core/*": ["src/app/shared/template/app/core/*"],
-      "@shared": ["src/app/shared/template/app/shared"],
-      "@shared/*": ["src/app/shared/template/app/shared/*"],
-      "@theme": ["src/app/shared/template/app/theme"],
-      "@theme/*": ["src/app/shared/template/app/theme/*"],
-      "@testing": ["src/app/shared/template/testing"],
-      "@testing/*": ["src/app/shared/template/testing/*"],
-      "@env": ["src/app/shared/template/environments"],
-      "@env/*": ["src/app/shared/template/environments/*"]
+      "@node_modules/*": [
+        "node_modules/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"
+      ],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    //"noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",

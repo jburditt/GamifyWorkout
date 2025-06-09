@@ -13,15 +13,14 @@ interface WeatherForecast {
 }
 
 @Component({
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.css'],
-  standalone: true,
-  imports: [
-    NgIf,
-    NgForOf,
-    RouterLink,
-    RouterOutlet
-  ]
+    templateUrl: './weather.component.html',
+    styleUrls: ['./weather.component.css'],
+    imports: [
+        NgIf,
+        NgForOf,
+        RouterLink,
+        RouterOutlet
+    ]
 })
 export class WeatherPageComponent implements OnInit {
 

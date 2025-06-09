@@ -20,6 +20,7 @@
       "@env": ["src/app/shared/template/environments"],
       "@env/*": ["src/app/shared/template/environments/*"]
     },
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     //"noImplicitOverride": true,
@@ -28,7 +29,6 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,

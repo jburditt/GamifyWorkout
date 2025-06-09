@@ -13,15 +13,14 @@ import { Store } from '@ngrx/store';
 import { Player } from '@features/rpg/model/player';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  standalone: true,
-  imports: [
-    NgIf, NgForOf,
-    RouterLink, RouterOutlet,
-    MatIconModule, MatToolbarModule, MatButtonModule,
-    MenuComponent
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    imports: [
+        NgIf, NgForOf,
+        RouterLink, RouterOutlet,
+        MatIconModule, MatToolbarModule, MatButtonModule,
+        MenuComponent
+    ]
 })
 export class AppComponent implements OnInit {
 

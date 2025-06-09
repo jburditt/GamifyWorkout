@@ -16,13 +16,6 @@ import { provideOAuthService } from "@app/core/auth/auth.provider";
 import { provideStore, provideState } from '@ngrx/store';
 import { playerReducer } from "@features/rpg/store/player.reducer";
 
-// TODO add @theme
-import { TranslateService, TranslateStore, TranslateLoader, TranslateModule } from '@app/shared/template/node_modules/@ngx-translate/core';
-import { TranslateHttpLoader } from '@app/shared/template/node_modules/@ngx-translate/http-loader';
-// Required for AOT compilation
-export function TranslateHttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
 
 export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthService) {
   return (): Observable<void> => {
@@ -53,14 +46,6 @@ bootstrapApplication(AppComponent, {
     provideStore(),
     provideState({ name: 'player', reducer: playerReducer }),
     // TODO
-    TranslateService, TranslateStore,
-    importProvidersFrom(TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: TranslateHttpLoaderFactory,
-            deps: [HttpClient],
-        },
-    })),
     provideStore()
 ]
 })

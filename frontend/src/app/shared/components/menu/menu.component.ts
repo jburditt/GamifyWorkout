@@ -7,14 +7,13 @@ import { RouterLink } from '@angular/router';
 import { MenuItem } from '@app/shared/models/menu-item.model';
 
 @Component({
-  standalone: true,
-  selector: 'menu',
-  templateUrl: './menu.component.html',
-  imports: [
-    RouterLink, 
-    NgIf, NgForOf,
-    MatMenuModule, MatIconModule, MatButtonModule
-  ]
+    selector: 'menu',
+    templateUrl: './menu.component.html',
+    imports: [
+        RouterLink,
+        NgIf, NgForOf,
+        MatMenuModule, MatIconModule, MatButtonModule
+    ]
 })
 export class MenuComponent { 
     @Input() items: Array<MenuItem> = [];

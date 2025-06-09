@@ -7,9 +7,8 @@ import { damage, heal } from '@features/rpg/store/player.actions';
 import { Player } from '@features/rpg/model/player';
 
 @Component({
-  standalone: true,
-  templateUrl: 'dashboard.component.html',
-  imports: [CommonModule]
+    templateUrl: 'dashboard.component.html',
+    imports: [CommonModule]
 })
 export class DashboardPageComponent {
   player$: Observable<Player>;

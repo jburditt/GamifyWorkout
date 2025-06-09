@@ -5,14 +5,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';
 
 @Component({
-  standalone: true,
-  templateUrl: 'form.component.html',
-  imports: [
-    FormsModule, ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    DatePickerComponent
-  ]
+    templateUrl: 'form.component.html',
+    imports: [
+        FormsModule, ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        DatePickerComponent
+    ]
 })
 export class FormPageComponent {
   searchForm = new FormGroup({

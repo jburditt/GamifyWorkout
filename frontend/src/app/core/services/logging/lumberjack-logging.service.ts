@@ -38,22 +38,22 @@ export class LumberjackLoggingService implements LoggingService {
   }
 
   private writeToLog(logLevel: LogLevel, message: string, payload?: any) {
-    let lumberjackLevel: LumberjackLevel = LumberjackLevel.Debug;
+    let lumberjackLevel: LumberjackLevel = 'debug';
     switch (logLevel) {
       case LogLevel.Debug:
-        lumberjackLevel = LumberjackLevel.Debug;
+        lumberjackLevel = 'debug';
         break;
       case LogLevel.Info:
-        lumberjackLevel = LumberjackLevel.Info;
+        lumberjackLevel = 'info';
         break;
       case LogLevel.Warn:
-        lumberjackLevel = LumberjackLevel.Warning;
+        lumberjackLevel = 'warn';
         break;
       case LogLevel.Error:
-        lumberjackLevel = LumberjackLevel.Error;
+        lumberjackLevel = 'error';
         break;
       case LogLevel.Fatal, LogLevel.Off:
-        lumberjackLevel = LumberjackLevel.Critical;
+        lumberjackLevel = 'critical';
         break;
     }
 

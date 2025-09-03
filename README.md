@@ -1,10 +1,23 @@
-# GamifyWorkout
-Gamify Working out and Exercising
+# Bootstrap Project
+A project to demonstrate Angular features to be used for reference and bootstrapping new projects.
 
-# Prerequisites
+# Tech Stack
+- .NET 8 OData API 
+- EntityFramework 8
+- Angular 20 frontend with DI
+
+# Angular Features
+- OAuth authentication
+- Logging service
+- Toast service
+- Datepicker
+- NgRx
+- OData query
+
+## Prerequisites
 Install Node.js
 
-# Windows
+## Windows
 Strongly recommended to use NVM. This greatly simplifies working with multiple node/npm versions.
 Follow this document to install nvm-windows, node.js, and npm
 https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows
@@ -13,7 +26,7 @@ For example:
 `nvm install 21.1.0`
 `nvm use 21.1.0`
 
-# OAuth Configuration
+## OAuth Configuration
 - Navigate to portal.azure.com
 - In "Search resources" textbox at top, find "Microsoft Entra ID"
 - On the top navigation, select "Add" -> "App Registration"
@@ -38,7 +51,7 @@ For example:
 
 To remove/replace Azure OAuth, delete the contents of folder /frontend/src/app/core/auth and /Api/Modules/Auth
 
-# Template
+## Template
 
 https://github.com/ng-matero/ng-matero
 

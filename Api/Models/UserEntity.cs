@@ -1,6 +1,6 @@
 ﻿namespace Api
 {
-    public class UserResponse
+    public class UserEntity
     {
         public Guid Id { get; set; }
         // TODO move this field to parent class

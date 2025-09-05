@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TokenInterceptor } from "@app/core/auth/token.interceptor";
-import { AuthService } from "@app/core/auth/auth.interface";
+import { AuthenticationService } from "@app/core/auth/auth.interface";
 import { AzureOAuthService } from "@app/core/auth/oauth.service";
 import { provideOAuthClient } from "angular-oauth2-oidc";
 
@@ -11,7 +11,7 @@ export function provideOAuthService(): any[] {
       multi: true
     },
     {
-      provide: AuthService,
+      provide: AuthenticationService,
       useClass: AzureOAuthService
     },
     provideOAuthClient()];

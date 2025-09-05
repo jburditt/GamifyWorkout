@@ -14,6 +14,7 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - OData query -> Query database using OData .NET EF controllers
 
 # TODO
+- Consolidate User and UserEntity
 - Use openapi-gen to auto generate Angular API services
 - Upgrade .NET
 - Upgrade EF
@@ -22,6 +23,8 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Upload to jburditt.com
 - Implement CI/CD
 - Add NgRx hydration for persistence
+- Fix VS SPA error in console logs
+- Fix or reinstall Storybook
 
 ## Prerequisites
 Install Node.js

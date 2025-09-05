@@ -8,7 +8,7 @@ import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/
 import { Observable, tap } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
 import { provideConfigService, provideErrorHandler, provideHttpInterceptor, provideLoggingService, provideToastService } from '@app/shared/providers';
-import { AuthService } from '@app/core/auth/auth.interface';
+import { AuthenticationService } from '@app/core/auth/auth.interface';
 import { ApiAuthenticationService } from '@app/core/auth/auth.service';
 import { provideOAuthService } from "@app/core/auth/auth.provider";
 
@@ -17,7 +17,7 @@ import { provideStore, provideState } from '@ngrx/store';
 import { playerReducer } from "@features/rpg/store/player.reducer";
 
 
-export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthService) {
+export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthenticationService) {
   return (): Observable<void> => {
     return configService.loadConfig()
       .pipe(tap(() => authService.init()));
@@ -29,7 +29,7 @@ bootstrapApplication(AppComponent, {
     {
         provide: APP_INITIALIZER,
         useFactory: initializeApp,
-        deps: [ConfigService, HttpClient, AuthService],
+        deps: [ConfigService, HttpClient, AuthenticationService],
         multi: true,
     },
     ApiAuthenticationService,

@@ -23,11 +23,11 @@ namespace Api
             }
         }
 
-        public static UserResponse GetUser(this IPrincipal principal)
+        public static UserEntity GetUser(this IPrincipal principal)
         {
             var currentPrincipal = principal as ClaimsPrincipal;
 
-            return new UserResponse
+            return new UserEntity
             {
                 // TODO
                 OAuthId = currentPrincipal.Get(AzureAdClaimTypes.Id),

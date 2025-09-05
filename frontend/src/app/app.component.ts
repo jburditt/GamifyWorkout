@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   private readonly _loggingService: LoggingService;
 
   menuItemList: Array<MenuItem> = [
-    new MenuItem('Weather', '/user/weather', 'assignment'),
     new MenuItem('Admin', '/admin', 'settings'),
     new MenuItem('User', '/user', 'contact_mail'),
     new MenuItem('Dashboard', '/user/dashboard', 'dashboard'),

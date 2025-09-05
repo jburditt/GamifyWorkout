@@ -2,25 +2,25 @@ import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { LoggingFactory } from '@app/core/services/logging/logging.factory';
 import { LoggingService } from '@app/core/services/logging/logging-service.interface';
-import { AuthService } from '@app/core/auth/auth.interface';
+import { AuthenticationService } from '@app/core/auth/auth.interface';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
 import { ApiAuthenticationService as AuthenticationApi } from '@app/core/auth/auth.service';
 
 @Injectable()
-export class AzureOAuthService implements AuthService {
+export class AzureOAuthService implements AuthenticationService {
 
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private readonly _loggingService: LoggingService;
-  
+
   constructor(
     private readonly oauthService: OAuthService,
     private readonly loggingFactory: LoggingFactory,
     private readonly configService: ConfigService,
     private readonly authenticationApi: AuthenticationApi
   ) {
-    this._loggingService = loggingFactory.create(this.constructor.name);  
+    this._loggingService = loggingFactory.create(this.constructor.name);
   }
 
   public init() {

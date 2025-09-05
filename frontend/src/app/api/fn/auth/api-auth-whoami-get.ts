@@ -10,16 +10,16 @@ import { RequestBuilder } from '../../request-builder';
 
 import { UserEntity } from '../../models/user-entity';
 
-export interface ApiAuthWhoamiGet$Plain$Params {
+export interface ApiAuthWhoamiGet$Params {
 }
 
-export function apiAuthWhoamiGet$Plain(http: HttpClient, rootUrl: string, params?: ApiAuthWhoamiGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<UserEntity>> {
-  const rb = new RequestBuilder(rootUrl, apiAuthWhoamiGet$Plain.PATH, 'get');
+export function apiAuthWhoamiGet(http: HttpClient, rootUrl: string, params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<StrictHttpResponse<UserEntity>> {
+  const rb = new RequestBuilder(rootUrl, apiAuthWhoamiGet.PATH, 'get');
   if (params) {
   }
 
   return http.request(
-    rb.build({ responseType: 'text', accept: 'text/plain', context })
+    rb.build({ responseType: 'json', accept: 'application/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -28,4 +28,4 @@ export function apiAuthWhoamiGet$Plain(http: HttpClient, rootUrl: string, params
   );
 }
 
-apiAuthWhoamiGet$Plain.PATH = '/api/Auth/whoami';
+apiAuthWhoamiGet.PATH = '/api/Auth/whoami';

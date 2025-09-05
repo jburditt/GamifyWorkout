@@ -11,15 +11,12 @@ import { UserEntity } from '@app/api/models';
 @Injectable()
 export class ApiAuthenticationService
 {
-
     public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     private readonly _loggingService: LoggingService;
 
     constructor(
-        http: HttpClient,
         private authService: AuthService,
-        configService: ConfigService,
         private router: Router,
         private loggingFactory: LoggingFactory
     ) {
@@ -27,8 +24,9 @@ export class ApiAuthenticationService
     }
 
     whoAmI(azureUserInfo: any): Observable<any> {
-        return this.authService.apiAuthWhoamiGet$Json$Response().pipe(
+        return this.authService.apiAuthWhoamiGet$Response().pipe(
             map((response: any) => {
+                this._loggingService.debug("azureUserInfo.info", azureUserInfo.info);
                 this._loggingService.debug("whoAmI response", response);
                 return response;
             }),

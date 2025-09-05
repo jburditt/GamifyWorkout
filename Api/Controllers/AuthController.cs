@@ -18,6 +18,7 @@ namespace Api
         [Authorize]
         [Route("whoami")]
         [HttpGet]
+        [Produces("application/json")]
         public async Task<UserEntity> GetUser()
         {
             return principal.GetUser();

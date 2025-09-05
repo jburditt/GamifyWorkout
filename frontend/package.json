@@ -34,6 +34,7 @@
     "ng-matero": "^18.2.0",
     "run-script-os": "*",
     "rxjs": "~7.8.0",
+    "survey-angular-ui": "^2.3.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"
   },

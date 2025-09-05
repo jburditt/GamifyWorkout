@@ -4,15 +4,24 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 # Tech Stack
 - .NET 8 OData API 
 - EntityFramework 8
-- Angular 20 frontend with DI
+- Angular 20
 
 # Angular Features
 - OAuth authentication
-- Logging service
-- Toast service
+- Dependency Injection -> Logging service, Toast service
 - Datepicker
 - NgRx
-- OData query
+- OData query -> Query database using OData .NET EF controllers
+
+# TODO
+- Use openapi-gen to auto generate Angular API services
+- Upgrade .NET
+- Upgrade EF
+- Add more Angular features
+- Only authentication on a single admin page
+- Upload to jburditt.com
+- Implement CI/CD
+- Add NgRx hydration for persistence
 
 ## Prerequisites
 Install Node.js

@@ -11,10 +11,13 @@ import { Player } from '@features/rpg/model/player';
     imports: [CommonModule]
 })
 export class DashboardPageComponent {
-  player$: Observable<Player>;
+  player!: Player;
 
   constructor(private store: Store<{ player: Player }>) {
-    this.player$ = store.select('player');
+
+    store.select('player').subscribe((player) => {
+      this.player = player;
+    })
   }
 
   damage() {

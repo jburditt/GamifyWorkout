@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
 import { LoggingService } from '@app/core/services/logging/logging-service.interface';
 import { LoggingFactory } from '@app/core/services/logging/logging.factory';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { MenuItem } from '@app/shared/models/menu-item.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,8 +14,7 @@ import { Player } from '@features/rpg/model/player';
     selector: 'app-root',
     templateUrl: './app.component.html',
     imports: [
-        NgIf, NgForOf,
-        RouterLink, RouterOutlet,
+        RouterOutlet,
         MatIconModule, MatToolbarModule, MatButtonModule,
         MenuComponent
     ]

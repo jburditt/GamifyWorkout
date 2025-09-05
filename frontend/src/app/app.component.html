@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <menu [items]="menuItemList"></menu>
   <span>
-    HP {{ player.hp + 1 }} / {{ player.maxHp }} MP {{ player.mp }} / {{ player.maxMp }} EXP {{ player.experience }} / {{ player.maxExperience }} LVL {{ player.level }}
+    HP {{ player.hp }} / {{ player.maxHp }} MP {{ player.mp }} / {{ player.maxMp }} EXP {{ player.experience }} / {{ player.maxExperience }} LVL {{ player.level }}
   </span>
   <span class="spacer"></span>
   <!--<button *ngIf="isLoggedIn" mat-icon-button (click)="logout()">

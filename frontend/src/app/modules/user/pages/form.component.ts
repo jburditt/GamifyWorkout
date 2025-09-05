@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EntityService } from '@app/api/services';
 import { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';
 
 @Component({
@@ -17,4 +18,11 @@ export class FormPageComponent {
   searchForm = new FormGroup({
     date: new FormControl('', []),
   });
+
+  constructor(private entityService: EntityService)
+  {
+    this.entityService.apiEntityGetentityGet({ entityName: "User" }).subscribe((entities) => {
+      console.log(entities);
+    });
+  }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Principal;
 
@@ -19,7 +20,7 @@ namespace Api
         [Route("whoami")]
         [HttpGet]
         [Produces("application/json")]
-        public async Task<UserEntity> GetUser()
+        public async Task<User> GetUser()
         {
             return principal.GetUser();
         }

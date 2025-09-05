@@ -8,12 +8,12 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { UserEntity } from '../../models/user-entity';
+import { User } from '../../models/user';
 
 export interface ApiAuthWhoamiGet$Params {
 }
 
-export function apiAuthWhoamiGet(http: HttpClient, rootUrl: string, params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<StrictHttpResponse<UserEntity>> {
+export function apiAuthWhoamiGet(http: HttpClient, rootUrl: string, params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<StrictHttpResponse<User>> {
   const rb = new RequestBuilder(rootUrl, apiAuthWhoamiGet.PATH, 'get');
   if (params) {
   }
@@ -23,7 +23,7 @@ export function apiAuthWhoamiGet(http: HttpClient, rootUrl: string, params?: Api
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<UserEntity>;
+      return r as StrictHttpResponse<User>;
     })
   );
 }

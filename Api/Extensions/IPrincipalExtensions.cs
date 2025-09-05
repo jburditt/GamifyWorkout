@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using Core;
+using System.Security.Claims;
 using System.Security.Principal;
 
 namespace Api
@@ -23,17 +24,17 @@ namespace Api
             }
         }
 
-        public static UserEntity GetUser(this IPrincipal principal)
+        public static User GetUser(this IPrincipal principal)
         {
             var currentPrincipal = principal as ClaimsPrincipal;
 
-            return new UserEntity
+            return new User
             {
-                // TODO
-                OAuthId = currentPrincipal.Get(AzureAdClaimTypes.Id),
+                Id = new Guid(currentPrincipal.Get(AzureAdClaimTypes.Id)),
                 FirstName = currentPrincipal.Get(ClaimTypes.GivenName),
                 LastName = currentPrincipal.Get(ClaimTypes.Surname),
                 Email = currentPrincipal.Get(ClaimTypes.Email),
+                Username = currentPrincipal.Get("preferred_username"),
             };
         }
     }

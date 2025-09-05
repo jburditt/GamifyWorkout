@@ -15,7 +15,7 @@ import { apiAuthLogoutGet } from '../fn/auth/api-auth-logout-get';
 import { ApiAuthLogoutGet$Params } from '../fn/auth/api-auth-logout-get';
 import { apiAuthWhoamiGet } from '../fn/auth/api-auth-whoami-get';
 import { ApiAuthWhoamiGet$Params } from '../fn/auth/api-auth-whoami-get';
-import { UserEntity } from '../models/user-entity';
+import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
@@ -32,7 +32,7 @@ export class AuthService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiAuthWhoamiGet$Response(params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<StrictHttpResponse<UserEntity>> {
+  apiAuthWhoamiGet$Response(params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<StrictHttpResponse<User>> {
     return apiAuthWhoamiGet(this.http, this.rootUrl, params, context);
   }
 
@@ -42,9 +42,9 @@ export class AuthService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiAuthWhoamiGet(params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<UserEntity> {
+  apiAuthWhoamiGet(params?: ApiAuthWhoamiGet$Params, context?: HttpContext): Observable<User> {
     return this.apiAuthWhoamiGet$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UserEntity>): UserEntity => r.body)
+      map((r: StrictHttpResponse<User>): User => r.body)
     );
   }
 

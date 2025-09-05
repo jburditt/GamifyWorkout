@@ -3,13 +3,16 @@ import { BehaviorSubject, Observable, catchError, map, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
-import { UserResponse } from '@app/api/models';
-import { BaseService } from '@app/api/services/base.service';
+//import { UserResponse } from '@app/api/models';
+//import { BaseService } from '@app/api/services/base.service';
 import { LoggingFactory } from '@app/core/services/logging/logging.factory';
 import { LoggingService } from '@app/core/services/logging/logging-service.interface';
+import { AuthService } from '@app/api/services/auth.service';
+import { UserEntity } from '@app/api/models';
 
 @Injectable()
-export class ApiAuthenticationService extends BaseService {
+export class ApiAuthenticationService //extends BaseService
+{
 
     public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -19,26 +22,37 @@ export class ApiAuthenticationService extends BaseService {
 
     constructor(
         http: HttpClient,
+        private authService: AuthService,
         configService: ConfigService,
         private router: Router,
         private loggingFactory: LoggingFactory
     ) {
-        super(http, configService);
+        //super(http, configService);
         this._loggingService = loggingFactory.create(this.constructor.name);
     }
 
     whoAmI(azureUserInfo: any): Observable<any> {
-		  return this.http.get<UserResponse>(this.getApiUrl(this._apiWhoAmIEndpoint))
-          .pipe(
-              map((result: UserResponse) => {
-                  this._loggingService.debug("azureUserInfo.info", azureUserInfo.info)
-                  this._loggingService.debug("UserResponse result", result)
-                  let userResponse = Object.assign(azureUserInfo.info, result);
-                  // save userReponse to store
-                  return result;
-              }), catchError((error: HttpErrorResponse) => {
-                  return throwError(() => error);
-              })
-          );
+        //return this.http.get<UserResponse>(this.getApiUrl(this._apiWhoAmIEndpoint))
+        return this.authService.apiAuthWhoamiGet$Json$Response().pipe(
+            map((response: any) => {
+                this._loggingService.debug("whoAmI response", response);
+                return response;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                this._loggingService.error("whoAmI error", error);
+                return throwError(() => error);
+            })
+        );
+        // .pipe(
+        //     map((result: UserEntity) => {
+        //         this._loggingService.debug("azureUserInfo.info", azureUserInfo.info)
+        //         this._loggingService.debug("UserResponse result", result)
+        //         let userResponse = Object.assign(azureUserInfo.info, result);
+        //         // save userReponse to store
+        //         //return new StrictHttpResponse<UserEntity>(result);
+        //     }), catchError((error: HttpErrorResponse) => {
+        //         return throwError(() => error);
+        //     })
+        // );
     }
 }

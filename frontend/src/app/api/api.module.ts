@@ -8,6 +8,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthService } from './services/auth.service';
 import { EntityService } from './services/entity.service';
+import { UserService } from './services/user.service';
 
 /**
  * Module that provides all services and configuration.
@@ -19,6 +20,7 @@ import { EntityService } from './services/entity.service';
   providers: [
     AuthService,
     EntityService,
+    UserService,
     ApiConfiguration
   ],
 })

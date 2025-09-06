@@ -13,3 +13,6 @@ TODO
 - Update root ReadMe on how to setup project e.g. EF commands above
 - Use GlobalUsings
 - Fix self-signed certificate
+- Upgrade .NET
+- Upgrade EF
+- Upgrade packages

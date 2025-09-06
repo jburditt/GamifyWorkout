@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { EntityService } from '@app/api/services';
+import { EntityService, UserService } from '@app/api/services';
 import { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';
 import { Model } from "survey-core";
 import { SurveyModule } from 'survey-angular-ui';
@@ -22,10 +22,7 @@ export class FormPageComponent implements OnInit {
   });
   surveyModel!: Model;
 
-  constructor(private entityService: EntityService)
-  {
-
-  }
+  constructor(private entityService: EntityService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.entityService.apiEntityGetentityGet({ entityName: "User" }).subscribe((entities) => {
@@ -35,16 +32,29 @@ export class FormPageComponent implements OnInit {
     const surveyJson = {
       elements: [{
         name: "FirstName",
-        title: "Enter your first name:",
+        title: "First Name:",
         type: "text"
       }, {
         name: "LastName",
-        title: "Enter your last name:",
+        title: "Last Name:",
+        type: "text"
+      }, {
+        name: "Username",
+        title: "Username:",
+        type: "text"
+      }, {
+        name: "Email",
+        title: "Email:",
         type: "text"
       }]
     };
 
     const survey = new Model(surveyJson);
+    survey.onComplete.add(this.surveyComplete);
     this.surveyModel = survey;
+  }
+
+  surveyComplete(survey: any) {
+    console.log("Survey results: " + JSON.stringify(survey.data));
   }
 }

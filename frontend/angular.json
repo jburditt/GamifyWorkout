@@ -32,7 +32,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              //"src/app/shared/template/styles.scss"
+              "node_modules/survey-core/survey-core.min.css"
             ],
             "scripts": [],
             "browser": "src/main.ts"

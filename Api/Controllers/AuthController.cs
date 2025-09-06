@@ -20,7 +20,7 @@ namespace Api
         [Route("whoami")]
         [HttpGet]
         [Produces("application/json")]
-        public async Task<User> GetUser()
+        public User GetUser()
         {
             return principal.GetUser();
         }

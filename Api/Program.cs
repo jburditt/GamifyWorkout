@@ -2,28 +2,35 @@ using Api;
 using Core;
 using Database;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Routing.Conventions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OData.Edm;
+using Microsoft.OData.Edm.Vocabularies;
 using Microsoft.OData.ModelBuilder;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // odata
 var odataRootPath = $"api/v1/odata";
-var modelBuilder = new ODataConventionModelBuilder();
-modelBuilder.EntitySet<User>("Users");
-var edmModel = modelBuilder
-    .EnableLowerCamelCase()
-    .GetEdmModel();
 builder.Services
     .AddControllers()
-    .AddOData(options => options.EnableQueryFeatures(100).AddRouteComponents(odataRootPath, edmModel));
+    .AddOData(options =>
+    {
+        options.Conventions.Remove(options.Conventions.OfType<MetadataRoutingConvention>().First());
+        options.EnableQueryFeatures(100).AddRouteComponents(odataRootPath, GetEdmModel());
+    });
 
 var corsPolicyName = "MyAllowedCorsOrigins";
 builder.Services.AddCorsPolicy(corsPolicyName);
 builder.Services.RegisterServices(builder.Configuration);
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwagger();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.DocumentFilter<ODataDocumentFilter>();
+});
 
 var app = builder.Build();
 
@@ -53,3 +60,41 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+static IEdmModel GetEdmModel()
+{
+    var modelBuilder = new ODataConventionModelBuilder();
+    modelBuilder.EntitySet<User>("Users");
+    var edmModel = modelBuilder
+        .EnableLowerCamelCase()
+        .GetEdmModel();
+
+    // Add DisplayName annotations to the EDM
+    //foreach (var edmType in edmModel.SchemaElements.OfType<EdmEntityType>())
+    //{
+    //    //var clrType = edmType.GetClrType();
+    //    var clrType = Type.GetType($"{edmType.Namespace}.{edmType.Name}, Core");
+    //    if (clrType != null)
+    //    {
+    //        foreach (var edmProperty in edmType.StructuralProperties())
+    //        {
+    //            var clrProperty = clrType.GetProperty(edmProperty.Name, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+    //            if (clrProperty != null)
+    //            {
+    //                var displayAttribute = clrProperty.GetCustomAttribute<DisplayAttribute>();
+    //                if (displayAttribute?.Name != null)
+    //                {
+    //                    var term = new EdmTerm("Display", "DisplayName", EdmCoreModel.Instance.GetString(true));
+    //                    var annotation = new EdmVocabularyAnnotation(edmProperty, term, new EdmStringConstant(displayAttribute.Name));
+    //                    if (edmModel is EdmModel mutableModel)
+    //                    {
+    //                        mutableModel.AddVocabularyAnnotation(annotation);
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+
+    return edmModel;
+}

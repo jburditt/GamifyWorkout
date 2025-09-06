@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.EntityFrameworkCore;
 
-[ApiExplorerSettings(IgnoreApi = true)]
-public class UsersController : ODataController
+[Route("api/[controller]")]
+public class UserController : ODataController
 {
     private readonly IDbContextFactory<EfDbContext> _contextFactory;
 
-    public UsersController(IDbContextFactory<EfDbContext> contextFactory)
+    public UserController(IDbContextFactory<EfDbContext> contextFactory)
     {
         _contextFactory = contextFactory;
     }
@@ -25,6 +25,7 @@ public class UsersController : ODataController
     }
 
     [HttpGet("{id}")]
+    [Produces("application/json")]
     public ActionResult<User> Get(Guid id)
     {
         var context = _contextFactory.CreateDbContext();
@@ -33,11 +34,12 @@ public class UsersController : ODataController
     }
 
     [HttpPost]
-    public ActionResult<User> Post([FromBody] User user)
+    [Produces("application/json")]
+    public bool Post([FromBody] User user)
     {
         var context = _contextFactory.CreateDbContext();
         context.Users.Add(user);
         context.SaveChanges();
-        return Created(user);
+        return true;
     }
 }

@@ -1,5 +1,10 @@
 # Bootstrap Project
-A project to demonstrate Angular features to be used for reference and bootstrapping new projects.
+A project to demonstrate Angular features to be used for reference and bootstrapping new projects. WIP: The following are all automated, once you add models (simple POCOs):
+- Create form from model
+- Save form to database
+- Create database from models
+- Load form from database
+- Query model using OData
 
 # Tech Stack
 - .NET 8 OData API 
@@ -25,7 +30,8 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Add NgRx hydration for persistence
 - Fix VS SPA error in console logs
 - Fix or reinstall Storybook
-
+- Add example of odata query
+- 
 ## Prerequisites
 Install Node.js
 

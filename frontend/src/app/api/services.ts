@@ -4,3 +4,4 @@
 
 export { AuthService } from './services/auth.service';
 export { EntityService } from './services/entity.service';
+export { UserService } from './services/user.service';

@@ -50,11 +50,12 @@ export class FormPageComponent implements OnInit {
     };
 
     const survey = new Model(surveyJson);
-    survey.onComplete.add(this.surveyComplete);
+    survey.onComplete.add((sender, options) => {
+      console.log("Survey results: " + survey.data);
+      this.userService.apiUserPost({ body: survey.data }).subscribe((user) => {
+        console.log("User created", user);
+      });
+    });
     this.surveyModel = survey;
-  }
-
-  surveyComplete(survey: any) {
-    console.log("Survey results: " + JSON.stringify(survey.data));
   }
 }

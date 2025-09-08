@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 //import { UserResponse } from '@app/api/models';
 //import { UserService } from '@app/core/services/user.service';
 import { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';
+import { HttpClient } from '@angular/common/http';
+import buildQuery from 'odata-query'
 
 @Component({
   standalone: true,
@@ -35,7 +37,7 @@ export class SearchPageComponent implements AfterViewInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'edit'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(/*private userService: UserService, */private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -56,6 +58,18 @@ export class SearchPageComponent implements AfterViewInit {
 
     //   console.log("data", data);
     // });
+    const filter = { or: { FirstName: this.searchForm.value.firstName, LastName: this.searchForm.value.lastName } };
+    const query = buildQuery({ filter });
+    this.http.get<any[]>(`/api/User${query}`).subscribe((data) => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      console.log("data", data);
+    });
+    //var response = fetch(`/api/User${query}`);
+      //.then(response => response.json())
+      //.then(data => {
+    //console.log("OData response", response);
   }
 
   edit(id: number) {

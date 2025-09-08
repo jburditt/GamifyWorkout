@@ -34,10 +34,10 @@ export class SearchPageComponent implements AfterViewInit {
     lastName: new FormControl(''),
   });
 
-  displayedColumns: string[] = ['firstName', 'lastName'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'edit'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, public router: Router) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

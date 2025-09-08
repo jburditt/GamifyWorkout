@@ -7,6 +7,7 @@ export class UserRoutes {
   public static HOME = '';
   public static DASHBOARD = 'dashboard';
   public static SEARCH = 'search';
+  public static EDIT = ':id';
 }
 
 export default [
@@ -21,5 +22,9 @@ export default [
   {
     path: UserRoutes.SEARCH,
     component: SearchPageComponent,
+  },
+  {
+    path: UserRoutes.EDIT,
+    component: FormPageComponent,
   }
 ] satisfies Route[];

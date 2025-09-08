@@ -1,10 +1,12 @@
 import { Route } from "@angular/router";
 import { FormPageComponent } from "@app/modules/user/pages/form.component";
 import { DashboardPageComponent } from "./pages/dashboard.component";
+import { SearchPageComponent } from "./pages/search.component";
 
 export class UserRoutes {
   public static HOME = '';
   public static DASHBOARD = 'dashboard';
+  public static SEARCH = 'search';
 }
 
 export default [
@@ -15,5 +17,9 @@ export default [
   {
     path: UserRoutes.DASHBOARD,
     component: DashboardPageComponent,
+  },
+  {
+    path: UserRoutes.SEARCH,
+    component: SearchPageComponent,
   }
 ] satisfies Route[];

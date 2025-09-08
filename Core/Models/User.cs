@@ -5,7 +5,7 @@ namespace Core
     public class User : BaseEntity
     {
         [Display(Name = "OAuth Id")]
-        public required Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Display(Name = "First Name")]
         public required string FirstName { get; set; }

@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,12 +8,8 @@ import { MenuItem } from '@app/shared/models/menu-item.model';
 @Component({
     selector: 'menu',
     templateUrl: './menu.component.html',
-    imports: [
-        RouterLink,
-        NgIf, NgForOf,
-        MatMenuModule, MatIconModule, MatButtonModule
-    ]
+    imports: [RouterLink, MatMenuModule, MatIconModule, MatButtonModule]
 })
-export class MenuComponent { 
+export class MenuComponent {
     @Input() items: Array<MenuItem> = [];
 }

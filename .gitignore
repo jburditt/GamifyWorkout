@@ -15,3 +15,5 @@
 /frontend/obj
 /obj
 /frontend/src/app/shared/template/node_modules
+/Tests/bin
+/Tests/obj

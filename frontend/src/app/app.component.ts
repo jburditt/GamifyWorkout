@@ -25,7 +25,10 @@ export class AppComponent implements OnInit {
 
   menuItemList: Array<MenuItem> = [
     new MenuItem('Admin', '/admin', 'settings'),
-    new MenuItem('User', '/user', 'contact_mail'),
+    new MenuItem('User', '/user', 'contact_mail', [
+      new MenuItem('Search', '/user/search', 'search'),
+      //new MenuItem('Profile', '/user/profile', 'person')
+    ]),
     new MenuItem('Dashboard', '/user/dashboard', 'dashboard'),
   ];
 

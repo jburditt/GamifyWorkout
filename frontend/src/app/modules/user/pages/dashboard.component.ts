@@ -5,10 +5,11 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 // TODO
 import { damage, heal } from '@features/rpg/store/player.actions';
 import { Player } from '@features/rpg/model/player';
+import { StatusBarComponent } from '@app/features/rpg/component/status-bar.component';
 
 @Component({
     templateUrl: 'dashboard.component.html',
-    imports: [CommonModule]
+    imports: [CommonModule, StatusBarComponent]
 })
 export class DashboardPageComponent {
   player!: Player;

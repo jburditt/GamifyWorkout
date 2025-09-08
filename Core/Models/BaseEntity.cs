@@ -17,15 +17,20 @@ namespace Core
 
         [JsonIgnore]
         public DateTimeOffset CreatedOn { get; set; }
+
         [JsonIgnore]
         public DateTimeOffset UpdatedOn { get; set; }
+
         [JsonIgnore]
-        public long? CreatedByUserId { get; set; }
+        public Guid? CreatedByUserId { get; set; }
+
         [JsonIgnore]
-        public long? UpdatedByUserId { get; set; }
+        public Guid? UpdatedByUserId { get; set; }
+
         [JsonIgnore]
         [NotMapped]
         public virtual User? CreatedByUser { get; set; }
+
         [JsonIgnore]
         [NotMapped]
         public virtual User? UpdatedByUser { get; set; }

@@ -5,7 +5,7 @@
 export interface User {
   email?: string | null;
   firstName?: string | null;
-  id?: string;
+  id?: string | null;
   lastName?: string | null;
   username?: string | null;
 }

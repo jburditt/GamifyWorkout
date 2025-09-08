@@ -34,7 +34,7 @@ export class SearchPageComponent implements AfterViewInit {
     lastName: new FormControl(''),
   });
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'edit'];
+  displayedColumns: string[] = ['firstName', 'lastName'];
   dataSource = new MatTableDataSource<any>();
 
   constructor(private http: HttpClient, private router: Router) { }

@@ -1,26 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EntityService, UserService } from '@app/api/services';
-import { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';
 import { Model } from "survey-core";
 import { SurveyModule } from 'survey-angular-ui';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: 'form.component.html',
-    imports: [
-        FormsModule, ReactiveFormsModule, SurveyModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        DatePickerComponent
-    ]
+    imports: [FormsModule, ReactiveFormsModule, SurveyModule, MatNativeDateModule]
 })
 export class FormPageComponent implements OnInit {
-  searchForm = new FormGroup({
-    date: new FormControl('', []),
-  });
   surveyModel!: Model;
 
   constructor(private entityService: EntityService, private userService: UserService, private route: ActivatedRoute) { }
@@ -32,6 +22,7 @@ export class FormPageComponent implements OnInit {
       console.log(entities);
     });
 
+    // TODO last step for full automation, transform the above to the below
     const surveyJson = {
       elements: [{
         name: "firstName",
@@ -59,6 +50,7 @@ if (id) {
     survey.data = user;
 });
 }
+// TODO handle edit instead of always adding new user
     survey.onComplete.add((sender, options) => {
       console.log("Survey results: " + survey.data);
       this.userService.apiUserPost({ body: survey.data }).subscribe((user) => {

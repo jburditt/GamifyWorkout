@@ -11,6 +11,10 @@ export const routes: Routes = [{
     {
       path: 'user',
       loadChildren: () => import('@app/modules/user/user.routes')
+    },
+    {
+      path: 'feature',
+      loadChildren: () => import('@app/modules/feature/feature.routes')
     }
   ],
 }];

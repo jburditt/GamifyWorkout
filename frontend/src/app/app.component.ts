@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
   private readonly _loggingService: LoggingService;
 
+  // list of mat-icons https://jossef.github.io/material-design-icons-iconfont/
   menuItemList: Array<MenuItem> = [
     new MenuItem('Admin', '/admin', 'settings'),
     new MenuItem('User', '/user', 'contact_mail', [
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit {
       //new MenuItem('Profile', '/user/profile', 'person')
     ]),
     new MenuItem('Dashboard', '/user/dashboard', 'dashboard'),
-  ];
+    new MenuItem('Features', '/feature', 'build'),
+];
 
   public player!: Player;
 

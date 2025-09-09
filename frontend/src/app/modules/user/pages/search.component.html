@@ -1,5 +1,5 @@
 <h1>Search Users</h1>
-<p>An example of using OData to query from the database</p>
+<p>An example of using OData to query the database</p>
 
 <br />
 
@@ -39,8 +39,8 @@
   <br class="clear" />
   <br class="clear" />
 
-
-  <div *ngIf="dataSource.data.length" class="mat-elevation-z8">
+  @if (dataSource.data.length) {
+  <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="firstName">
@@ -69,3 +69,4 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
 
   </div>
+  }

@@ -1,4 +1,3 @@
-import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,9 +10,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
-//import { UserResponse } from '@app/api/models';
-//import { UserService } from '@app/core/services/user.service';
-import { DatePickerComponent } from '@app/shared/components/datepicker/date-picker.component';
 import { HttpClient } from '@angular/common/http';
 import buildQuery from 'odata-query'
 
@@ -21,11 +17,9 @@ import buildQuery from 'odata-query'
   standalone: true,
   templateUrl: 'search.component.html',
   imports: [
-    NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault,
     FormsModule, ReactiveFormsModule,
     MatPaginatorModule, MatIconModule, MatGridListModule, MatInputModule, MatDatepickerModule, MatTableModule,
     MatNativeDateModule, MatButtonModule,
-    DatePickerComponent
   ]
 })
 export class SearchPageComponent implements AfterViewInit {
@@ -51,14 +45,7 @@ export class SearchPageComponent implements AfterViewInit {
       return;
     }
     console.log("searchForm", this.searchForm.value);
-    // this.userService.search(this.searchForm.value).then(data => {
-    //   this.dataSource.data = data;
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-
-    //   console.log("data", data);
-    // });
-    const filter = { or: { FirstName: this.searchForm.value.firstName, LastName: this.searchForm.value.lastName } };
+    const filter = { and: { FirstName: { contains: this.searchForm.value.firstName }, LastName: { contains: this.searchForm.value.lastName } } };
     const query = buildQuery({ filter });
     this.http.get<any[]>(`/api/User${query}`).subscribe((data) => {
       this.dataSource.data = data;
@@ -66,10 +53,6 @@ export class SearchPageComponent implements AfterViewInit {
       this.dataSource.sort = this.sort;
       console.log("data", data);
     });
-    //var response = fetch(`/api/User${query}`);
-      //.then(response => response.json())
-      //.then(data => {
-    //console.log("OData response", response);
   }
 
   edit(id: number) {

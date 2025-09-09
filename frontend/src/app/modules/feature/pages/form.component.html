@@ -2,4 +2,16 @@
 
 <p>This page [will] demonstrates basic form features - datepicker control, validation, nested forms, etc.</p>
 
-<date-picker title="Date" [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>
+<fieldset>
+  <legend>Reactive Form</legend>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name" formControlName="firstName" required>
+    </mat-form-field>
+    <date-picker title="Date" [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>
+    <button type="submit" matButton="filled" color="primary">
+      Submit
+    </button>
+  </form>
+</fieldset>

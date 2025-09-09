@@ -22,9 +22,7 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
-- Upgrade EF
 - Add more Angular features
-- Only authentication on a single admin page
 - Upload to jburditt.com
 - Implement CI/CD
 - Add NgRx hydration for persistence

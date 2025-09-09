@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuItem } from '@app/shared/models/menu-item.model';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,15 +16,13 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     ]
 })
 export class AppComponent {
-
-  // list of mat-icons https://jossef.github.io/material-design-icons-iconfont/
   menuItemList: Array<MenuItem> = [
-    new MenuItem('Admin', '/admin', 'settings'),
+    new MenuItem('Home', '/', 'home'),
     new MenuItem('User', '/user', 'contact_mail', [
-      new MenuItem('Search', '/user/search', 'search'),
-      //new MenuItem('Profile', '/user/profile', 'person')
+      new MenuItem('Search', '/user/search', 'search')
     ]),
     new MenuItem('Dashboard', '/user/dashboard', 'dashboard'),
     new MenuItem('Features', '/feature', 'build'),
+    new MenuItem('Admin', '/admin', 'settings'),
   ];
 }

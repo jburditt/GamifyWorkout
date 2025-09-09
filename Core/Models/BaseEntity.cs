@@ -13,7 +13,7 @@ namespace Core
         }
 
         [Key]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonIgnore]
         public DateTimeOffset CreatedOn { get; set; }

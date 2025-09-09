@@ -12,11 +12,14 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Angular 20
 
 # Angular Features
-- OAuth authentication
+- OAuth authentication -> Auth guard, Azure AD
 - Dependency Injection -> Logging service, Toast service
 - Datepicker
 - NgRx
 - OData query -> Query database using OData .NET EF controllers
+- Menu -> Routing
+- SurveyJS -> Automate creating form from model, and loading form from database
+- OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
 - Consolidate User and UserEntity
@@ -31,7 +34,8 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Fix VS SPA error in console logs
 - Fix or reinstall Storybook
 - Add example of odata query
-- 
+- Integrate Matero component
+
 ## Prerequisites
 Install Node.js
 

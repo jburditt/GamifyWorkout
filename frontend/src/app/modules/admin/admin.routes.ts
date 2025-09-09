@@ -1,6 +1,5 @@
 import { Route } from "@angular/router";
-import { WorkoutsPageComponent } from "@app/modules/admin/pages/workouts.component";
-//import { AdminLayoutComponent } from "@app/theme/admin-layout/admin-layout.component";
+import { DashboardPageComponent } from "@app/modules/admin/pages/dashboard.component";
 
 export class AdminRoutes {
   public static HOME = '';
@@ -9,6 +8,6 @@ export class AdminRoutes {
 export default [
   {
     path: AdminRoutes.HOME,
-    component: WorkoutsPageComponent
+    component: DashboardPageComponent
   }
 ] satisfies Route[];

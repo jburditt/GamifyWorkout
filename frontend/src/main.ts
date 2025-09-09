@@ -17,7 +17,7 @@ import { provideStore, provideState } from '@ngrx/store';
 import { playerReducer } from "@features/rpg/store/player.reducer";
 // uncomment for site-wide authentication required
 // export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthenticationService) {
-//   return (): Observable<void> => {
+//   return (): Observable<boolean> => {
 //     return configService.loadConfig$()
 //       .pipe(tap(() => authService.init()));
 //   }

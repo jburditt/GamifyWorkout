@@ -6,6 +6,6 @@ import { Configuration } from "./config.interface";
 export abstract class ConfigService {
   abstract config: Configuration;
   abstract isLoaded$: BehaviorSubject<boolean>;
-  abstract loadConfig(): Observable<void>;
+  abstract loadConfig$(): Observable<boolean>;
   abstract getEndpoint(controller: string, path: string): string;
 }

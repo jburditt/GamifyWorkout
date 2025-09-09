@@ -14,11 +14,12 @@ export class JsonConfigService implements ConfigService {
 
   constructor(private readonly http: HttpClient) { }
 
-  loadConfig(): Observable<void> {
+  loadConfig$(): Observable<boolean> {
     return this.http.get('assets/config.json')
       .pipe(map((data: any) => {
         this.config = data;
         this.isLoaded$.next(true);
+        return true;
       }), catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       }));

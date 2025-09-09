@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
   <menu [items]="menuItemList"></menu>
   Angular Bootstrap Demo
-  <!--<button *ngIf="isLoggedIn" mat-icon-button (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>-->
+  @if (isLoggedIn) {
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  }
 </mat-toolbar>
 
 <div class="wrapper">

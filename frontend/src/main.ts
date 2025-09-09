@@ -15,23 +15,23 @@ import { provideOAuthService } from "@app/core/auth/auth.provider";
 // ngrx/store
 import { provideStore, provideState } from '@ngrx/store';
 import { playerReducer } from "@features/rpg/store/player.reducer";
-
-
-export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthenticationService) {
-  return (): Observable<void> => {
-    return configService.loadConfig()
-      .pipe(tap(() => authService.init()));
-  }
-}
+// uncomment for site-wide authentication required
+// export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthenticationService) {
+//   return (): Observable<void> => {
+//     return configService.loadConfig$()
+//       .pipe(tap(() => authService.init()));
+//   }
+// }
 
 bootstrapApplication(AppComponent, {
   providers: [
-    {
-        provide: APP_INITIALIZER,
-        useFactory: initializeApp,
-        deps: [ConfigService, HttpClient, AuthenticationService],
-        multi: true,
-    },
+    // uncomment for site-wide authentication required
+    // {
+    //     provide: APP_INITIALIZER,
+    //     useFactory: initializeApp,
+    //     deps: [ConfigService, HttpClient, AuthenticationService],
+    //     multi: true,
+    // },
     ApiAuthenticationService,
     provideOAuthService(),
     provideAnimations(),

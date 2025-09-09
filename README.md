@@ -33,7 +33,6 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Add NgRx hydration for persistence
 - Fix VS SPA error in console logs
 - Fix or reinstall Storybook
-- Add example of odata query
 - Integrate Matero component
 - Edit user instead of adding new user
 

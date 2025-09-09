@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ConfigService } from '@app/core/services/config/config-service.interface';
 import { ApiAuthenticationService as AuthenticationApi } from '@app/core/auth/auth.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AzureOAuthService implements AuthenticationService {
 
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

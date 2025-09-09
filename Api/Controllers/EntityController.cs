@@ -15,6 +15,7 @@ namespace Api
         [HttpGet]
         public async Task<IActionResult> GetEntity(string entityName)
         {
+            // TODO complete by returning this from metadata service
             return Ok(@"      ""User"": {
                 ""type"": ""object"",
                 ""properties"": {

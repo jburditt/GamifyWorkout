@@ -22,9 +22,6 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
-- Consolidate User and UserEntity
-- Use openapi-gen to auto generate Angular API services
-- Upgrade .NET
 - Upgrade EF
 - Add more Angular features
 - Only authentication on a single admin page
@@ -35,6 +32,22 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Fix or reinstall Storybook
 - Integrate Matero component
 - Edit user instead of adding new user
+- Auth -> On clicking on Admin menu item, you will be redirected to Denied page. On second attempt, it will work
+- Auth -> On logging out, it doesn't redirect you back to website
+
+SiteMap
+  Home
+  Admin
+    Dashboard
+  User
+    Edit
+    Search
+    New
+  Features
+    Form
+    Upload
+    NgRx Store
+    Theme Matero
 
 ## Prerequisites
 Install Node.js

@@ -5,13 +5,21 @@
 <fieldset>
   <legend>Reactive Form</legend>
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
     <mat-form-field>
       <mat-label>First Name</mat-label>
       <input matInput placeholder="First Name" formControlName="firstName" required>
+      @if (searchForm.get('firstName')?.hasError('minlength')) { <mat-error>Must be at least 3 characters long</mat-error> }
+      @if (searchForm.get('firstName')?.hasError('required')) { <mat-error>First Name is required</mat-error> }
     </mat-form-field>
+
     <date-picker title="Date" [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>
+
+    <address formGroupName="addressForm" [addressForm]="$any(searchForm.get('addressForm'))"></address>
+
     <button type="submit" matButton="filled" color="primary">
       Submit
     </button>
+
   </form>
 </fieldset>

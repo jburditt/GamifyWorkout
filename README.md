@@ -35,6 +35,7 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Fix or reinstall Storybook
 - Add example of odata query
 - Integrate Matero component
+- Edit user instead of adding new user
 
 ## Prerequisites
 Install Node.js

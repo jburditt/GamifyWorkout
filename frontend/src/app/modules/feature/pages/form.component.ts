@@ -32,9 +32,8 @@ export class FormPageComponent {
   constructor() { }
 
   onSubmit() {
-    // if (!this.searchForm.valid) {
-    //   return;
-    // }
+    this.searchForm.get('addressForm')?.markAllAsTouched();
+    console.log("isValid", this.searchForm.valid);
     console.log("searchForm", this.searchForm.value);
   }
 }

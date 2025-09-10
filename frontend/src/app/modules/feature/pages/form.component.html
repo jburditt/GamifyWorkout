@@ -13,9 +13,9 @@
       @if (searchForm.get('firstName')?.hasError('required')) { <mat-error>First Name is required</mat-error> }
     </mat-form-field>
 
-    <date-picker title="Date" [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>
+    <date-picker [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>
 
-    <address formGroupName="addressForm" [addressForm]="$any(searchForm.get('addressForm'))"></address>
+    <address [addressForm]="$any(searchForm.get('addressForm'))"></address>
 
     <button type="submit" matButton="filled" color="primary">
       Submit

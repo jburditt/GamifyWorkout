@@ -29,7 +29,8 @@
   <mat-form-field>
     <mat-label>Postal/Zip Code</mat-label>
     <input matInput formControlName="postalCode" required>
-    @if (addressForm.get('postalCode')?.hasError('pattern')) { <mat-error>Must be in 12345 or 12345-6789 format</mat-error> }
+    <!--@if (addressForm.get('postalCode')?.hasError('pattern')) { <mat-error>Must be in 12345 or 12345-6789 format</mat-error> }-->
+    @if (addressForm.get('postalCode')?.hasError('pattern')) { <mat-error>Must be in A1B 2C3 or A1B2C3 format</mat-error> }
     @if (addressForm.get('postalCode')?.hasError('required')) { <mat-error>Postal/Zip Code is required</mat-error> }
   </mat-form-field>
 </div>

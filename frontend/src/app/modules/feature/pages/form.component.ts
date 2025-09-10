@@ -25,7 +25,8 @@ export class FormPageComponent {
       addressLine2: new FormControl(''),
       city: new FormControl('', [Validators.required]),
       province: new FormControl('', [Validators.required]),
-      postalCode: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')])
+      postalCode: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z][0-9][a-zA-Z] ?[0-9][a-zA-Z][0-9]$')])
+      //postalCode: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')])
     })
   });
 

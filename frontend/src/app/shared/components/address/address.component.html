@@ -18,7 +18,11 @@
 
   <mat-form-field>
     <mat-label>Province/State</mat-label>
-    <input matInput formControlName="province" required>
+    <mat-select formControlName="province" required>
+      @for (province of provinces; track province.code) {
+        <mat-option [value]="province.code">{{ province.name }}</mat-option>
+      }
+    </mat-select>
     @if (addressForm.get('province')?.hasError('required')) { <mat-error>Province/State is required</mat-error> }
   </mat-form-field>
 

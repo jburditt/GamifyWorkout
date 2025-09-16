@@ -12,7 +12,7 @@ import { AuthenticationService } from '@app/core/auth/auth.interface';
 import { ApiAuthenticationService } from '@app/core/auth/auth.service';
 import { provideOAuthService } from "@app/core/auth/auth.provider";
 
-import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: '#267591',
   bgsType: 'square-loader',
@@ -50,6 +50,7 @@ bootstrapApplication(AppComponent, {
     provideLoggingService(),
     provideToastService(),
     importProvidersFrom(
+      NgxUiLoaderHttpModule,
       NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
       NgxUiLoaderRouterModule.forRoot({ showForeground: false })
     ),

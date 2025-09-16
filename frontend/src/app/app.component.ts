@@ -6,11 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { AuthenticationService } from './core/auth/auth.interface';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule, MenuComponent]
+    imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule, MenuComponent, NgxUiLoaderModule]
 })
 export class AppComponent {
   menuItemList: Array<MenuItem> = [

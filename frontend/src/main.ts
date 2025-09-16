@@ -12,6 +12,13 @@ import { AuthenticationService } from '@app/core/auth/auth.interface';
 import { ApiAuthenticationService } from '@app/core/auth/auth.service';
 import { provideOAuthService } from "@app/core/auth/auth.provider";
 
+import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: '#267591',
+  bgsType: 'square-loader',
+  bgsSize: 100
+};
+
 // ngrx/store
 import { provideStore, provideState } from '@ngrx/store';
 import { playerReducer } from "@features/rpg/store/player.reducer";
@@ -42,6 +49,10 @@ bootstrapApplication(AppComponent, {
     provideConfigService(),
     provideLoggingService(),
     provideToastService(),
+    importProvidersFrom(
+      NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+      NgxUiLoaderRouterModule.forRoot({ showForeground: false })
+    ),
     // ngrx/store
     provideStore(),
     provideState({ name: 'player', reducer: playerReducer }),

@@ -9,8 +9,9 @@
     <mat-form-field>
       <mat-label>First Name</mat-label>
       <input matInput placeholder="First Name" formControlName="firstName" required>
-      @if (searchForm.get('firstName')?.hasError('minlength')) { <mat-error>Must be at least 3 characters long</mat-error> }
-      @if (searchForm.get('firstName')?.hasError('required')) { <mat-error>First Name is required</mat-error> }
+      <mat-error>
+        <validation-message [control]="$any(searchForm.get('firstName'))"></validation-message>
+      </mat-error>
     </mat-form-field>
 
     <date-picker [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>

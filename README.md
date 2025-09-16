@@ -7,7 +7,7 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Query model using OData
 
 # Tech Stack
-- .NET 8 OData API 
+- .NET 9 OData API 
 - EntityFramework 8
 - Angular 20
 
@@ -23,7 +23,7 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 
 # TODO
 - Add more Angular features
-- Upload to jburditt.com
+- Upload to jburditt.com or fullsweb.com
 - Implement CI/CD
 - Add NgRx hydration for persistence
 - Fix VS SPA error in console logs
@@ -113,9 +113,9 @@ git checkout blah.git .
 TODO main.ts sections
 
 angular.json
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/app/shared/template/assets",
-                "output": "/assets"
-              },
+    "assets": [
+    {
+        "glob": "**/*",
+        "input": "src/app/shared/template/assets",
+        "output": "/assets"
+    },

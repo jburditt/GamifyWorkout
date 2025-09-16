@@ -7,12 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AddressComponent } from '@app/shared/components/address/address.component';
+import { ValidationMessageComponent } from '@app/features/rpg/component/validation-message.component';
 
 @Component({
     templateUrl: 'form.component.html',
     imports: [
       FormsModule, ReactiveFormsModule, MatDatepickerModule, MatNativeDateModule, DatePickerComponent,
-      MatButtonModule, MatFormFieldModule, MatInputModule, AddressComponent
+      MatButtonModule, MatFormFieldModule, MatInputModule, AddressComponent, ValidationMessageComponent
     ],
     styleUrls: ['form.component.scss'],
 })

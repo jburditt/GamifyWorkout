@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <menu [items]="menuItemList"></menu>
+  Angular Bootstrap Demo
+  <span class="spacer"></span>
+  @if (isLoggedIn) {
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  } @else {
+    <button mat-icon-button (click)="login()">
+      <mat-icon>login</mat-icon>
+    </button>
+  }
+</mat-toolbar>
+
+<div class="wrapper">
+  <router-outlet></router-outlet>
+  <ngx-ui-loader></ngx-ui-loader>
+</div>

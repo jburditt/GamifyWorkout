@@ -1,0 +1,36 @@
+<div [formGroup]="addressForm">
+  <mat-form-field>
+    <mat-label>Address Line 1</mat-label>
+    <input matInput formControlName="addressLine1" required>
+    @if (addressForm.get('addressLine1')?.hasError('required')) { <mat-error>Address Line 1 is required</mat-error> }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Address Line 2</mat-label>
+    <input matInput formControlName="addressLine2">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input matInput formControlName="city" required>
+    @if (addressForm.get('city')?.hasError('required')) { <mat-error>City is required</mat-error> }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Province/State</mat-label>
+    <mat-select formControlName="province" required>
+      @for (province of provinces; track province.code) {
+        <mat-option [value]="province.code">{{ province.name }}</mat-option>
+      }
+    </mat-select>
+    @if (addressForm.get('province')?.hasError('required')) { <mat-error>Province/State is required</mat-error> }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Postal/Zip Code</mat-label>
+    <input matInput formControlName="postalCode" required>
+    <!--@if (addressForm.get('postalCode')?.hasError('pattern')) { <mat-error>Must be in 12345 or 12345-6789 format</mat-error> }-->
+    @if (addressForm.get('postalCode')?.hasError('pattern')) { <mat-error>Must be in A1B 2C3 or A1B2C3 format</mat-error> }
+    @if (addressForm.get('postalCode')?.hasError('required')) { <mat-error>Postal/Zip Code is required</mat-error> }
+  </mat-form-field>
+</div>

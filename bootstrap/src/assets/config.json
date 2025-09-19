@@ -1,0 +1,13 @@
+{
+  "baseUrl": "https://localhost:8080/api",
+  "logLevel": "All",
+  "authentication": {
+    "issuer": "https://login.microsoftonline.com/a3b56f32-a9ff-4f58-bbd1-1433edc18671/v2.0",
+    "strictDiscoveryDocumentValidation": false,
+    "clientId": "4af8572c-0fc3-40e1-91d6-f7da39d11e37",
+    "responseType": "code",
+    "scope": "openid profile email offline_access",
+    "showDebugInformation": true,
+    "requireHttps": false
+  }
+}

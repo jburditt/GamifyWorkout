@@ -17,3 +17,4 @@
 /frontend/src/app/shared/template/node_modules
 /Tests/bin
 /Tests/obj
+/bootstrap/.vscode

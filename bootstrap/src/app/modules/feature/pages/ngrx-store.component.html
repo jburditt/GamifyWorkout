@@ -1,0 +1,15 @@
+<h1>NgRx Store</h1>
+
+<p>This page demonstrates using NgRx Store to manage the player state and using background loader animation.</p>
+
+<fieldset>
+  <legend>Player Actions</legend>
+  <button matButton="filled" color="primary" (click)="damage()">Damage</button>
+  <button matButton="filled" color="primary" (click)="heal()">Heal</button>
+  <div>Current HP: {{ player.hp }}</div>
+</fieldset>
+
+<fieldset>
+  <legend>Status Bar (No binding, only using NgRx Store)</legend>
+  <status-bar></status-bar>
+</fieldset>

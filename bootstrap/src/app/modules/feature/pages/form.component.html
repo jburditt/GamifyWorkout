@@ -1,0 +1,26 @@
+<h1>Form</h1>
+
+<p>This page demonstrates datepicker, validation, and a nested address form.</p>
+
+<fieldset>
+  <legend>Reactive Form</legend>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name" formControlName="firstName" required>
+      <mat-error>
+        <validation-message [control]="$any(searchForm.get('firstName'))"></validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <date-picker [datePickerFormControl]="$any(searchForm.get('date'))"></date-picker>
+
+    <address [addressForm]="$any(searchForm.get('addressForm'))"></address>
+
+    <button type="submit" matButton="filled" color="primary">
+      Submit
+    </button>
+
+  </form>
+</fieldset>

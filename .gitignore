@@ -3,6 +3,9 @@
 ################################################################################
 
 /.vs
+/**/.vscode
+/**/bin
+/**/obj
 /gamifyworkout.client/obj
 /GamifyWorkout.Server/bin
 /GamifyWorkout.Server/obj
@@ -17,4 +20,3 @@
 /frontend/src/app/shared/template/node_modules
 /Tests/bin
 /Tests/obj
-/bootstrap/.vscode

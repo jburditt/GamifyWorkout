@@ -33,6 +33,11 @@ export class AppComponent {
     });
   }
 
+  login() {
+    // TODO config service first
+    //this.authService.init();
+  }
+
   logout() {
     this.authService.logout();
   }

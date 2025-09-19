@@ -22,6 +22,7 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
+- Add centralized logging
 - Add more Angular features
 - Upload to jburditt.com or fullsweb.com
 - Implement CI/CD

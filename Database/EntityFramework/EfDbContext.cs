@@ -14,10 +14,12 @@ namespace Database
         {
             optionsBuilder.UseSeeding((context, _) =>
             {
-                context
-                    .Set<User>()
-                    .Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" });
-
+                if (!context.Set<User>().Any(u => u.Username == "jburditt"))
+                {
+                    context
+                        .Set<User>()
+                        .Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" });
+                }
                 context.SaveChanges();
             });
         }

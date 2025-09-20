@@ -6,12 +6,16 @@ import { RouterLink } from '@angular/router';
 import { MenuItem } from '@app/shared/models/menu-item.model';
 
 @Component({
-    selector: 'menu',
-    templateUrl: './menu.component.html',
-    imports: [RouterLink, MatMenuModule, MatIconModule, MatButtonModule],
-    styleUrls: ['./menu.component.scss']
+  selector: 'menu',
+  templateUrl: './menu.component.html',
+  imports: [RouterLink, MatMenuModule, MatIconModule, MatButtonModule],
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-    @Input() items: Array<MenuItem> = [];
-    @Input() label: string = 'Menu';
+  @Input() items: Array<MenuItem> = [];
+  @Input() label: string = 'Menu';
+
+  isActive(route: string): string {
+    return window.location.pathname.startsWith(route) ? 'active' : '';
+  }
 }

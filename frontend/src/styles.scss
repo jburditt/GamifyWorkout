@@ -1,5 +1,5 @@
 //327EA5
-//a5327e
+//a5327e  purple
 //#7EA532
 
 
@@ -11,6 +11,8 @@ html {
   $system-variables-theme: mat.define-theme(
     (
       color: (
+        // TODO
+        theme-type: light,
         primary: $primary-palette,
         tertiary: $tertiary-palette
       ),
@@ -21,10 +23,18 @@ html {
   );
   @include mat.all-component-themes($system-variables-theme);
   @include mat.toolbar-overrides((
-    container-background-color: #327EA5, // Use system variable for primary color
-    container-text-color: var(--mat-sys-on-primary) // Use system variable for text color
+    container-background-color: #327EA5, // TODO should use a variable not hardcoded
+    container-text-color: var(--mat-sys-on-primary)
   ));
 }
+
+//  color: mat.get-theme-color($my-theme, primary);
+
+// TODO
+a { color: #fff; }
+// TODO fix this property insteading of overriding
+mat-toolbar a { font-size:20px; }
+mat-icon { color: #fff!important; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

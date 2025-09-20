@@ -21,6 +21,7 @@ export class FormPageComponent {
   searchForm = new FormGroup({
     date: new FormControl('', [Validators.required]),
     firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    // TODO try replacing with Service
     addressForm: new FormGroup({
       addressLine1: new FormControl('', [Validators.required]),
       addressLine2: new FormControl(''),

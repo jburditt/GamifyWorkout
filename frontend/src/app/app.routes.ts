@@ -8,9 +8,9 @@ export const routes: Routes = [{
       loadComponent: () => import('@app/modules/home.component').then(m => m.HomePageComponent)
     },
     {
-      path: 'admin',
+      path: 'inventory',
       //canActivate: [authGuard],
-      loadChildren: () => import('@app/modules/admin/admin.routes')
+      loadChildren: () => import('@app/modules/inventory/inventory.routes')
     },
     {
       path: 'user',

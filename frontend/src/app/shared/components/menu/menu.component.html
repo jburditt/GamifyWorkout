@@ -1,4 +1,5 @@
-<a [matMenuTriggerFor]="menu">{{ label }}</a>
+<!-- NOTE label must match your route path e.g. 'Inventory' -> '/inventory/equipment' -->
+<a [matMenuTriggerFor]="menu" [class]="isActive('/' + label.toLowerCase())">{{ label }}</a>
 <mat-menu #menu="matMenu">
   @for (menuItem of items; track menuItem.displayName) {
     <button mat-menu-item [routerLink]="menuItem.routerLink">

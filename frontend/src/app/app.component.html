@@ -1,6 +1,8 @@
 <mat-toolbar>
   <img src="assets/logo.png" alt="Logo" />
-  <menu [items]="menuItemList" [label]="'Inventory'"></menu>
+  <menu [items]="inventoryMenuItems" [label]="'Inventory'"></menu>
+  <menu [label]="'Schedule'"></menu>
+  <menu [label]="'Quest'"></menu>
   <span class="spacer"></span>
   @if (isLoggedIn) {
     <button mat-icon-button (click)="logout()">

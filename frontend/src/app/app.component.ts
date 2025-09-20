@@ -9,20 +9,16 @@ import { AuthenticationService } from './core/auth/auth.interface';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule, MenuComponent, NgxUiLoaderModule]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule, MenuComponent, NgxUiLoaderModule],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  menuItemList: Array<MenuItem> = [
-    new MenuItem('Home', '/', 'home'),
-    new MenuItem('User', '/user', 'contact_mail', [
-      new MenuItem('Search', '/user/search', 'search')
-    ]),
-    new MenuItem('Form', '/feature', 'build', [
-      new MenuItem('NgRx Store', '/feature/ngrx-store', 'dashboard')
-    ]),
-    new MenuItem('Admin', '/admin', 'settings'),
+  inventoryMenuItems: Array<MenuItem> = [
+    new MenuItem('Gym', '/inventory/gym', 'home'),
+    new MenuItem('Items', '/inventory/items', 'contact_mail'),
+    new MenuItem('Equipment', '/inventory/equipment', 'build'),
   ];
 
   isLoggedIn: boolean = false;

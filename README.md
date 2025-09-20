@@ -22,6 +22,9 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
+- Move validation-message component from features/rpg to shared/component
+- Copy theming from frontend to bootstrap
+- Copy frontend menu changes to bootstrap
 - Add centralized logging
 - Add more Angular features
 - Upload to jburditt.com or fullsweb.com

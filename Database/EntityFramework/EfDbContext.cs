@@ -10,10 +10,16 @@ namespace Database
 
         public EfDbContext(DbContextOptions<EfDbContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSeeding((context, _) =>
+            {
+                context
+                    .Set<User>()
+                    .Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" });
 
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+                context.SaveChanges();
+            });
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Core;
 
-public class User
+public class User : BaseEntity
 {
     [Key]
     [Display(Name = "OAuth Id")]

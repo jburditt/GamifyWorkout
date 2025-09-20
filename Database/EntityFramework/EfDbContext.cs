@@ -6,6 +6,7 @@ namespace Database
     public class EfDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Gym> Gyms { get; set; }
 
         public EfDbContext(DbContextOptions<EfDbContext> options) : base(options) { }
 

@@ -13,10 +13,6 @@ export const routes: Routes = [{
       loadChildren: () => import('@app/modules/inventory/inventory.routes')
     },
     {
-      path: 'user',
-      loadChildren: () => import('@app/modules/user/user.routes')
-    },
-    {
       path: 'feature',
       loadChildren: () => import('@app/modules/feature/feature.routes')
     }

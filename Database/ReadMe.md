@@ -7,6 +7,7 @@ dotnet ef core tool installed `dotnet tool install --global dotnet-ef`
 `dotnet ef database update --project Database --startup-project Api`
 
 To add a new migration:
+- Add any new models to EfDbContext.cs e.g. `public DbSet<Gym> Gyms { get; set; }`
 `dotnet ef migrations add AddUser --project Database --startup-project Api`
 `dotnet ef database update --project Database --startup-project Api`
 

@@ -2,30 +2,6 @@
 //a5327e
 //#7EA532
 
-// @use '@angular/material' as mat;
-// @import 'assets/theme-colors.scss';
-// @include mat.core();
-
-//$my-primary: mat.m2-define-palette(mat.$m2-blue-palette);
-//$my-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-
-// $my-theme: mat.m2-define-light-theme((
-//   color: (
-//     primary: $primary-palette,
-//     tertiary: $tertiary-palette,
-//     accent: $secondary-palette,
-//   )
-// ));
-
-//@include angular-material-theme($custom-theme);
-
-//@include mat.all-component-themes($my-theme);
-//@include mat.progress-bar-color($my-theme);
-//@include mat.button-color($my-theme);
-// @include mat.toolbar-overrides((
-//   container-background-color: var(--mat-sys-primary), // Use system variable for primary color
-//   container-text-color: var(--mat-sys-on-primary) // Use system variable for text color
-// ));
 
 @use '@angular/material' as mat;
 @include mat.core();
@@ -36,8 +12,7 @@ html {
     (
       color: (
         primary: $primary-palette,
-        tertiary: $tertiary-palette,
-        //accent: $secondary-palette
+        tertiary: $tertiary-palette
       ),
       typography: (
         use-system-variables: true,
@@ -45,6 +20,10 @@ html {
     )
   );
   @include mat.all-component-themes($system-variables-theme);
+  @include mat.toolbar-overrides((
+    container-background-color: #327EA5, // Use system variable for primary color
+    container-text-color: var(--mat-sys-on-primary) // Use system variable for text color
+  ));
 }
 
 html, body { height: 100%; }

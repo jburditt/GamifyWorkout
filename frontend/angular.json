@@ -22,16 +22,12 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/app/shared/template/assets",
-                "output": "/assets/"
-              },
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "src/styles.scss",
+              "src/assets/theme-colors.scss",
               "node_modules/survey-core/survey-core.min.css"
             ],
             "scripts": [],

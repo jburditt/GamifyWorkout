@@ -7,7 +7,17 @@
     </mat-tab>
   }
   <mat-tab label="+ Add">
-    <manage-gym />
+
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput placeholder="Name" formControlName="name" required>
+  <mat-error>
+    <validation-message [control]="$any(form.get('name'))"></validation-message>
+  </mat-error>
+</mat-form-field>
+
+    <span class="spacer"></span>
+    <button matButton="filled" color="primary">Add Gym</button>
   </mat-tab>
 </mat-tab-group>
 

@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { Gym } from '@app/api/models';
 import { GymService } from '@app/api/services';
 import { ManageGymComponent } from '@app/features/rpg/component/manage-gym.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     templateUrl: 'gym.component.html',
@@ -15,6 +16,11 @@ import { ManageGymComponent } from '@app/features/rpg/component/manage-gym.compo
 })
 export class GymPageComponent implements OnInit {
   gyms: Gym[] = [];
+  form: FormGroup = new FormGroup({
+    name: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+    })
+  });
 
   constructor(private gymService: GymService) { }
 

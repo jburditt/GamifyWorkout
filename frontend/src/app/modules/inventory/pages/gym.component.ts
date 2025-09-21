@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ValidationMessageComponent } from '@app/features/rpg/component/validation-message.component';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { Gym } from '@app/api/models';
 import { GymService } from '@app/api/services';
 import { ManageGymComponent } from '@app/features/rpg/component/manage-gym.component';
@@ -16,19 +16,27 @@ import { TextboxComponent } from "@app/shared/components/form/textbox/textbox.co
     styleUrls: ['gym.component.scss'],
 })
 export class GymPageComponent implements OnInit {
+
   gyms: Gym[] = [];
+
   form: FormGroup = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     })
   });
 
-  constructor(private gymService: GymService) { }
+  @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
+
+  constructor(private gymService: GymService, private change: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.gymService.apiGymGet().subscribe({
       next: (gyms) => {
         this.gyms = gyms;
+        window.setTimeout(()=>{
+          this.tabGroup.selectedIndex = 0;
+          this.change.markForCheck();
+        });
       },
       error: (error) => {
         console.error('Error fetching gyms:', error);
@@ -38,6 +46,7 @@ export class GymPageComponent implements OnInit {
 
   insert() {
     if (this.form.valid) {
+      // TODO get userId from userService
       const newGym: Gym = { name: this.form.value.name, userId: "113C9AA8-F4C3-4DE7-2FCE-08DDF89CDBF6" };
       this.gymService.apiGymPost({ body: newGym }).subscribe({
         next: (gym) => {

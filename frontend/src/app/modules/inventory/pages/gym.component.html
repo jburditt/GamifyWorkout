@@ -1,6 +1,6 @@
 <h1>Gym</h1>
 
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
   @for (gym of gyms; track gym.id) {
     <mat-tab label="{{ gym.name }}">
       <manage-gym [gym]="gym" />

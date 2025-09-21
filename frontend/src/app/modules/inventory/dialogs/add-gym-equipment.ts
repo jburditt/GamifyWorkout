@@ -4,7 +4,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Equipment } from '@app/api/models';
 import { EquipmentService } from '@app/api/services';
 import { GymEquipmentTableComponent } from '@app/features/rpg/component/gym-equipment-table.component';
-import { MatTableDataSource } from '@angular/material/table';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'add-gym-equipment',
@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AddGymEquipmentDialog implements OnInit {
   equipment!: Equipment[];
+  equipmentFormArray!: FormArray;
 
   constructor(private equipmentService: EquipmentService) { }
 
@@ -21,5 +22,13 @@ export class AddGymEquipmentDialog implements OnInit {
     this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
       this.equipment = equipment;
     });
+  }
+
+  addGymEquipment(): void {
+    console.log("value", this.equipmentFormArray);
+  }
+
+  changeGymEquipment(formArray: FormArray): void {
+    this.equipmentFormArray = formArray;
   }
 }

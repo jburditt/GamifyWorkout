@@ -25,7 +25,7 @@ export class GymEquipmentTableComponent {
   displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
   addGymEquipment = output<boolean>();
-
+  changeGymEquipment = output<FormArray>();
   formGroup!: FormGroup;
 
   constructor(private loggingFactory: LoggingFactory, private formBuilder: FormBuilder)
@@ -40,13 +40,13 @@ export class GymEquipmentTableComponent {
 
   onChange(event: any) {
     const equipment = <FormArray>this.formGroup.get('equipment') as FormArray;
-
-    if(event.checked) {
+    if (event.checked) {
       equipment.push(new FormControl(event.source.value))
     } else {
       const i = equipment.controls.findIndex(x => x.value === event.source.value);
       equipment.removeAt(i);
     }
+    this.changeGymEquipment.emit(this.formGroup.value);
   }
 
   openDialog() {

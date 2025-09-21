@@ -11,6 +11,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { apiGymEquipmentGymIdEquipmentIdDelete } from '../fn/gym-equipment/api-gym-equipment-gym-id-equipment-id-delete';
+import { ApiGymEquipmentGymIdEquipmentIdDelete$Params } from '../fn/gym-equipment/api-gym-equipment-gym-id-equipment-id-delete';
 import { apiGymEquipmentGymIdPost } from '../fn/gym-equipment/api-gym-equipment-gym-id-post';
 import { ApiGymEquipmentGymIdPost$Params } from '../fn/gym-equipment/api-gym-equipment-gym-id-post';
 
@@ -41,6 +43,31 @@ export class GymEquipmentService extends BaseService {
    */
   apiGymEquipmentGymIdPost(params: ApiGymEquipmentGymIdPost$Params, context?: HttpContext): Observable<boolean> {
     return this.apiGymEquipmentGymIdPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /** Path part for operation `apiGymEquipmentGymIdEquipmentIdDelete()` */
+  static readonly ApiGymEquipmentGymIdEquipmentIdDeletePath = '/api/GymEquipment/{gymId}/{equipmentId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGymEquipmentGymIdEquipmentIdDelete()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGymEquipmentGymIdEquipmentIdDelete$Response(params: ApiGymEquipmentGymIdEquipmentIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return apiGymEquipmentGymIdEquipmentIdDelete(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiGymEquipmentGymIdEquipmentIdDelete$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGymEquipmentGymIdEquipmentIdDelete(params: ApiGymEquipmentGymIdEquipmentIdDelete$Params, context?: HttpContext): Observable<boolean> {
+    return this.apiGymEquipmentGymIdEquipmentIdDelete$Response(params, context).pipe(
       map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }

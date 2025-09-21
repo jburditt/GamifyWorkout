@@ -27,5 +27,16 @@ namespace Api
             }
             return context.SaveChanges() > 0;
         }
+
+        [HttpDelete("{gymId}/{equipmentId}")]
+        [Produces("application/json")]
+        public ActionResult<bool> Delete(Guid gymId, Guid equipmentId)
+        {
+            var context = _contextFactory.CreateDbContext();
+            context.GymEquipment
+                .Where(ge => ge.GymId == gymId && ge.EquipmentId == equipmentId)
+                .ExecuteDelete();
+            return context.SaveChanges() > 0;
+        }
     }
 }

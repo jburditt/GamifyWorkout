@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Equipment } from '@app/api/models';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { GymEquipmentService } from '@app/api/services';
 
 @Component({
     templateUrl: 'gym-equipment-table.component.html',
@@ -24,11 +25,13 @@ export class GymEquipmentTableComponent {
   @Input() dataSource = new MatTableDataSource<Equipment>();
   displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
+  @Input() gymId!: string;
+
   addGymEquipment = output<string[]>();
   changeGymEquipment = output<string[]>();
   equipmentIds: string[] = [];
 
-  constructor(private loggingFactory: LoggingFactory, private formBuilder: FormBuilder)
+  constructor(private gymEquipmentService: GymEquipmentService, private loggingFactory: LoggingFactory)
   {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
@@ -46,8 +49,22 @@ export class GymEquipmentTableComponent {
     this.changeGymEquipment.emit(this.equipmentIds);
   }
 
+  onDelete(equipmentId: string) {
+    this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gymId, equipmentId: equipmentId }).subscribe((response) => {
+      console.log("response", this.dataSource.data);
+      let equipmentIdsRemaining = new Array<Equipment>;
+      if (this.dataSource.data) {
+        equipmentIdsRemaining = this.dataSource.data.filter(e => e.id != equipmentId);
+      } else {
+        equipmentIdsRemaining = (this.dataSource as unknown as Array<Equipment>).filter(e => e.id != equipmentId);
+      }
+      this.dataSource = new MatTableDataSource(equipmentIdsRemaining);
+    });
+  }
+
   openDialog() {
-    let equipmentIds = (this.dataSource as unknown as Array<Equipment>).map(e => e.id as string);
+    let data = this.dataSource.data || (this.dataSource as unknown as Array<Equipment>);
+    let equipmentIds = data ? data.map(e => e.id as string) : [];
     this.addGymEquipment.emit(equipmentIds);
   }
 }

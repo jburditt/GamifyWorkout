@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add Gym Equipment</h2>
 <mat-dialog-content class="mat-typography">
-  <gym-equipment-table [dataSource]="$any(equipment)" [canSelect]="true" (changeGymEquipment)="changeGymEquipment($event)" />
+  <gym-equipment-table [dataSource]="$any(equipment)" [gymId]="this.data.gymId" [canSelect]="true" (changeGymEquipment)="changeGymEquipment($event)" />
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button matButton mat-dialog-close>Cancel</button>

@@ -25,6 +25,8 @@ namespace Database
                 context.Set<Equipment>().Add(new Equipment { Icon = "resistbands", Name = "Resistance Bands" });
                 context.Set<Equipment>().Add(new Equipment { Icon = "stabilityball", Name = "Stability Ball" });
 
+                context.Set<GymEquipment>().ExecuteDelete();
+
                 context.SaveChanges();
             });
         }

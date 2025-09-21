@@ -34,7 +34,7 @@ namespace Api
             var equipment = (
                 from e in context.Equipment
                 join ge in context.GymEquipment on e.Id equals ge.EquipmentId
-                where ge.GymId == id
+                where ge.GymId.Equals(id)
                 select e)
                 .ToList();
             return Ok(equipment);

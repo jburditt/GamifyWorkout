@@ -10,6 +10,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
 })
 export class ValidationMessageComponent {
   @Input() control!: AbstractControl;
+  @Input() label!: string;
 
   private readonly _loggingService: LoggingService;
 
@@ -19,16 +20,5 @@ export class ValidationMessageComponent {
 
   ngOnInit() {
     this._loggingService.debug('ValidationMessageComponent initialized');
-  }
-
-  getControlName(c: AbstractControl): string | null {
-      const formGroup = c.parent?.controls;
-      if (!formGroup) {
-          return null;
-      }
-      if (typeof formGroup === 'object' && !Array.isArray(formGroup)) {
-          return Object.keys(formGroup).find((name: string) => c === (formGroup as { [key: string]: AbstractControl })[name]) || null;
-      }
-      return null;
   }
 }

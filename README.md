@@ -15,6 +15,7 @@ A workout application to track exercises and create workout schedules. Progressi
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
+- Move textbox.component to bootstrap repo
 - Move validation-message component from features/rpg to shared/component
 - Add centralized logging
 - Upload to gamifyworkout.com

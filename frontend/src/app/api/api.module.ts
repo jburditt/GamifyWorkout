@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthService } from './services/auth.service';
+import { EquipmentService } from './services/equipment.service';
 import { GymService } from './services/gym.service';
 import { UserService } from './services/user.service';
 
@@ -19,6 +20,7 @@ import { UserService } from './services/user.service';
   declarations: [],
   providers: [
     AuthService,
+    EquipmentService,
     GymService,
     UserService,
     ApiConfiguration

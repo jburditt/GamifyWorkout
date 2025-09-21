@@ -6,7 +6,9 @@
 
     <ng-container matColumnDef="icon">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element"> <mat-icon>{{element.icon}}</mat-icon> </td>
+      <td mat-cell *matCellDef="let element">
+        <img src="assets/equipment/{{ element.icon }}.png" alt="{{ element.name }}" />
+      </td>
       <td mat-footer-cell *matFooterCellDef>
 
       </td>
@@ -14,7 +16,7 @@
 
     <ng-container matColumnDef="equipment">
       <th mat-header-cell *matHeaderCellDef>Equipment</th>
-      <td mat-cell *matCellDef="let element"> {{element.equipment}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.name}}</td>
       <td mat-footer-cell *matFooterCellDef>
         Select available equipment
       </td>

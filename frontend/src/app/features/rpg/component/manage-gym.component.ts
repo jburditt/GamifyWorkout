@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
 import { MatButtonModule } from '@angular/material/button';
+import { EquipmentService } from '@app/api/services';
 
 @Component({
     templateUrl: 'manage-gym.component.html',
@@ -29,7 +30,7 @@ export class ManageGymComponent {
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
-  constructor(private loggingFactory: LoggingFactory)
+  constructor(private loggingFactory: LoggingFactory, private equipmentService: EquipmentService)
   {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
@@ -37,5 +38,8 @@ export class ManageGymComponent {
   ngOnInit() {
     this._loggingService.debug('ManageGymComponent initialized');
     this.form.get('name')!.setValue(this.gym.name);
+    this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
+      this.dataSource.data = equipment;
+    });
   }
 }

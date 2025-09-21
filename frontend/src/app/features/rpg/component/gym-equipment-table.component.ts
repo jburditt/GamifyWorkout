@@ -25,8 +25,8 @@ export class GymEquipmentTableComponent {
   displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
   addGymEquipment = output<boolean>();
-  changeGymEquipment = output<FormArray>();
-  formGroup!: FormGroup;
+  changeGymEquipment = output<string[]>();
+  equipmentIds: string[] = [];
 
   constructor(private loggingFactory: LoggingFactory, private formBuilder: FormBuilder)
   {
@@ -35,18 +35,15 @@ export class GymEquipmentTableComponent {
 
   ngOnInit() {
     this._loggingService.debug('GymEquipmentTableComponent initialized');
-    this.formGroup = this.formBuilder.group({ equipment: this.formBuilder.array([]) });
   }
 
   onChange(event: any) {
-    const equipment = <FormArray>this.formGroup.get('equipment') as FormArray;
     if (event.checked) {
-      equipment.push(new FormControl(event.source.value))
+      this.equipmentIds.push(event.source.value);
     } else {
-      const i = equipment.controls.findIndex(x => x.value === event.source.value);
-      equipment.removeAt(i);
+      this.equipmentIds = this.equipmentIds.filter(e => e != event.source.value);
     }
-    this.changeGymEquipment.emit(this.formGroup.value);
+    this.changeGymEquipment.emit(this.equipmentIds);
   }
 
   openDialog() {

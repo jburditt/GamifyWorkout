@@ -5,4 +5,5 @@
 export { AuthService } from './services/auth.service';
 export { EquipmentService } from './services/equipment.service';
 export { GymService } from './services/gym.service';
+export { GymEquipmentService } from './services/gym-equipment.service';
 export { UserService } from './services/user.service';

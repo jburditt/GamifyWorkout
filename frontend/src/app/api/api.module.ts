@@ -9,6 +9,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { AuthService } from './services/auth.service';
 import { EquipmentService } from './services/equipment.service';
 import { GymService } from './services/gym.service';
+import { GymEquipmentService } from './services/gym-equipment.service';
 import { UserService } from './services/user.service';
 
 /**
@@ -22,6 +23,7 @@ import { UserService } from './services/user.service';
     AuthService,
     EquipmentService,
     GymService,
+    GymEquipmentService,
     UserService,
     ApiConfiguration
   ],

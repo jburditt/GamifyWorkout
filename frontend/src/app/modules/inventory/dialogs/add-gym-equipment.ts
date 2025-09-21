@@ -13,13 +13,13 @@ import { MatTableDataSource } from '@angular/material/table';
   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddGymEquipmentDialog implements OnInit {
-  equipment!: MatTableDataSource<Equipment>;
+  equipment!: Equipment[];
 
   constructor(private equipmentService: EquipmentService) { }
 
   ngOnInit(): void {
     this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
-      this.equipment = new MatTableDataSource(equipment);
+      this.equipment = equipment;
     });
   }
 }

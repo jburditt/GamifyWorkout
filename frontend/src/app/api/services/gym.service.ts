@@ -11,10 +11,10 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { apiGymEquipmentGet } from '../fn/gym/api-gym-equipment-get';
-import { ApiGymEquipmentGet$Params } from '../fn/gym/api-gym-equipment-get';
 import { apiGymGet } from '../fn/gym/api-gym-get';
 import { ApiGymGet$Params } from '../fn/gym/api-gym-get';
+import { apiGymIdEquipmentGet } from '../fn/gym/api-gym-id-equipment-get';
+import { ApiGymIdEquipmentGet$Params } from '../fn/gym/api-gym-id-equipment-get';
 import { apiGymPost } from '../fn/gym/api-gym-post';
 import { ApiGymPost$Params } from '../fn/gym/api-gym-post';
 import { Equipment } from '../models/equipment';
@@ -76,27 +76,27 @@ export class GymService extends BaseService {
     );
   }
 
-  /** Path part for operation `apiGymEquipmentGet()` */
-  static readonly ApiGymEquipmentGetPath = '/api/Gym/equipment';
+  /** Path part for operation `apiGymIdEquipmentGet()` */
+  static readonly ApiGymIdEquipmentGetPath = '/api/Gym/{id}/equipment';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiGymEquipmentGet()` instead.
+   * To access only the response body, use `apiGymIdEquipmentGet()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  apiGymEquipmentGet$Response(params?: ApiGymEquipmentGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
-    return apiGymEquipmentGet(this.http, this.rootUrl, params, context);
+  apiGymIdEquipmentGet$Response(params: ApiGymIdEquipmentGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
+    return apiGymIdEquipmentGet(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiGymEquipmentGet$Response()` instead.
+   * To access the full response (for headers, for example), `apiGymIdEquipmentGet$Response()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  apiGymEquipmentGet(params?: ApiGymEquipmentGet$Params, context?: HttpContext): Observable<Array<Equipment>> {
-    return this.apiGymEquipmentGet$Response(params, context).pipe(
+  apiGymIdEquipmentGet(params: ApiGymIdEquipmentGet$Params, context?: HttpContext): Observable<Array<Equipment>> {
+    return this.apiGymIdEquipmentGet$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<Equipment>>): Array<Equipment> => r.body)
     );
   }

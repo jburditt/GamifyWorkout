@@ -28,9 +28,9 @@ namespace Api
             return Ok(gyms);
         }
 
-        [HttpGet("equipment")]
+        [HttpGet("{id}/equipment")]
         [Produces("application/json")]
-        public ActionResult<List<Equipment>> GetEquipment([FromBody] Guid gymId)
+        public ActionResult<List<Equipment>> GetEquipment(Guid gymId)
         {
             var context = _contextFactory.CreateDbContext();
             var equipment = (

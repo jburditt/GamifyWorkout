@@ -3,9 +3,11 @@
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
   @for (gym of gyms; track gym.id) {
     <mat-tab label="{{ gym.name }}">
-
+      <manage-gym [gym]="gym" />
     </mat-tab>
   }
-  <mat-tab label="+ Add"></mat-tab>
+  <mat-tab label="+ Add">
+    <manage-gym />
+  </mat-tab>
 </mat-tab-group>
 

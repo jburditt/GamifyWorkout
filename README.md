@@ -1,10 +1,5 @@
-# Bootstrap Project
-A project to demonstrate Angular features to be used for reference and bootstrapping new projects. WIP: The following are all automated, once you add models (simple POCOs):
-- Create form from model
-- Save form to database
-- Create database from models
-- Load form from database
-- Query model using OData
+# Gamify Workout Project
+A workout application to track exercises and create workout schedules. Progression is gamified by earning experience points and leveling up.
 
 # Tech Stack
 - .NET 9 OData API 
@@ -12,44 +7,24 @@ A project to demonstrate Angular features to be used for reference and bootstrap
 - Angular 20
 
 # Angular Features
-- OAuth authentication -> Auth guard, Azure AD
-- Dependency Injection -> Logging service, Toast service
-- Datepicker
+- OAuth authentication
+- Dependency Injection
 - NgRx
 - OData query -> Query database using OData .NET EF controllers
-- Menu -> Routing
 - SurveyJS -> Automate creating form from model, and loading form from database
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
 
 # TODO
 - Move validation-message component from features/rpg to shared/component
-- Copy theming from frontend to bootstrap
-- Copy frontend menu changes to bootstrap
 - Add centralized logging
-- Add more Angular features
-- Upload to jburditt.com or fullsweb.com
+- Upload to gamifyworkout.com
 - Implement CI/CD
 - Add NgRx hydration for persistence
 - Fix VS SPA error in console logs
-- Fix or reinstall Storybook
-- Integrate Matero component
-- Edit user instead of adding new user
+- Remove Storybook
+- Add OAuth to API
 - Auth -> On clicking on Admin menu item, you will be redirected to Denied page. On second attempt, it will work
 - Auth -> On logging out, it doesn't redirect you back to website
-
-SiteMap
-  Home
-  Admin
-    Dashboard
-  User
-    Edit
-    Search
-    New
-  Features
-    Form
-    Upload
-    NgRx Store
-    Theme Matero
 
 ## Prerequisites
 Install Node.js
@@ -87,39 +62,3 @@ For example:
     - Audiences (client)
 
 To remove/replace Azure OAuth, delete the contents of folder /frontend/src/app/core/auth and /Api/Modules/Auth
-
-## Template
-
-https://github.com/ng-matero/ng-matero
-
-The template is in folder /frontend/src/app/shared/template
-
-Verify if you need to install sub npm packages `npm i` (in folder /frontend/src/app/shared/template)
-Verify what I did wrong, I manually deleted template/node_modules/common,router (exists in sub node_modules and root, maybe try using prefix instead of npm i in the sub folder)
-
-To remove the template
-- Delete /frontend/src/app/shared/template folder
-- Run `npm uninstall @ng-matero/extensions`
-- Delete architect/build/styles `"src/app/shared/template/styles.scss"` from angular.json
-- Delete ng-matero paths from tsconfig.json
-
-TODO check if there is a way to install package without installing package dependencies, since you will need to delete them from the template/node_modules and install in the root node_modules
-
-## Pull Latest Changes
-
-To install a npm package for ng-matero
-- Run `./npm_download.sh photoviewer`
-- Copy the package.json values from github ng-matero
-NOTE if you run `npm i --prefix src/app/shared/template @ng-matero/extensions` it will install package dependencies in the subfolder node_modules and cause compilation errors
-
-cd /frontend/src/app/shared/template
-git checkout blah.git .
-TODO main.ts sections
-
-angular.json
-    "assets": [
-    {
-        "glob": "**/*",
-        "input": "src/app/shared/template/assets",
-        "output": "/assets"
-    },

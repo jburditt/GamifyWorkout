@@ -6,12 +6,11 @@ import { ValidationMessageComponent } from '@app/features/rpg/component/validati
 import { MatTabsModule } from '@angular/material/tabs';
 import { Gym } from '@app/api/models';
 import { GymService } from '@app/api/services';
+import { ManageGymComponent } from '@app/features/rpg/component/manage-gym.component';
 
 @Component({
     templateUrl: 'gym.component.html',
-    imports: [
-      MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule, ValidationMessageComponent
-    ],
+    imports: [ManageGymComponent, MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule, ValidationMessageComponent],
     styleUrls: ['gym.component.scss'],
 })
 export class GymPageComponent implements OnInit {

@@ -7,6 +7,7 @@ namespace Database
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Gym> Gyms { get; set; }
+        public DbSet<Equipment> Equipment { get; set; }
 
         public EfDbContext(DbContextOptions<EfDbContext> options) : base(options) { }
 
@@ -14,12 +15,17 @@ namespace Database
         {
             optionsBuilder.UseSeeding((context, _) =>
             {
-                if (!context.Set<User>().Any(u => u.Username == "jburditt"))
-                {
-                    context
-                        .Set<User>()
-                        .Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" });
-                }
+                context.Set<User>().ExecuteDelete();
+                context
+                    .Set<User>()
+                    .Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" });
+
+                context.Set<Equipment>().ExecuteDelete();
+                context.Set<Equipment>().Add(new Equipment { Icon = "dumbbells", Name = "Dumbbells" });
+                context.Set<Equipment>().Add(new Equipment { Icon = "bench", Name = "Bench" });
+                context.Set<Equipment>().Add(new Equipment { Icon = "resistbands", Name = "Resistance Bands" });
+                context.Set<Equipment>().Add(new Equipment { Icon = "stabilityball", Name = "Stability Ball" });
+
                 context.SaveChanges();
             });
         }

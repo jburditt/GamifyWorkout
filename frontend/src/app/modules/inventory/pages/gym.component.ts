@@ -35,4 +35,19 @@ export class GymPageComponent implements OnInit {
       }
     });
   }
+
+  insert() {
+    if (this.form.valid) {
+      const newGym: Gym = { name: this.form.value.name, userId: "113C9AA8-F4C3-4DE7-2FCE-08DDF89CDBF6" };
+      this.gymService.apiGymPost({ body: newGym }).subscribe({
+        next: (gym) => {
+          this.gyms.push(newGym);
+          this.form.reset();
+        },
+        error: (error) => {
+          console.error('Error adding gym:', error);
+        }
+      });
+    }
+  }
 }

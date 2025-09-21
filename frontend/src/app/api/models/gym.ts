@@ -5,4 +5,5 @@
 export interface Gym {
   id?: string;
   name?: string | null;
+  userId?: string;
 }

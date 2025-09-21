@@ -27,5 +27,14 @@ namespace Api
                 .ToList();
             return Ok(gyms);
         }
+
+        [HttpPost]
+        [Produces("application/json")]
+        public bool Post([FromBody] Gym gym)
+        {
+            var context = _contextFactory.CreateDbContext();
+            context.Gyms.Add(gym);
+            return context.SaveChanges() > 0;
+        }
     }
 }

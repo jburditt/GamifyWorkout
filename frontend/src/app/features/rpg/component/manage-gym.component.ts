@@ -11,10 +11,11 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     templateUrl: 'manage-gym.component.html',
-    imports: [ReactiveFormsModule, TextboxComponent, MatInputModule, ValidationMessageComponent, MatPaginatorModule, MatIconModule, MatGridListModule, MatInputModule, MatTableModule],
+    imports: [ReactiveFormsModule, TextboxComponent, MatButtonModule, MatInputModule, ValidationMessageComponent, MatPaginatorModule, MatIconModule, MatGridListModule, MatInputModule, MatTableModule],
     selector: 'manage-gym'
 })
 export class ManageGymComponent {
@@ -35,5 +36,6 @@ export class ManageGymComponent {
 
   ngOnInit() {
     this._loggingService.debug('ManageGymComponent initialized');
+    this.form.get('name')!.setValue(this.gym.name);
   }
 }

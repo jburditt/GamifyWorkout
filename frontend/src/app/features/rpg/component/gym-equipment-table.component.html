@@ -11,7 +11,7 @@
 
   <ng-container matColumnDef="equipment">
     <th mat-header-cell *matHeaderCellDef>Equipment</th>
-    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     <td mat-footer-cell *matFooterCellDef>
       @if (canAddRow) {
         <button matButton="filled" (click)="openDialog()">Add Equipment</button>
@@ -22,9 +22,13 @@
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary">
-        <mat-icon>edit</mat-icon>
-      </button>
+      @if (canSelect) {
+        <mat-checkbox [value]="element.id" />
+      } @else {
+        <button mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      }
     </td>
     @if (canAddRow) {
       <td mat-footer-cell *matFooterCellDef></td>

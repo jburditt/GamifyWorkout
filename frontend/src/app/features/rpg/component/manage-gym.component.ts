@@ -5,10 +5,15 @@ import { Gym } from '@app/api/models';
 import { MatInputModule } from '@angular/material/input';
 import { ValidationMessageComponent } from './validation-message.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
     templateUrl: 'manage-gym.component.html',
-    imports: [MatInputModule, ValidationMessageComponent],
+    imports: [MatInputModule, ValidationMessageComponent, MatPaginatorModule, MatIconModule, MatGridListModule, MatInputModule, MatTableModule],
     selector: 'manage-gym'
 })
 export class ManageGymComponent {
@@ -19,6 +24,8 @@ export class ManageGymComponent {
     })
   });
   @Input() gym!: Gym;
+  dataSource = new MatTableDataSource<any>();
+  displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
   constructor(private loggingFactory: LoggingFactory)
   {

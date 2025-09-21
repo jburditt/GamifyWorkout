@@ -8,7 +8,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
 import { MatButtonModule } from '@angular/material/button';
-import { GymService } from '@app/api/services';
+import { EquipmentService, GymService } from '@app/api/services';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddGymEquipmentDialog } from '@app/modules/inventory/dialogs/add-gym-equipment';
 import { GymEquipmentTableComponent } from './gym-equipment-table.component';
@@ -33,7 +33,7 @@ export class ManageGymComponent {
 
   readonly dialog = inject(MatDialog);
 
-  constructor(private loggingFactory: LoggingFactory, private gymService: GymService)
+  constructor(private loggingFactory: LoggingFactory, private equipmentService: EquipmentService)
   {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
@@ -41,8 +41,9 @@ export class ManageGymComponent {
   ngOnInit() {
     this._loggingService.debug('ManageGymComponent initialized');
     this.form.get('name')!.setValue(this.gym.name);
-    console.log("id", this.gym.id);
-    this.gymService.apiGymIdEquipmentGet({ id: this.gym.id! }).subscribe((equipment) => {
+    console.log("id", this.gym);
+    this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
+      console.log("equipment", equipment);
       this.equipment = equipment;
     });
   }
@@ -52,6 +53,11 @@ export class ManageGymComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      // TODO optimize by updating table with returned results from dialog instead of reloading from database
+      this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
+        console.log("equipment", equipment);
+        this.equipment = equipment;
+      });
     });
   }
 }

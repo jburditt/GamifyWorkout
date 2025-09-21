@@ -19,24 +19,18 @@ export class AddGymEquipmentDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { gymId: string }, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService) { }
 
   ngOnInit(): void {
-    this.loadEquipment();
+    this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
+      this.equipment = equipment;
+    });
   }
 
   addGymEquipment(): void {
-    console.log("formArray", this.equipmentIds);
     this.gymEquipmentService.apiGymEquipmentGymIdPost({ gymId: this.data.gymId, body: this.equipmentIds }).subscribe((response) => {
       // TODO reload equipment table by passing icon, name, id from source and updating this.equipment instead of using API
-      this.loadEquipment();
     });
   }
 
   changeGymEquipment(equipmentIds: string[]): void {
     this.equipmentIds = equipmentIds;
-  }
-
-  loadEquipment() {
-    this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
-      this.equipment = equipment;
-    });
   }
 }

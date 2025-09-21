@@ -10,15 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 import { Equipment } from '../../models/equipment';
 
-export interface ApiGymIdEquipmentGet$Params {
-  gymId?: string;
+export interface ApiEquipmentIdGet$Params {
   id: string;
 }
 
-export function apiGymIdEquipmentGet(http: HttpClient, rootUrl: string, params: ApiGymIdEquipmentGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
-  const rb = new RequestBuilder(rootUrl, apiGymIdEquipmentGet.PATH, 'get');
+export function apiEquipmentIdGet(http: HttpClient, rootUrl: string, params: ApiEquipmentIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
+  const rb = new RequestBuilder(rootUrl, apiEquipmentIdGet.PATH, 'get');
   if (params) {
-    rb.query('gymId', params.gymId, {});
     rb.path('id', params.id, {});
   }
 
@@ -32,4 +30,4 @@ export function apiGymIdEquipmentGet(http: HttpClient, rootUrl: string, params: 
   );
 }
 
-apiGymIdEquipmentGet.PATH = '/api/Gym/{id}/equipment';
+apiEquipmentIdGet.PATH = '/api/Equipment/{id}';

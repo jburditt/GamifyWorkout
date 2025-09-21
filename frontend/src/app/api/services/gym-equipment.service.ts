@@ -29,7 +29,7 @@ export class GymEquipmentService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  apiGymEquipmentGymIdPost$Response(params: ApiGymEquipmentGymIdPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  apiGymEquipmentGymIdPost$Response(params: ApiGymEquipmentGymIdPost$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
     return apiGymEquipmentGymIdPost(this.http, this.rootUrl, params, context);
   }
 
@@ -39,9 +39,9 @@ export class GymEquipmentService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  apiGymEquipmentGymIdPost(params: ApiGymEquipmentGymIdPost$Params, context?: HttpContext): Observable<void> {
+  apiGymEquipmentGymIdPost(params: ApiGymEquipmentGymIdPost$Params, context?: HttpContext): Observable<boolean> {
     return this.apiGymEquipmentGymIdPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 

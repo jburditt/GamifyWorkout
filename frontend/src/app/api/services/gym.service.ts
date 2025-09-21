@@ -13,11 +13,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { apiGymGet } from '../fn/gym/api-gym-get';
 import { ApiGymGet$Params } from '../fn/gym/api-gym-get';
-import { apiGymIdEquipmentGet } from '../fn/gym/api-gym-id-equipment-get';
-import { ApiGymIdEquipmentGet$Params } from '../fn/gym/api-gym-id-equipment-get';
 import { apiGymPost } from '../fn/gym/api-gym-post';
 import { ApiGymPost$Params } from '../fn/gym/api-gym-post';
-import { Equipment } from '../models/equipment';
 import { Gym } from '../models/gym';
 
 @Injectable({ providedIn: 'root' })
@@ -73,31 +70,6 @@ export class GymService extends BaseService {
   apiGymPost(params?: ApiGymPost$Params, context?: HttpContext): Observable<boolean> {
     return this.apiGymPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<boolean>): boolean => r.body)
-    );
-  }
-
-  /** Path part for operation `apiGymIdEquipmentGet()` */
-  static readonly ApiGymIdEquipmentGetPath = '/api/Gym/{id}/equipment';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiGymIdEquipmentGet()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  apiGymIdEquipmentGet$Response(params: ApiGymIdEquipmentGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
-    return apiGymIdEquipmentGet(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiGymIdEquipmentGet$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  apiGymIdEquipmentGet(params: ApiGymIdEquipmentGet$Params, context?: HttpContext): Observable<Array<Equipment>> {
-    return this.apiGymIdEquipmentGet$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<Equipment>>): Array<Equipment> => r.body)
     );
   }
 

@@ -13,6 +13,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { apiEquipmentGet } from '../fn/equipment/api-equipment-get';
 import { ApiEquipmentGet$Params } from '../fn/equipment/api-equipment-get';
+import { apiEquipmentIdGet } from '../fn/equipment/api-equipment-id-get';
+import { ApiEquipmentIdGet$Params } from '../fn/equipment/api-equipment-id-get';
 import { Equipment } from '../models/equipment';
 
 @Injectable({ providedIn: 'root' })
@@ -42,6 +44,31 @@ export class EquipmentService extends BaseService {
    */
   apiEquipmentGet(params?: ApiEquipmentGet$Params, context?: HttpContext): Observable<Array<Equipment>> {
     return this.apiEquipmentGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<Equipment>>): Array<Equipment> => r.body)
+    );
+  }
+
+  /** Path part for operation `apiEquipmentIdGet()` */
+  static readonly ApiEquipmentIdGetPath = '/api/Equipment/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiEquipmentIdGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiEquipmentIdGet$Response(params: ApiEquipmentIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
+    return apiEquipmentIdGet(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiEquipmentIdGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiEquipmentIdGet(params: ApiEquipmentIdGet$Params, context?: HttpContext): Observable<Array<Equipment>> {
+    return this.apiEquipmentIdGet$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<Equipment>>): Array<Equipment> => r.body)
     );
   }

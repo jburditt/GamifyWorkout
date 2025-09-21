@@ -18,9 +18,14 @@ namespace Api
 
         [HttpPost("{gymId}")]
         [Produces("application/json")]
-        public ActionResult Insert(Guid gymId, [FromBody] Guid[] equipment)
+        public ActionResult<bool> Insert(Guid gymId, [FromBody] Guid[] equipmentIds)
         {
-            return Ok();
+            var context = _contextFactory.CreateDbContext();
+            foreach (var equipmentId in equipmentIds)
+            {
+                context.GymEquipment.Add(new GymEquipment { EquipmentId = equipmentId, GymId = gymId });
+            }
+            return context.SaveChanges() > 0;
         }
     }
 }

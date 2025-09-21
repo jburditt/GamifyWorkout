@@ -16,11 +16,14 @@ export class AddGymEquipmentDialog implements OnInit {
   equipment!: Equipment[];
   equipmentIds!: string[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { gymId: string }, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { gymId: string, equipmentIds: string }, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService) { }
 
   ngOnInit(): void {
     this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
-      this.equipment = equipment;
+      if (this.data.equipmentIds.length > 0)
+        this.equipment = equipment.filter(e => this.data.equipmentIds.indexOf(e.id as string) == -1);
+      else
+        this.equipment = equipment;
     });
   }
 

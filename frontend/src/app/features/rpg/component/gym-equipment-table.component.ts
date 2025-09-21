@@ -24,7 +24,7 @@ export class GymEquipmentTableComponent {
   @Input() dataSource = new MatTableDataSource<Equipment>();
   displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
-  addGymEquipment = output<boolean>();
+  addGymEquipment = output<string[]>();
   changeGymEquipment = output<string[]>();
   equipmentIds: string[] = [];
 
@@ -47,6 +47,7 @@ export class GymEquipmentTableComponent {
   }
 
   openDialog() {
-    this.addGymEquipment.emit(true);
+    let equipmentIds = (this.dataSource as unknown as Array<Equipment>).map(e => e.id as string);
+    this.addGymEquipment.emit(equipmentIds);
   }
 }

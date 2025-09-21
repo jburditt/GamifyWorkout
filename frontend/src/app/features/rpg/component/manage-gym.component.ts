@@ -48,8 +48,8 @@ export class ManageGymComponent {
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AddGymEquipmentDialog, { data: { gymId: this.gym.id } });
+  openDialog(equipmentIds: string[]) {
+    const dialogRef = this.dialog.open(AddGymEquipmentDialog, { data: { gymId: this.gym.id, equipmentIds: equipmentIds } });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

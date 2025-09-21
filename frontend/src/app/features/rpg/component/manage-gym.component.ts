@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-
 import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
 import { MatButtonModule } from '@angular/material/button';
 import { GymService } from '@app/api/services';
@@ -32,6 +31,8 @@ export class ManageGymComponent {
   });
   equipment!: Equipment[];
 
+  readonly dialog = inject(MatDialog);
+
   constructor(private loggingFactory: LoggingFactory, private gymService: GymService)
   {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
@@ -43,6 +44,14 @@ export class ManageGymComponent {
     console.log("id", this.gym.id);
     this.gymService.apiGymIdEquipmentGet({ id: this.gym.id! }).subscribe((equipment) => {
       this.equipment = equipment;
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddGymEquipmentDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
   }
 }

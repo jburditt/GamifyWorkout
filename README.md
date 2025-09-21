@@ -6,13 +6,13 @@ A workout application to track exercises and create workout schedules. Progressi
 - EntityFramework 8
 - Angular 20
 
-# Angular Features
+# Features
 - OAuth authentication
 - Dependency Injection
 - NgRx
-- OData query -> Query database using OData .NET EF controllers
-- SurveyJS -> Automate creating form from model, and loading form from database
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
+- Angular Material -> Datatable, tabs, form components, etc
+- Entity Framework -> Seeding, API, migrations, etc
 
 # TODO
 - Move textbox.component to bootstrap repo

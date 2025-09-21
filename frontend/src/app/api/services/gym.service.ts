@@ -11,10 +11,13 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { apiGymEquipmentGet } from '../fn/gym/api-gym-equipment-get';
+import { ApiGymEquipmentGet$Params } from '../fn/gym/api-gym-equipment-get';
 import { apiGymGet } from '../fn/gym/api-gym-get';
 import { ApiGymGet$Params } from '../fn/gym/api-gym-get';
 import { apiGymPost } from '../fn/gym/api-gym-post';
 import { ApiGymPost$Params } from '../fn/gym/api-gym-post';
+import { Equipment } from '../models/equipment';
 import { Gym } from '../models/gym';
 
 @Injectable({ providedIn: 'root' })
@@ -70,6 +73,31 @@ export class GymService extends BaseService {
   apiGymPost(params?: ApiGymPost$Params, context?: HttpContext): Observable<boolean> {
     return this.apiGymPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /** Path part for operation `apiGymEquipmentGet()` */
+  static readonly ApiGymEquipmentGetPath = '/api/Gym/equipment';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGymEquipmentGet()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  apiGymEquipmentGet$Response(params?: ApiGymEquipmentGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Equipment>>> {
+    return apiGymEquipmentGet(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiGymEquipmentGet$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  apiGymEquipmentGet(params?: ApiGymEquipmentGet$Params, context?: HttpContext): Observable<Array<Equipment>> {
+    return this.apiGymEquipmentGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<Equipment>>): Array<Equipment> => r.body)
     );
   }
 

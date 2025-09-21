@@ -28,6 +28,20 @@ namespace Api
             return Ok(gyms);
         }
 
+        [HttpGet("equipment")]
+        [Produces("application/json")]
+        public ActionResult<List<Equipment>> GetEquipment([FromBody] Guid gymId)
+        {
+            var context = _contextFactory.CreateDbContext();
+            var equipment = (
+                from e in context.Equipment
+                join ge in context.GymEquipment on e.Id equals ge.EquipmentId
+                where ge.GymId == gymId
+                select e)
+                .ToList();
+            return Ok(equipment);
+        }
+
         [HttpPost]
         [Produces("application/json")]
         public bool Post([FromBody] Gym gym)

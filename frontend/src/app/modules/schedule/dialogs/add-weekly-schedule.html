@@ -1,9 +1,11 @@
 <h2 mat-dialog-title>Add Weekly Schedule</h2>
 <mat-dialog-content class="mat-typography">
-  <textbox [label]="'Name'" [controlName]="'name'" [parentForm]="form" />
-  <mat-slide-toggle>Save as Default</mat-slide-toggle>
+  <form [formGroup]="form">
+    <textbox [label]="'Name'" [controlName]="'name'" [parentForm]="form" />
+    <mat-slide-toggle [formControl]="$any(this.form.get('default'))">Save as Default</mat-slide-toggle>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button matButton mat-dialog-close>Cancel</button>
-  <button matButton [mat-dialog-close]="form.get('name')?.value" cdkFocusInitial>Add</button>
+  <button matButton [mat-dialog-close]="dialogClose()" [disabled]="!isFormValid()" cdkFocusInitial>Add</button>
 </mat-dialog-actions>

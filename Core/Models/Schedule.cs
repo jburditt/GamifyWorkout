@@ -13,7 +13,6 @@ public class Schedule : BaseEntity
     public Guid GymId { get; set; }
 
     public DateOnly Date { get; set; }
-
-    // Children
-    public List<Workout>? Workouts { get; set; }
+    public List<MuscleGroup>? MuscleGroupFilter { get; set; }
+    public ICollection<WorkoutLog>? Workouts { get; set; }
 }

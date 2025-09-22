@@ -9,8 +9,15 @@ namespace Database
         public DbSet<Gym> Gyms { get; set; }
         public DbSet<GymEquipment> GymEquipment { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<WorkoutLog> WorkoutLog { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
 
         public EfDbContext(DbContextOptions<EfDbContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<WorkoutLog>().HasKey(wl => new { wl.ScheduleId, wl.ExerciseId, wl.Date });
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

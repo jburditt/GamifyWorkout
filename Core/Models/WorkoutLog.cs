@@ -2,7 +2,7 @@
 
 namespace Core;
 
-public class WorkoutLog : BaseEntity
+public class WorkoutLog
 {
     [ForeignKey("Schedule.Id")]
     public Guid ScheduleId { get; set; }
@@ -10,8 +10,9 @@ public class WorkoutLog : BaseEntity
     [ForeignKey("Exercise.Id")]
     public Guid ExerciseId { get; set; }
 
-    [ForeignKey("Workout.Id")]
-    public Guid WorkoutId { get; set; }
+    public DateOnly Date { get; set; }
 
-    public required WorkoutLogEntry WorkoutLogEntry { get; set; }
+    public int Sets { get; set; }
+    public int Reps { get; set; }
+    public double Weight { get; set; }
 }

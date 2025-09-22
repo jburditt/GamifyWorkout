@@ -5,17 +5,27 @@ import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.co
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   templateUrl: 'add-weekly-schedule.html',
-  imports: [MatButtonModule, MatDialogModule, MatInputModule, TextboxComponent, MatSlideToggleModule]
+  imports: [ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, TextboxComponent, MatSlideToggleModule]
 })
 export class AddWeeklyScheduleDialog {
   form: FormGroup = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-    })
+    }),
+    default: new FormControl()
   });
 
   constructor() { }
+
+  dialogClose(): { name: string, default: boolean } {
+    return { name: this.form.get('name')?.value, default: this.form.get('default')?.value || false };
+  }
+
+  isFormValid(): boolean {
+    return this.form.valid;
+  }
 }

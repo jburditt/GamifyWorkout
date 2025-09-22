@@ -17,6 +17,7 @@ export class AddGymEquipmentDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { equipmentIds: string }, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService) { }
 
   ngOnInit(): void {
+    // TODO cache this or only load it the first time
     this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
       if (this.data.equipmentIds.length > 0)
         this.equipment = equipment.filter(e => this.data.equipmentIds.indexOf(e.id as string) == -1);

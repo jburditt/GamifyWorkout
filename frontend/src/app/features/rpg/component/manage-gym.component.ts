@@ -65,8 +65,9 @@ export class ManageGymComponent {
   }
 
   deleteGymEquipment(equipmentId: string): void {
+    this.equipment = this.equipment.filter(e => e.id != equipmentId);
     this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gym.id as string, equipmentId: equipmentId }).subscribe((response) => {
-      this.equipment = this.equipment.filter(e => e.id != equipmentId);
+
     });
   }
 }

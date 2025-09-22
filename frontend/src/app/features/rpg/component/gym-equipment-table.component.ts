@@ -1,4 +1,4 @@
-import { Component, inject, Input, output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { LoggingService } from '@app/core/services/logging/logging-service.interface';
 import { LoggingFactory } from '@app/core/services/logging/logging.factory';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { Equipment } from '@app/api/models';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GymEquipmentService } from '@app/api/services';
 
 @Component({
@@ -25,14 +24,12 @@ export class GymEquipmentTableComponent {
   @Input() dataSource = new MatTableDataSource<Equipment>();
   displayedColumns: string[] = ['icon', 'equipment', 'edit'];
 
-  @Input() gymId!: string;
-
   addGymEquipment = output<string[]>();
   changeGymEquipment = output<string[]>();
   deleteGymEquipment = output<string>();
   equipmentIds: string[] = [];
 
-  constructor(private gymEquipmentService: GymEquipmentService, private loggingFactory: LoggingFactory)
+  constructor(private loggingFactory: LoggingFactory)
   {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
@@ -48,12 +45,6 @@ export class GymEquipmentTableComponent {
       this.equipmentIds = this.equipmentIds.filter(e => e != event.source.value);
     }
     this.changeGymEquipment.emit(this.equipmentIds);
-  }
-
-  // this should be emitted to parent for deletion
-  onDelete(equipmentId: string) {
-
-    this.deleteGymEquipment.emit
   }
 
   openDialogEmitter() {

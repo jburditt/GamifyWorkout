@@ -1,4 +1,12 @@
-<app-week-container>
-  <ng-content slot="monday">test 1</ng-content>
-  <ng-content slot="tuesday">test 2</ng-content>
-</app-week-container>
+<div class="wrapper">
+
+  <div class="leftColumn">
+    <span>Rest</span>
+  </div>
+
+  <app-week-container class="contentColumn">
+    <ng-content slot="monday">test 1</ng-content>
+    <ng-content slot="tuesday">test 2</ng-content>
+  </app-week-container>
+
+</div>

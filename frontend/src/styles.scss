@@ -61,7 +61,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .wrapper{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 0 32px;
 }
 
@@ -71,4 +71,13 @@ menu {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.leftColumn {
+  width: 20%;
+  margin-top: 24px;
+}
+
+.contentColumn {
+  width: 80%;
 }

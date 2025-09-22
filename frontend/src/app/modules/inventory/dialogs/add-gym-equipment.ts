@@ -14,7 +14,7 @@ export class AddGymEquipmentDialog implements OnInit {
   equipment!: Equipment[];
   equipmentIds!: string[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { gymId: string, equipmentIds: string }, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { equipmentIds: string }, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService) { }
 
   ngOnInit(): void {
     this.equipmentService.apiEquipmentGet().subscribe((equipment) => {
@@ -22,12 +22,6 @@ export class AddGymEquipmentDialog implements OnInit {
         this.equipment = equipment.filter(e => this.data.equipmentIds.indexOf(e.id as string) == -1);
       else
         this.equipment = equipment;
-    });
-  }
-
-  addGymEquipment(): void {
-    this.gymEquipmentService.apiGymEquipmentGymIdPost({ gymId: this.data.gymId, body: this.equipmentIds }).subscribe((response) => {
-      // TODO reload equipment table by passing icon, name, id from source and updating this.equipment instead of using API
     });
   }
 

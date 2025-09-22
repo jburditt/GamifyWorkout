@@ -49,6 +49,7 @@ export class GymEquipmentTableComponent {
     this.changeGymEquipment.emit(this.equipmentIds);
   }
 
+  // this should be emitted to parent for deletion
   onDelete(equipmentId: string) {
     this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gymId, equipmentId: equipmentId }).subscribe((response) => {
       console.log("response", this.dataSource.data);

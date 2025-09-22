@@ -8,7 +8,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
 import { MatButtonModule } from '@angular/material/button';
-import { EquipmentService, GymService } from '@app/api/services';
+import { EquipmentService, GymEquipmentService, GymService } from '@app/api/services';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddGymEquipmentDialog } from '@app/modules/inventory/dialogs/add-gym-equipment';
 import { GymEquipmentTableComponent } from './gym-equipment-table.component';
@@ -33,7 +33,7 @@ export class ManageGymComponent {
 
   readonly dialog = inject(MatDialog);
 
-  constructor(private loggingFactory: LoggingFactory, private equipmentService: EquipmentService)
+  constructor(private loggingFactory: LoggingFactory, private equipmentService: EquipmentService, private gymEquipmentService: GymEquipmentService)
   {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
@@ -48,14 +48,19 @@ export class ManageGymComponent {
   }
 
   openDialog(equipmentIds: string[]) {
-    const dialogRef = this.dialog.open(AddGymEquipmentDialog, { data: { gymId: this.gym.id, equipmentIds: equipmentIds } });
+    const dialogRef = this.dialog.open(AddGymEquipmentDialog, { data: { equipmentIds: equipmentIds } });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      // TODO optimize by updating table with returned results from dialog instead of reloading from database
-      this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
-        this.equipment = equipment;
-      });
+      if (result) {
+        this.gymEquipmentService.apiGymEquipmentGymIdPost({ gymId: this.gym.id as string, body: result }).subscribe((response) => {
+          // TODO reload equipment table by passing icon, name, id from source and updating this.equipment instead of using API
+          // TODO optimize by updating table with returned results from dialog instead of reloading from database
+          this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
+            this.equipment = equipment;
+          });
+        });
+      }
     });
   }
 }

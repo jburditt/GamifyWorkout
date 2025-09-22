@@ -11,8 +11,9 @@ A workout application to track exercises and create workout schedules. Progressi
 - Dependency Injection
 - NgRx
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
-- Angular Material -> Datatable, tabs, form components, dialogs, etc
+- Angular Material -> Datatable, tabs, form components, dialogs, drag and drop, slide toggle, etc
 - Entity Framework -> Seeding, API, migrations, etc
+- Angular Features -> Dynamic Routing, Content Projection, Form Controls/Group, etc
 
 # TODO
 - Gym page bugs and missing features

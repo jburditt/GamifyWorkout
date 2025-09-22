@@ -1,31 +1,38 @@
 <div class="calendar-container">
-        <h2>Weekly Schedule</h2>
-        <table class="weekly-calendar">
-            <thead>
-                <tr>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <!-- <td>[<ng-content id="monday">monday</ng-content>]</td>
-                    <td>[<ng-content id="tuesday">tuesday</ng-content>]</td> -->
-                    <td><ng-content select="[slot=monday]"></ng-content></td>
-                    <td><ng-content select="[slot=tuesday]"></ng-content></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <h2>Weekly Schedule</h2>
+  <table class="weekly-calendar" cellspacing="0" cellpadding="10">
+    <thead>
+      <tr>
+        <td class="topRowCell">{{ displayDate(1) }}</td>
+        <td class="topRowCell">{{ displayDate(2) }}</td>
+        <td class="topRowCell">{{ displayDate(3) }}</td>
+        <td class="topRowCell">{{ displayDate(4) }}</td>
+        <td class="topRowCell">{{ displayDate(5) }}</td>
+        <td class="topRowCell">{{ displayDate(6) }}</td>
+        <td class="topRowCell">{{ displayDate(0) }}</td>
+      </tr>
+      <tr>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><ng-content select="[slot=monday]"></ng-content></td>
+        <td><ng-content select="[slot=tuesday]"></ng-content></td>
+        <td><ng-content select="[slot=wedsnesday]"></ng-content></td>
+        <td><ng-content select="[slot=thursday]"></ng-content></td>
+        <td><ng-content select="[slot=friday]"></ng-content></td>
+        <td><ng-content select="[slot=saturday]"></ng-content></td>
+        <td><ng-content select="[slot=sunday]"></ng-content></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 

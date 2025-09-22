@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Add Weekly Schedule</h2>
+<mat-dialog-content class="mat-typography">
+  <textbox [label]="'Name'" [controlName]="'name'" [parentForm]="form" />
+  <mat-slide-toggle>Save as Default</mat-slide-toggle>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton mat-dialog-close>Cancel</button>
+  <button matButton [mat-dialog-close]="true" cdkFocusInitial (click)="add()">Add</button>
+</mat-dialog-actions>

@@ -17,7 +17,7 @@ import { GymEquipmentTableComponent } from './gym-equipment-table.component';
     templateUrl: 'manage-gym.component.html',
     imports: [
       ReactiveFormsModule, TextboxComponent, MatDialogModule, MatButtonModule, MatInputModule,
-      MatIconModule, MatGridListModule, MatInputModule, GymEquipmentTableComponent
+      MatIconModule, MatGridListModule, GymEquipmentTableComponent
     ],
     selector: 'manage-gym'
 })

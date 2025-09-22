@@ -4,10 +4,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/d
 import { Equipment } from '@app/api/models';
 import { EquipmentService, GymEquipmentService } from '@app/api/services';
 import { GymEquipmentTableComponent } from '@app/features/rpg/component/gym-equipment-table.component';
-import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'add-gym-equipment',
   templateUrl: 'add-gym-equipment.html',
   imports: [MatButtonModule, MatDialogModule, GymEquipmentTableComponent],
   //changeDetection: ChangeDetectionStrategy.OnPush,

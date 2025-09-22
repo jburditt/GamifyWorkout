@@ -1,8 +1,10 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, inject } from '@angular/core';
 import { WeekContainerComponent } from "@app/features/rpg/component/week-container/week-container.component";
 import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { CdkDropListGroup } from "@angular/cdk/drag-drop";
 import { MatButtonModule } from '@angular/material/button';
+import { AddWeeklyScheduleDialog } from '../../dialogs/add-weekly-schedule';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   imports: [WeekContainerComponent, MatButtonModule, CdkDropList, CdkDrag, CdkDropListGroup, forwardRef(() => WeekdayDropContainer)],
@@ -18,6 +20,20 @@ export class WeekPageComponent {
   friday: Array<string> = [];
   saturday: Array<string> = [];
   sunday: Array<string> = [];
+
+  readonly dialog = inject(MatDialog);
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddWeeklyScheduleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // TODO optimize by updating table with returned results from dialog instead of reloading from database
+      // this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
+      //   this.equipment = equipment;
+      // });
+    });
+  }
 }
 
 @Component({

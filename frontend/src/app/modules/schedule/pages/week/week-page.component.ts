@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { WeekContainerComponent } from "@app/features/rpg/component/week-container/week-container.component";
-import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { CdkDropListGroup } from "@angular/cdk/drag-drop";
 
 @Component({
@@ -10,14 +10,15 @@ import { CdkDropListGroup } from "@angular/cdk/drag-drop";
 })
 export class WeekPageComponent {
   activity = ['Rest', 'Any', 'Cardio', 'Core', 'Chest', 'Back', 'Shoulders', 'Arms', 'Legs'];
-  monday = [''];
+  monday: Array<string> = [];
+  tuesday: Array<string> = [];
 
   drop(event: CdkDragDrop<string[]>) {
     console.log("event", event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
+      copyArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,

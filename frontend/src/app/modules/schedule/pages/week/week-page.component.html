@@ -3,7 +3,7 @@
 
     <div class="leftColumn">
       <div class="leftColumnSpacer"></div>
-      <div cdkDropList #activityList="cdkDropList" [cdkDropListData]="activity" [cdkDropListConnectedTo]="['mondayList']" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList #activityList="cdkDropList" [cdkDropListData]="activity" (cdkDropListDropped)="drop($event)">
         @for (item of activity; track item) {
           <div class="activity activity-{{ item.toLowerCase() }}" cdkDrag>{{ item }}</div>
         }
@@ -12,13 +12,19 @@
 
     <app-week-container class="contentColumn">
       <ng-content slot="monday">
-        <div class="weekdayColumn" cdkDropList id="mondayList" [cdkDropListData]="monday" [cdkDropListConnectedTo]="[activityList]" (cdkDropListDropped)="drop($event)">
+        <div class="weekdayColumn" cdkDropList id="mondayList" [cdkDropListData]="monday" (cdkDropListDropped)="drop($event)">
           @for (item of monday; track item) {
             <div class="activity activity-{{ item.toLowerCase() }}" cdkDrag>{{ item }}</div>
           }
         </div>
       </ng-content>
-      <ng-content slot="tuesday">test 2</ng-content>
+      <ng-content slot="tuesday">
+        <div class="weekdayColumn" cdkDropList id="tuesdayList" [cdkDropListData]="tuesday" (cdkDropListDropped)="drop($event)">
+          @for (item of tuesday; track item) {
+            <div class="activity activity-{{ item.toLowerCase() }}" cdkDrag>{{ item }}</div>
+          }
+        </div>
+      </ng-content>
     </app-week-container>
 
 </div>

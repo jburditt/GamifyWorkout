@@ -2,7 +2,7 @@
 
   <textbox label="Name" controlName="name" [parentForm]="form"></textbox>
 
-  <gym-equipment-table [dataSource]="$any(equipment)" [gymId]="gym.id!" [canAddRow]="true" (addGymEquipment)="openDialog($event)"/>
+  <gym-equipment-table [dataSource]="$any(equipment)" [gymId]="gym.id!" [canAddRow]="true" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
 
   <button type="submit" matButton="filled">Save</button>
 

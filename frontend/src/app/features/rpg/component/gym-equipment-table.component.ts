@@ -29,6 +29,7 @@ export class GymEquipmentTableComponent {
 
   addGymEquipment = output<string[]>();
   changeGymEquipment = output<string[]>();
+  deleteGymEquipment = output<string>();
   equipmentIds: string[] = [];
 
   constructor(private gymEquipmentService: GymEquipmentService, private loggingFactory: LoggingFactory)
@@ -51,19 +52,11 @@ export class GymEquipmentTableComponent {
 
   // this should be emitted to parent for deletion
   onDelete(equipmentId: string) {
-    this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gymId, equipmentId: equipmentId }).subscribe((response) => {
-      console.log("response", this.dataSource.data);
-      let equipmentIdsRemaining = new Array<Equipment>;
-      if (this.dataSource.data) {
-        equipmentIdsRemaining = this.dataSource.data.filter(e => e.id != equipmentId);
-      } else {
-        equipmentIdsRemaining = (this.dataSource as unknown as Array<Equipment>).filter(e => e.id != equipmentId);
-      }
-      this.dataSource = new MatTableDataSource(equipmentIdsRemaining);
-    });
+
+    this.deleteGymEquipment.emit
   }
 
-  openDialog() {
+  openDialogEmitter() {
     let data = this.dataSource.data || (this.dataSource as unknown as Array<Equipment>);
     let equipmentIds = data ? data.map(e => e.id as string) : [];
     this.addGymEquipment.emit(equipmentIds);

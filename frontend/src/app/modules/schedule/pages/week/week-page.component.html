@@ -2,35 +2,39 @@
 
     <div class="leftColumn">
       <div class="leftColumnSpacer"></div>
-      <div cdkDropList #activityList="cdkDropList" [cdkDropListData]="activity">
+      <div cdkDropList id="activityList" #activityList="cdkDropList" [cdkDropListData]="activity">
         @for (item of activity; track item) {
           <div class="activity activity-{{ item.toLowerCase() }}" cdkDrag>{{ item }}</div>
         }
       </div>
     </div>
 
-    <app-week-container class="contentColumn">
-      <ng-content slot="monday">
-        <app-weekday-drop-container [id]="'mondayList'" [data]="monday" />
-      </ng-content>
-      <ng-content slot="tuesday">
-        <app-weekday-drop-container [id]="'tuesdayList'" [data]="tuesday" />
-      </ng-content>
-      <ng-content slot="wednesday">
-        <app-weekday-drop-container [id]="'wednesdayList'" [data]="wednesday" />
-      </ng-content>
-      <ng-content slot="thursday">
-        <app-weekday-drop-container [id]="'thursdayList'" [data]="thursday" />
-      </ng-content>
-      <ng-content slot="friday">
-        <app-weekday-drop-container [id]="'fridayList'" [data]="friday" />
-      </ng-content>
-      <ng-content slot="saturday">
-        <app-weekday-drop-container [id]="'saturdayList'" [data]="saturday" />
-      </ng-content>
-      <ng-content slot="sunday">
-        <app-weekday-drop-container [id]="'sundayList'" [data]="sunday" />
-      </ng-content>
-    </app-week-container>
+    <div class="contentColumn">
+      <app-week-container class="contentColumn">
+        <ng-content slot="monday">
+          <app-weekday-drop-container [id]="'mondayList'" [data]="monday" />
+        </ng-content>
+        <ng-content slot="tuesday">
+          <app-weekday-drop-container [id]="'tuesdayList'" [data]="tuesday" />
+        </ng-content>
+        <ng-content slot="wednesday">
+          <app-weekday-drop-container [id]="'wednesdayList'" [data]="wednesday" />
+        </ng-content>
+        <ng-content slot="thursday">
+          <app-weekday-drop-container [id]="'thursdayList'" [data]="thursday" />
+        </ng-content>
+        <ng-content slot="friday">
+          <app-weekday-drop-container [id]="'fridayList'" [data]="friday" />
+        </ng-content>
+        <ng-content slot="saturday">
+          <app-weekday-drop-container [id]="'saturdayList'" [data]="saturday" />
+        </ng-content>
+        <ng-content slot="sunday">
+          <app-weekday-drop-container [id]="'sundayList'" [data]="sunday" />
+        </ng-content>
+      </app-week-container>
 
+      <p>Drag and drop the muscle group boxes on the left to a day of the week on the right. To clear a muscle group box from a week, drag it away from the day or double click the box. When you are done, click on the "Generate" button to generate the workout schedule with exercises or click "Save Template" to save the weekly schedule as a template.</p>
+
+    </div>
 </div>

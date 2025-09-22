@@ -36,16 +36,13 @@ export class WeekdayDropContainer {
   @Input() id!: string;
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log("event", event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      copyArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      if (event.previousContainer.id != "activityList")
+        transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      else
+        copyArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
   }
 }

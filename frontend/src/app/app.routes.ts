@@ -13,8 +13,8 @@ export const routes: Routes = [{
       loadChildren: () => import('@app/modules/inventory/inventory.routes')
     },
     {
-      path: 'feature',
-      loadChildren: () => import('@app/modules/feature/feature.routes')
+      path: 'schedule',
+      loadChildren: () => import('@app/modules/schedule/schedule.routes')
     }
   ],
 }];

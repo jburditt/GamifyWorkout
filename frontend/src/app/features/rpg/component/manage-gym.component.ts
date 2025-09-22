@@ -43,7 +43,6 @@ export class ManageGymComponent {
     this.form.get('name')!.setValue(this.gym.name);
     console.log("id", this.gym);
     this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
-      console.log("equipment", equipment);
       this.equipment = equipment;
     });
   }
@@ -55,7 +54,6 @@ export class ManageGymComponent {
       console.log(`Dialog result: ${result}`);
       // TODO optimize by updating table with returned results from dialog instead of reloading from database
       this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
-        console.log("equipment", equipment);
         this.equipment = equipment;
       });
     });

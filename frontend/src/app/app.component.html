@@ -1,7 +1,7 @@
 <mat-toolbar>
   <img src="assets/logo.png" alt="Logo" />
   <menu [items]="inventoryMenuItems" [label]="'Inventory'"></menu>
-  <menu [label]="'Schedule'"></menu>
+  <menu [items]="scheduleMenuItems" [label]="'Schedule'"></menu>
   <menu [label]="'Quest'"></menu>
   <span class="spacer"></span>
   @if (isLoggedIn) {

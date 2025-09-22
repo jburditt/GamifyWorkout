@@ -11,10 +11,17 @@ A workout application to track exercises and create workout schedules. Progressi
 - Dependency Injection
 - NgRx
 - OpenAPI generate -> Generate Angular API services from OpenAPI spec
-- Angular Material -> Datatable, tabs, form components, etc
+- Angular Material -> Datatable, tabs, form components, dialogs, etc
 - Entity Framework -> Seeding, API, migrations, etc
 
 # TODO
+- Gym page bugs and missing features
+  - Add new gym without reload the equipment is wrong and delete doesn't have the gymId
+  - Move Save button beside name and rename to "Change Name"
+  - Add a remove gym button
+  - Add a "Select All Equipment" button
+  - Hide "Add Equipment" button if gym already has all equipment
+  - Change sync to async and verify the UI is less glitchy
 - Move textbox.component to bootstrap repo
 - Move validation-message component from features/rpg to shared/component
 - Add centralized logging

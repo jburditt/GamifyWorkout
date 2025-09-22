@@ -1,0 +1,31 @@
+<div class="calendar-container">
+        <h2>Weekly Schedule</h2>
+        <table class="weekly-calendar">
+            <thead>
+                <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- <td>[<ng-content id="monday">monday</ng-content>]</td>
+                    <td>[<ng-content id="tuesday">tuesday</ng-content>]</td> -->
+                    <td><ng-content select="[slot=monday]"></ng-content></td>
+                    <td><ng-content select="[slot=tuesday]"></ng-content></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+

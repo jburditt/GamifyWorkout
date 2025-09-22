@@ -38,13 +38,14 @@ mat-toolbar mat-icon { color: #fff!important; }
 
 mat-tab-body { padding: 32px 16px; }
 //mat-form-field { padding-bottom: 16px; }
+button { margin-right: 6px; }
 table {
   // TODO
   border: 1px solid #ccc!important;
   margin-bottom: 16px;
   border-radius: 12px;
   overflow:hidden !important;
-background-color:transparent!important;
+  background-color:transparent!important;
 }
 .mat-mdc-header-row {
   background-color: #eee!important;

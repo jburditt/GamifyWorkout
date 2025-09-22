@@ -5,5 +5,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button matButton mat-dialog-close>Cancel</button>
-  <button matButton [mat-dialog-close]="true" cdkFocusInitial (click)="add()">Add</button>
+  <button matButton [mat-dialog-close]="form.get('name')?.value" cdkFocusInitial>Add</button>
 </mat-dialog-actions>

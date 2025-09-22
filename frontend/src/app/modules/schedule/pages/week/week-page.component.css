@@ -1,0 +1,49 @@
+.leftColumn {
+  padding-top: 166px;
+}
+
+.weekdayColumn {
+  min-height: 400px;
+}
+
+.activity {
+  padding: 10px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.activity-rest {
+  background-color: blueviolet;
+}
+
+.activity-any {
+  background-color: greenyellow;
+}
+
+.activity-cardio {
+  background-color: rosybrown;
+}
+
+.activity-core {
+  background-color: brown;
+}
+
+.activity-chest {
+  background-color: cornflowerblue;
+}
+
+.activity-back {
+  background-color: plum;
+}
+
+.activity-shoulders {
+  background-color: indianred;
+}
+
+.activity-arms {
+  background-color: mediumpurple;
+}
+
+.activity-legs {
+  background-color: olive;
+}

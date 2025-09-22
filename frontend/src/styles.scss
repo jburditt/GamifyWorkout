@@ -59,10 +59,15 @@ td { background-color: #fff!important; padding: 16px!important; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: row;
   padding: 0 32px;
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
 }
 
 menu {
@@ -76,6 +81,7 @@ menu {
 .leftColumn {
   width: 20%;
   margin-top: 24px;
+  margin-right: 32px;
 }
 
 .contentColumn {

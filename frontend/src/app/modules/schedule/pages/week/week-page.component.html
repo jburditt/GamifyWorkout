@@ -1,11 +1,18 @@
-<div class="wrapper">
+<div class="flexbox">
 
   <div class="leftColumn">
-    <span>Rest</span>
+    <div class="leftColumnSpacer"></div>
+    <div cdkDropList #activityList="cdkDropList" [cdkDropListData]="activity">
+      @for (item of activity; track item) {
+        <div class="activity activity-{{ item.toLowerCase() }}" cdkDrag>{{ item }}</div>
+      }
+    </div>
   </div>
 
   <app-week-container class="contentColumn">
-    <ng-content slot="monday">test 1</ng-content>
+    <ng-content slot="monday">
+      <div class="weekdayColumn"></div>
+    </ng-content>
     <ng-content slot="tuesday">test 2</ng-content>
   </app-week-container>
 

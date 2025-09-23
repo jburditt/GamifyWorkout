@@ -10,36 +10,37 @@
     </div>
 
     <div class="contentColumn">
-      <app-week-container [help]="'Drag and drop the muscle group boxes on the left to a day of the week on the right. To clear a muscle group box from a week, drag it away from the day or double click the box. When you are done, click on the &quot;Generate&quot; button to generate the workout schedule with exercises or click &quot;Save Template&quot; to save the weekly schedule as a template.'">
-        <ng-content slot="monday">
-          <app-weekday-drop-container [id]="'mondayList'" [data]="monday" />
-        </ng-content>
-        <ng-content slot="tuesday">
-          <app-weekday-drop-container [id]="'tuesdayList'" [data]="tuesday" />
-        </ng-content>
-        <ng-content slot="wednesday">
-          <app-weekday-drop-container [id]="'wednesdayList'" [data]="wednesday" />
-        </ng-content>
-        <ng-content slot="thursday">
-          <app-weekday-drop-container [id]="'thursdayList'" [data]="thursday" />
-        </ng-content>
-        <ng-content slot="friday">
-          <app-weekday-drop-container [id]="'fridayList'" [data]="friday" />
-        </ng-content>
-        <ng-content slot="saturday">
-          <app-weekday-drop-container [id]="'saturdayList'" [data]="saturday" />
-        </ng-content>
-        <ng-content slot="sunday">
-          <app-weekday-drop-container [id]="'sundayList'" [data]="sunday" />
-        </ng-content>
-      </app-week-container>
+      <div class="shrinkwrap">
+        <app-week-container [help]="'Drag and drop the muscle group boxes on the left to a day of the week on the right. To clear a muscle group box from a week, drag it away from the day or double click the box. When you are done, click on the &quot;Generate&quot; button to generate the workout schedule with exercises or click &quot;Save Template&quot; to save the weekly schedule as a template.'">
+          <ng-content slot="monday">
+            <app-weekday-drop-container [id]="'mondayList'" [data]="monday" />
+          </ng-content>
+          <ng-content slot="tuesday">
+            <app-weekday-drop-container [id]="'tuesdayList'" [data]="tuesday" />
+          </ng-content>
+          <ng-content slot="wednesday">
+            <app-weekday-drop-container [id]="'wednesdayList'" [data]="wednesday" />
+          </ng-content>
+          <ng-content slot="thursday">
+            <app-weekday-drop-container [id]="'thursdayList'" [data]="thursday" />
+          </ng-content>
+          <ng-content slot="friday">
+            <app-weekday-drop-container [id]="'fridayList'" [data]="friday" />
+          </ng-content>
+          <ng-content slot="saturday">
+            <app-weekday-drop-container [id]="'saturdayList'" [data]="saturday" />
+          </ng-content>
+          <ng-content slot="sunday">
+            <app-weekday-drop-container [id]="'sundayList'" [data]="sunday" />
+          </ng-content>
+        </app-week-container>
 
-      <div class="flexbox">
-        <button matButton="filled" disabled="true">Load Template</button>
-        <button matButton="filled" disabled="true">Save Template</button>
-        <span class="spacer"></span>
-        <button matButton="filled" (click)="openDialog('Save')">Save</button>
+        <div class="flexbox">
+          <button matButton="filled" disabled="true">Load Template</button>
+          <button matButton="filled" disabled="true">Save Template</button>
+          <span class="spacer"></span>
+          <button matButton="filled" (click)="openDialog('Save')">Save</button>
+        </div>
       </div>
-
     </div>
 </div>

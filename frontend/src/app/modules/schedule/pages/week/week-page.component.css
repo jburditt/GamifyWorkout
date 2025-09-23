@@ -2,6 +2,10 @@
   padding-top: 166px;
 }
 
+.contentColumn {
+  display: inline-block;
+}
+
 .weekdayColumn {
   min-height: 360px;
 }

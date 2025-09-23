@@ -45,14 +45,46 @@ export class WeekPageComponent {
         monday.setDate(today.getDate() + dayOfWeek - 1);
         let tuesday = new Date();
         tuesday.setDate(today.getDate() + dayOfWeek);
-
-        const mondaySchedule: Schedule = {
-          date: monday.toLocaleDateString(),
-          muscleGroupFilter: this.monday
-        };
+        let wednesday = new Date();
+        wednesday.setDate(today.getDate() + dayOfWeek + 1);
+        let thursday = new Date();
+        thursday.setDate(today.getDate() + dayOfWeek + 2);
+        let friday = new Date();
+        friday.setDate(today.getDate() + dayOfWeek + 3);
+        let saturday = new Date();
+        saturday.setDate(today.getDate() + dayOfWeek + 4);
+        let sunday = new Date();
+        sunday.setDate(today.getDate() + dayOfWeek + 5);
 
         const weeklySchedule: WeeklySchedule = {
-          monday: mondaySchedule
+          monday: {
+            date: monday.toLocaleDateString(),
+            muscleGroupFilter: this.monday
+          },
+          tuesday: {
+            date: tuesday.toLocaleDateString(),
+            muscleGroupFilter: this.tuesday
+          },
+          wednesday: {
+            date: wednesday.toLocaleDateString(),
+            muscleGroupFilter: this.wednesday
+          },
+          thursday: {
+            date: thursday.toLocaleDateString(),
+            muscleGroupFilter: this.thursday
+          },
+          friday: {
+            date: friday.toLocaleDateString(),
+            muscleGroupFilter: this.friday
+          },
+          saturday: {
+            date: saturday.toLocaleDateString(),
+            muscleGroupFilter: this.saturday
+          },
+          sunday: {
+            date: sunday.toLocaleDateString(),
+            muscleGroupFilter: this.sunday
+          },
         }
         console.log("weeklySchedule", weeklySchedule);
       }

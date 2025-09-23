@@ -57,6 +57,7 @@ public class WeeklySchedule
     public Schedule? Saturday { get; set; }
     public Schedule? Sunday { get; set; }
 
+    public WeeklySchedule() { }
     public WeeklySchedule(List<Schedule> schedules)
     {
         if (schedules == null || schedules.Count != 7)

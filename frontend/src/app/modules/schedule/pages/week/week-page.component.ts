@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddWeeklyScheduleDialog } from '../../dialogs/add-weekly-schedule';
 import { MatDialog } from '@angular/material/dialog';
 import { MuscleGroup, Schedule, WeeklySchedule } from '@app/api/models';
+import { ScheduleService } from '@app/api/services';
 
 type DialogAction = 'Save Template' | 'Save';
 
@@ -26,18 +27,14 @@ export class WeekPageComponent {
 
   readonly dialog = inject(MatDialog);
 
+  constructor(private scheduleService: ScheduleService) { }
 
   openDialog(action: DialogAction) {
     const dialogRef = this.dialog.open(AddWeeklyScheduleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       console.log(`Dialog result: ${result.name}`);
       console.log(`Dialog result: ${result.default}`);
-      // TODO optimize by updating table with returned results from dialog instead of reloading from database
-      // this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
-      //   this.equipment = equipment;
-      // });
       if (result && action == 'Save') {
         let today = new Date();
         let dayOfWeek = today.getDay();
@@ -58,35 +55,38 @@ export class WeekPageComponent {
 
         const weeklySchedule: WeeklySchedule = {
           monday: {
-            date: monday.toLocaleDateString(),
+            date: monday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.monday
           },
           tuesday: {
-            date: tuesday.toLocaleDateString(),
+            date: tuesday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.tuesday
           },
           wednesday: {
-            date: wednesday.toLocaleDateString(),
+            date: wednesday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.wednesday
           },
           thursday: {
-            date: thursday.toLocaleDateString(),
+            date: thursday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.thursday
           },
           friday: {
-            date: friday.toLocaleDateString(),
+            date: friday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.friday
           },
           saturday: {
-            date: saturday.toLocaleDateString(),
+            date: saturday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.saturday
           },
           sunday: {
-            date: sunday.toLocaleDateString(),
+            date: sunday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.sunday
           },
         }
         console.log("weeklySchedule", weeklySchedule);
+        this.scheduleService.apiSchedulePost({ body: weeklySchedule }).subscribe((isSuccess) => {
+          console.log("success", isSuccess);
+        });
       }
     });
   }

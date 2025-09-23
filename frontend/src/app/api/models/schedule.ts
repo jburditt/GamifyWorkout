@@ -6,7 +6,6 @@ import { MuscleGroup } from '../models/muscle-group';
 import { WorkoutLog } from '../models/workout-log';
 export interface Schedule {
   date?: string;
-  gymId?: string;
   id?: string;
   muscleGroupFilter?: Array<MuscleGroup> | null;
   workouts?: Array<WorkoutLog> | null;

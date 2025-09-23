@@ -3,6 +3,10 @@ This demo focuses on two pages, see the menu items [Gym](/inventory/gym) and [We
 
 ~~A workout application to track exercises and create workout schedules. Progression is gamified by earning experience points and leveling up.~~
 
+![image info](Weekly Schedule.png)
+
+![image info](Gym Equipment.png)
+
 # Tech Stack
 - .NET 9 OData API 
 - EntityFramework 8

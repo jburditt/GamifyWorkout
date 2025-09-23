@@ -10,6 +10,7 @@ import { AuthService } from './services/auth.service';
 import { EquipmentService } from './services/equipment.service';
 import { GymService } from './services/gym.service';
 import { GymEquipmentService } from './services/gym-equipment.service';
+import { ScheduleService } from './services/schedule.service';
 import { UserService } from './services/user.service';
 
 /**
@@ -24,6 +25,7 @@ import { UserService } from './services/user.service';
     EquipmentService,
     GymService,
     GymEquipmentService,
+    ScheduleService,
     UserService,
     ApiConfiguration
   ],

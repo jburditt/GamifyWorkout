@@ -1,4 +1,6 @@
-﻿namespace Core;
+﻿using System.Text.Json.Serialization;
+
+namespace Core;
 
 public class Exercise : BaseEntity
 {
@@ -10,16 +12,21 @@ public class Exercise : BaseEntity
     public MuscleGroup? SecondaryMuscleGroup { get; set; }
     public Muscle? SecondaryMuscle { get; set; }
 }
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum MuscleGroup
 {
+    Any,
     Arms,
     Back,
+    Cardio,
     Chest,
     Core,
     Legs,
     Shoulders
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Muscle
 {
     Abs,

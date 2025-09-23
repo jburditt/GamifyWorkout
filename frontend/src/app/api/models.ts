@@ -4,4 +4,8 @@
 
 export type { Equipment } from './models/equipment';
 export type { Gym } from './models/gym';
+export { MuscleGroup } from './models/muscle-group';
+export type { Schedule } from './models/schedule';
 export type { User } from './models/user';
+export type { WeeklySchedule } from './models/weekly-schedule';
+export type { WorkoutLog } from './models/workout-log';

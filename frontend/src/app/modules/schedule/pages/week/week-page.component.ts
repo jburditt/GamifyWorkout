@@ -5,6 +5,9 @@ import { CdkDropListGroup } from "@angular/cdk/drag-drop";
 import { MatButtonModule } from '@angular/material/button';
 import { AddWeeklyScheduleDialog } from '../../dialogs/add-weekly-schedule';
 import { MatDialog } from '@angular/material/dialog';
+import { MuscleGroup, Schedule, WeeklySchedule } from '@app/api/models';
+
+type DialogAction = 'Save Template' | 'Save';
 
 @Component({
   imports: [WeekContainerComponent, MatButtonModule, CdkDropList, CdkDrag, CdkDropListGroup, forwardRef(() => WeekdayDropContainer)],
@@ -12,26 +15,47 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './week-page.component.css'
 })
 export class WeekPageComponent {
-  activity = ['Rest', 'Any', 'Cardio', 'Core', 'Chest', 'Back', 'Shoulders', 'Arms', 'Legs'];
-  monday: Array<string> = [];
-  tuesday: Array<string> = [];
-  wednesday: Array<string> = [];
-  thursday: Array<string> = [];
-  friday: Array<string> = [];
-  saturday: Array<string> = [];
-  sunday: Array<string> = [];
+  activity: Array<MuscleGroup> = [MuscleGroup.Any, MuscleGroup.Cardio, MuscleGroup.Core, MuscleGroup.Chest, MuscleGroup.Back, MuscleGroup.Shoulders, MuscleGroup.Arms, MuscleGroup.Legs];
+  monday: Array<MuscleGroup> = [];
+  tuesday: Array<MuscleGroup> = [];
+  wednesday: Array<MuscleGroup> = [];
+  thursday: Array<MuscleGroup> = [];
+  friday: Array<MuscleGroup> = [];
+  saturday: Array<MuscleGroup> = [];
+  sunday: Array<MuscleGroup> = [];
 
   readonly dialog = inject(MatDialog);
 
-  openDialog() {
+
+  openDialog(action: DialogAction) {
     const dialogRef = this.dialog.open(AddWeeklyScheduleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      console.log(`Dialog result: ${result.name}`);
+      console.log(`Dialog result: ${result.default}`);
       // TODO optimize by updating table with returned results from dialog instead of reloading from database
       // this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
       //   this.equipment = equipment;
       // });
+      if (result && action == 'Save') {
+        let today = new Date();
+        let dayOfWeek = today.getDay();
+        let monday = new Date();
+        monday.setDate(today.getDate() + dayOfWeek - 1);
+        let tuesday = new Date();
+        tuesday.setDate(today.getDate() + dayOfWeek);
+
+        const mondaySchedule: Schedule = {
+          date: monday.toLocaleDateString(),
+          muscleGroupFilter: this.monday
+        };
+
+        const weeklySchedule: WeeklySchedule = {
+          monday: mondaySchedule
+        }
+        console.log("weeklySchedule", weeklySchedule);
+      }
     });
   }
 }

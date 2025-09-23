@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-week-container',
-  imports: [],
+  imports: [MatIconModule, MatTooltip],
   templateUrl: './week-container.component.html',
   styleUrl: './week-container.component.css'
 })
 export class WeekContainerComponent {
+  @Input() help!: string;
+
   constructor() { }
 
   displayDate(i: number): string {

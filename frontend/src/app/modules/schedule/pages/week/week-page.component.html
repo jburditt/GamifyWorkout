@@ -10,7 +10,7 @@
     </div>
 
     <div class="contentColumn">
-      <app-week-container>
+      <app-week-container [help]="'Drag and drop the muscle group boxes on the left to a day of the week on the right. To clear a muscle group box from a week, drag it away from the day or double click the box. When you are done, click on the &quot;Generate&quot; button to generate the workout schedule with exercises or click &quot;Save Template&quot; to save the weekly schedule as a template.'">
         <ng-content slot="monday">
           <app-weekday-drop-container [id]="'mondayList'" [data]="monday" />
         </ng-content>
@@ -35,13 +35,11 @@
       </app-week-container>
 
       <div class="flexbox">
-        <button matButton="filled">Load Template</button>
-        <button matButton="filled">Save Template</button>
+        <button matButton="filled" disabled="true">Load Template</button>
+        <button matButton="filled" disabled="true">Save Template</button>
         <span class="spacer"></span>
         <button matButton="filled" (click)="openDialog('Save')">Save</button>
       </div>
-
-      <p>Drag and drop the muscle group boxes on the left to a day of the week on the right. To clear a muscle group box from a week, drag it away from the day or double click the box. When you are done, click on the "Generate" button to generate the workout schedule with exercises or click "Save Template" to save the weekly schedule as a template.</p>
 
     </div>
 </div>

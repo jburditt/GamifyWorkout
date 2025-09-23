@@ -5,6 +5,7 @@
     <button type="submit" matButton="filled" class="valign" disabled="true">Update Name</button>
   </div>
 
-  <gym-equipment-table class="shrinkwrap" [dataSource]="$any(equipment)" [canAddRow]="true" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
+  <!-- TODO remove [canAddRow] hack -->
+  <gym-equipment-table class="shrinkwrap" [dataSource]="$any(equipment)" [canAddRow]="equipment.length < 4" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
 
 </form>

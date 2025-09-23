@@ -35,6 +35,8 @@ a { color: #fff; }
 // TODO fix this property instead of overriding
 mat-toolbar a { font-size:20px; }
 mat-toolbar mat-icon { color: #fff!important; }
+mat-icon.primary { color: #327EA5; }
+mat-icon.secondary { color: #7EA532;}
 
 mat-tab-body { padding: 32px 16px; }
 //mat-form-field { padding-bottom: 16px; }
@@ -61,14 +63,22 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .wrapper {
-  display: flex;
-  flex-direction: row;
+  //display: flex;
+  //flex-direction: row;
   padding: 0 32px;
+}
+
+.shrinkwrap {
+  display: inline-block;
 }
 
 .flexbox {
   display: flex;
   flex-direction: row;
+}
+
+.valign {
+  margin: auto 0;
 }
 
 menu {

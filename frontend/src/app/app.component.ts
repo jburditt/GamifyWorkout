@@ -18,7 +18,7 @@ export class AppComponent {
   inventoryMenuItems: Array<MenuItem> = [
     new MenuItem('Gym', '/inventory/gym', 'home'),
     //new MenuItem('Items', '/inventory/items', 'contact_mail'),
-    new MenuItem('Equipment', '/inventory/equipment', 'build'),
+    //new MenuItem('Equipment', '/inventory/equipment', 'build'),
   ];
   scheduleMenuItems: Array<MenuItem> = [
     new MenuItem('Week', '/schedule/week', 'calendar_today')

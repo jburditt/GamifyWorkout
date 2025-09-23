@@ -1,16 +1,17 @@
-<h1>Gym</h1>
+<div class="contentColumn">
+  <h2>Gym</h2>
 
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms" dynamicHeight>
-  @for (gym of gyms; track gym.id) {
-    <mat-tab label="{{ gym.name }}">
-      <manage-gym [gym]="gym" />
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms" dynamicHeight>
+    @for (gym of gyms; track gym.id) {
+      <mat-tab label="{{ gym.name }}">
+        <manage-gym [gym]="gym" />
+      </mat-tab>
+    }
+    <mat-tab label="+ Add">
+      <form [formGroup]="form">
+        <textbox label="Name" controlName="name" [parentForm]="form"></textbox>
+        <button matButton="filled" (click)="insert()">Add Gym</button>
+      </form>
     </mat-tab>
-  }
-  <mat-tab label="+ Add">
-    <form [formGroup]="form">
-      <textbox label="Name" controlName="name" [parentForm]="form"></textbox>
-      <button matButton="filled" (click)="insert()">Add Gym</button>
-    </form>
-  </mat-tab>
-</mat-tab-group>
-
+  </mat-tab-group>
+</div>

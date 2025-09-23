@@ -23,7 +23,7 @@ public class ScheduleController : ControllerBase
         var context = _contextFactory.CreateDbContext();
         var schedules = context.Schedule
             // TODO get userId from Claims
-            .Where(s => s.UserId == new Guid("113C9AA8-F4C3-4DE7-2FCE-08DDF89CDBF6") && s.Date >= monday && s.Date <= monday.AddDays(6))
+            .Where(s => /*s.UserId == new Guid("113C9AA8-F4C3-4DE7-2FCE-08DDF89CDBF6") &&*/ s.Date >= monday && s.Date <= monday.AddDays(6))
             .OrderBy(s => s.Date)
             .ToList();
 

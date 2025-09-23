@@ -1,9 +1,10 @@
 <form [formGroup]="form">
 
-  <textbox label="Name" controlName="name" [parentForm]="form"></textbox>
+  <div class="flexbox">
+    <textbox label="Name" controlName="name" [parentForm]="form"></textbox>
+    <button type="submit" matButton="filled" class="valign" disabled="true">Update Name</button>
+  </div>
 
-  <gym-equipment-table [dataSource]="$any(equipment)" [canAddRow]="true" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
-
-  <button type="submit" matButton="filled">Save</button>
+  <gym-equipment-table class="shrinkwrap" [dataSource]="$any(equipment)" [canAddRow]="true" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
 
 </form>

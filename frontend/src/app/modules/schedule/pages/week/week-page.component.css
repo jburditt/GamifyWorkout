@@ -3,22 +3,25 @@
 }
 
 .weekdayColumn {
-  min-height: 400px;
+  min-height: 360px;
 }
 
 .activity {
   padding: 10px;
-  margin-bottom: 6px;
-  text-align: center;
+  margin: 0 auto 6px auto;
+  max-width:120px;
+  color: #fff;
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+  border: 1px solid #000;
   border-radius: 4px;
 }
 
-.activity-rest {
-  background-color: blueviolet;
-}
-
 .activity-any {
-  background-color: greenyellow;
+  background-color: yellowgreen;
 }
 
 .activity-cardio {

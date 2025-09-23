@@ -1,5 +1,7 @@
 # Gamify Workout Project
-A workout application to track exercises and create workout schedules. Progression is gamified by earning experience points and leveling up.
+This demo focuses on two pages, see the menu items [Gym](/inventory/gym) and [Weekly Schedule](/schedule/week).
+
+~~A workout application to track exercises and create workout schedules. Progression is gamified by earning experience points and leveling up.~~
 
 # Tech Stack
 - .NET 9 OData API 
@@ -9,11 +11,12 @@ A workout application to track exercises and create workout schedules. Progressi
 # Features
 - OAuth authentication
 - Dependency Injection
-- NgRx
-- OpenAPI generate -> Generate Angular API services from OpenAPI spec
+- NgRx -> Observables, Behavioural Subject, etc
+- OpenAPI generate -> Generate Angular API services and models from OpenAPI spec
 - Angular Material -> Datatable, tabs, form components, dialogs, drag and drop, slide toggle, etc
-- Entity Framework -> Seeding, API, migrations, etc
+- Entity Framework -> Seeding, API, migrations, CRUD entities, etc
 - Angular Features -> Dynamic Routing, Content Projection, Form Controls/Group, etc
+- Axure Wireframes
 
 # TODO
 - Gym page bugs and missing features

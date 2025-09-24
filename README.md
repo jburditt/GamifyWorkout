@@ -1,5 +1,5 @@
-# Gamify Workout Project
-This demo focuses on two pages, see the menu items [Gym](/inventory/gym) and [Weekly Schedule](/schedule/week).
+# Gamify Workout Demo
+This demo focuses on two pages, see the menu items Inventory -> [Gym](/inventory/gym) and Schedule -> [Weekly Schedule](/schedule/week).
 
 ~~A workout application to track exercises and create workout schedules. Progression is gamified by earning experience points and leveling up.~~
 

@@ -21,7 +21,7 @@ export class AppComponent {
     //new MenuItem('Equipment', '/inventory/equipment', 'build'),
   ];
   scheduleMenuItems: Array<MenuItem> = [
-    new MenuItem('Week', '/schedule/week', 'calendar_today')
+    new MenuItem('Weekly Schedule', '/schedule/week', 'calendar_today')
   ];
   isLoggedIn: boolean = false;
 

@@ -1,7 +1,6 @@
-//327EA5
-//a5327e  purple
-//#7EA532
-
+//#327EA5 teal
+//#a5327e purple
+//#7EA532 green
 
 @use '@angular/material' as mat;
 @include mat.core();
@@ -39,7 +38,8 @@ mat-icon.primary { color: #327EA5; }
 mat-icon.secondary { color: #7EA532;}
 
 mat-tab-body { padding: 32px 16px; }
-mat-form-field { margin-right: 6px; }
+mat-form-field { width: 240px; margin: 0 6px 16px 0; }
+validation-message { font-size: 10pt; }
 button { margin-right: 6px; }
 table {
   // TODO

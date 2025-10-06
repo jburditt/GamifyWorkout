@@ -4,7 +4,7 @@ import { LoggingFactory } from '@app/core/services/logging/logging.factory';
 import { LoggingService } from '@app/core/services/logging/logging-service.interface';
 import { AuthenticationService } from '@app/core/auth/auth.interface';
 import { BehaviorSubject } from 'rxjs';
-import { ConfigService } from '@app/core/services/config/config-service.interface';
+import { ConfigService } from '@fullswing-angular-library';
 import { ApiAuthenticationService as AuthenticationApi } from '@app/core/auth/auth.service';
 
 @Injectable({ providedIn: 'root' })

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LogLevel, LoggingService } from "./logging-service.interface";
-import { ConfigService } from '@app/core/services/config/config-service.interface';
+import { ConfigService } from '@fullswing-angular-library';
 import { filter } from "rxjs";
 
 @Injectable()

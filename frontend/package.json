@@ -16,6 +16,7 @@
   },
   "private": true,
   "dependencies": {
+    "fullswing-angular-library": "file:../../fullswing-angular/dist/fullswing-angular-library",
     "@angular/animations": "^20.0.2",
     "@angular/cdk": "^20.2.4",
     "@angular/common": "^20.0.2",

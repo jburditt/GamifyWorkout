@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
+## Libary Dependency
+
+The library must be located at `../fullswing-angular` folder or you must update tsconfig.json and package.json:
+```   # tsconfig.json
+"@fullswing-angular-library": [
+  "../../fullswing-angular/dist/fullswing-angular-library"
+],
+```
+```   # package.json
+"dependencies": {
+  "fullswing-angular-library": "file:../../fullswing-angular/dist/fullswing-angular-library",
+```
+
 ## Development server
 
 Run `ng s` for a dev server. Navigate to `https://localhost:4200/`. The application will automatically reload if you change any of the source files.

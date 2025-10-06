@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuItem } from '@app/shared/models/menu-item.model';
+import { MenuItem, MenuComponent } from '@fullswing-angular-library';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MenuComponent } from './shared/components/menu/menu.component';
 import { AuthenticationService } from './core/auth/auth.interface';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
@@ -38,5 +37,9 @@ export class AppComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  isActive(route: string): string {
+    return window.location.pathname.startsWith(route) ? 'active' : '';
   }
 }

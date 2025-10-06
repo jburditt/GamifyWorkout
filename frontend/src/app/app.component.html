@@ -1,7 +1,20 @@
 <mat-toolbar>
   <img src="assets/logo.png" alt="Logo" />
-  <menu [items]="inventoryMenuItems" [label]="'Inventory'"></menu>
-  <menu [items]="scheduleMenuItems" [label]="'Schedule'"></menu>
+
+  <menu [items]="inventoryMenuItems">
+    <ng-content slot="menuLink">
+      <a [class]="isActive('/inventory')">Inventory</a>
+    </ng-content>
+  </menu>
+
+  <menu [items]="scheduleMenuItems">
+    <ng-content slot="menuLink">
+      <a [class]="isActive('/schedule')">Schedule</a>
+    </ng-content>
+  </menu>
+
+  <!--menu [items]="scheduleMenuItems" [label]="'Schedule'"></menu-->
+
   <!--<menu [label]="'Quest'"></menu>-->
   <span class="spacer"></span>
   @if (isLoggedIn) {

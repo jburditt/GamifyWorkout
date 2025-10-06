@@ -23,10 +23,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
 		let headers = req.headers.set('Authorization', header);
 
-		if (req.url.includes('api/claim-payments/')) {
-			headers = headers.set('x-function-user', 'ProcessResult');
-		}
-
 		req = req.clone({ headers });
 
 		return next.handle(req)

@@ -14,6 +14,9 @@
       "@features/*": [
         "src/app/features/*"
       ],
+      "@fullswing-angular-library": [
+        "../../fullswing-angular/dist/fullswing-angular-library"
+      ],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

@@ -20,7 +20,7 @@ export class GymEquipmentTableComponent
 
   canAddRow = input<boolean>(false);
   canSelect = input<boolean>(false);
-  dataSourceComputed = computed(() => new MatTableDataSource<Equipment>(this.equipment()));
+  dataSource = computed(() => new MatTableDataSource<Equipment>(this.equipment()));
   equipment = input<Equipment[]>([]);
 
   addGymEquipment = output<string[]>();
@@ -50,7 +50,7 @@ export class GymEquipmentTableComponent
   }
 
   openDialogEmitter() {
-    let data = this.dataSourceComputed().data;// || (this.dataSource() as unknown as Array<Equipment>);
+    let data = this.dataSource().data;
     let equipmentIds = data ? data.map(e => e.id as string) : [];
     this.addGymEquipment.emit(equipmentIds);
   }

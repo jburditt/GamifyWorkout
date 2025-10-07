@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/core/auth/auth.interface';
-import { Observable, map, of, tap } from 'rxjs';
-import { ConfigService } from '../services/config/config-service.interface';
+import { AuthenticationService } from "@fullswing-angular-library";
+import { Observable, firstValueFrom, from, map, of, tap } from 'rxjs';
+import { ConfigService } from '@fullswing-angular-library';
 
 export const AuthGuard = (): Observable<boolean> => {
   const router = inject(Router);
@@ -10,11 +10,13 @@ export const AuthGuard = (): Observable<boolean> => {
   const configService = inject(ConfigService);
 
   return authService.isLoggedIn$.pipe(
-    map((isLoggedIn) => {
+    tap((isLoggedIn) => {
+      console.log("AuthGuard isLoggedIn", isLoggedIn);
       if (!isLoggedIn) {
         // TODO check config is not already loaded
-        configService.loadConfig$().subscribe(() => {
-          authService.init();
+        return firstValueFrom(configService.loadConfig$()).then(() => {
+        //return configService.loadConfig$().pipe(tap((isLoaded) => {
+          return authService.init();
         });
         router.navigate(['/admin/denied']);
       }

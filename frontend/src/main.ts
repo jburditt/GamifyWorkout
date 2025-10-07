@@ -6,10 +6,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from '@app/app.routes';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { provideConfigService, ConfigService, provideLoggingService, provideErrorHandler, provideHttpInterceptor, provideToastService } from "@fullswing-angular-library";
-import { AuthenticationService } from '@app/core/auth/auth.interface';
-import { ApiAuthenticationService } from '@app/core/auth/auth.service';
-import { provideOAuthService } from "@app/core/auth/auth.provider";
+import { provideConfigService, ConfigService, provideLoggingService, provideErrorHandler, provideHttpInterceptor, provideToastService, AuthenticationService, provideOAuthService } from "@fullswing-angular-library";
+import { ApiAuthenticationService } from '@app/core/auth/api-auth.service';
 
 import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {

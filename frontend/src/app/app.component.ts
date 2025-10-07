@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuItem, MenuComponent } from '@fullswing-angular-library';
+import { MenuItem, MenuComponent, AuthenticationService } from '@fullswing-angular-library';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthenticationService } from './core/auth/auth.interface';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({

@@ -6,7 +6,7 @@ import { AuthService } from '@app/api/services/auth.service';
 import { User } from '@app/api/models';
 import { StrictHttpResponse } from '@app/api/strict-http-response';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiAuthenticationService
 {
     public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

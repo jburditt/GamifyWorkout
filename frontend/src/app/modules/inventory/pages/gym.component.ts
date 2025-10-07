@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ValidationMessageComponent } from '@app/shared/components/form/validation/validation-message.component';
+import { ValidationMessageComponent } from '@fullswing-angular-library';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { Gym } from '@app/api/models';
 import { GymService } from '@app/api/services';

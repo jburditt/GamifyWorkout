@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import { ValidationMessageComponent } from '@app/shared/components/form/validation/validation-message.component';
+import { ValidationMessageComponent } from '@fullswing-angular-library';
 
 @Component({
     selector: '[label] [controlName] [parentForm] textbox',

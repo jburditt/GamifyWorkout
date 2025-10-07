@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, inject } from '@angular/core';
+import { Component, input, forwardRef, inject } from '@angular/core';
 import { WeekContainerComponent } from "@app/features/rpg/component/week-container/week-container.component";
 import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { CdkDropListGroup } from "@angular/cdk/drag-drop";
@@ -33,8 +33,8 @@ export class WeekPageComponent {
     const dialogRef = this.dialog.open(AddWeeklyScheduleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result.name}`);
-      console.log(`Dialog result: ${result.default}`);
+      console.log(`Dialog name: ${result.name}`);
+      console.log(`Dialog isDefault: ${result.default}`);
       if (result && action == 'Save') {
         let today = new Date();
         let dayOfWeek = today.getDay();
@@ -55,6 +55,7 @@ export class WeekPageComponent {
 
         const weeklySchedule: WeeklySchedule = {
           monday: {
+            // TODO use pipe?
             date: monday.toLocaleDateString('en-CA'),
             muscleGroupFilter: this.monday
           },
@@ -95,8 +96,8 @@ export class WeekPageComponent {
 @Component({
   selector: 'app-weekday-drop-container',
   template: `
-    <div class="weekdayColumn" cdkDropList [id]="id" [cdkDropListData]="data" (cdkDropListDropped)="drop($event)">
-      @for (item of data; track item) {
+    <div class="weekdayColumn" cdkDropList [id]="id()" [cdkDropListData]="data()" (cdkDropListDropped)="drop($event)">
+      @for (item of data(); track item) {
         <div class="activity activity-{{ item.toLowerCase() }}" cdkDrag>{{ item }}</div>
       }
     </div>
@@ -105,8 +106,8 @@ export class WeekPageComponent {
   imports: [CdkDropList, CdkDrag],
 })
 export class WeekdayDropContainer {
-  @Input() data: Array<string> = [];
-  @Input() id!: string;
+  data = input<Array<string>>([]);
+  id = input.required<string>();
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

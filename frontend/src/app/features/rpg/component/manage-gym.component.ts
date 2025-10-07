@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { LoggingFactory, LoggingService, TextboxComponent } from '@fullswing-angular-library';
 import { Equipment, Gym } from '@app/api/models';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +21,7 @@ import { GymEquipmentTableComponent } from './gym-equipment-table.component';
 })
 export class ManageGymComponent {
   private readonly _loggingService: LoggingService;
-  @Input() gym!: Gym;
+  gym = input.required<Gym>();
   form: FormGroup = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
@@ -38,9 +38,9 @@ export class ManageGymComponent {
 
   ngOnInit() {
     this._loggingService.debug('ManageGymComponent initialized');
-    this.form.get('name')!.setValue(this.gym.name);
-    console.log("id", this.gym);
-    this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
+    this.form.get('name')!.setValue(this.gym().name);
+    console.log("id", this.gym());
+    this.equipmentService.apiEquipmentIdGet({ id: this.gym().id! }).subscribe((equipment) => {
       this.equipment = equipment;
     });
   }
@@ -51,10 +51,10 @@ export class ManageGymComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if (result) {
-        this.gymEquipmentService.apiGymEquipmentGymIdPost({ gymId: this.gym.id as string, body: result }).subscribe((response) => {
+        this.gymEquipmentService.apiGymEquipmentGymIdPost({ gymId: this.gym().id as string, body: result }).subscribe((response) => {
           // TODO reload equipment table by passing icon, name, id from source and updating this.equipment instead of using API
           // TODO optimize by updating table with returned results from dialog instead of reloading from database
-          this.equipmentService.apiEquipmentIdGet({ id: this.gym.id! }).subscribe((equipment) => {
+          this.equipmentService.apiEquipmentIdGet({ id: this.gym().id! }).subscribe((equipment) => {
             this.equipment = equipment;
           });
         });
@@ -64,7 +64,7 @@ export class ManageGymComponent {
 
   deleteGymEquipment(equipmentId: string): void {
     this.equipment = this.equipment.filter(e => e.id != equipmentId);
-    this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gym.id as string, equipmentId: equipmentId }).subscribe((response) => {
+    this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gym().id as string, equipmentId: equipmentId }).subscribe((response) => {
 
     });
   }

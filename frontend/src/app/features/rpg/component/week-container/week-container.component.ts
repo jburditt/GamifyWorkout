@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 
@@ -9,7 +9,7 @@ import { MatTooltip } from '@angular/material/tooltip';
   styleUrl: './week-container.component.css'
 })
 export class WeekContainerComponent {
-  @Input() help!: string;
+  help = input.required<string>();
 
   constructor() { }
 

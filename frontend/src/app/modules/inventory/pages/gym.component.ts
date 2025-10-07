@@ -2,13 +2,12 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ValidationMessageComponent } from '@fullswing-angular-library';
+import { ValidationMessageComponent, TextboxComponent } from '@fullswing-angular-library';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { Gym } from '@app/api/models';
 import { GymService } from '@app/api/services';
 import { ManageGymComponent } from '@app/features/rpg/component/manage-gym.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TextboxComponent } from "@app/shared/components/form/textbox/textbox.component";
 
 @Component({
     templateUrl: 'gym.component.html',

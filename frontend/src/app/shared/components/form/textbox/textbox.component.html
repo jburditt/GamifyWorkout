@@ -1,9 +1,0 @@
-<div role="group" [formGroup]="parentForm">
-  <mat-form-field>
-    <mat-label>{{ label }}</mat-label>
-    <input matInput [formControl]="$any(parentForm.get(controlName))" required>
-    <mat-error>
-      <validation-message [label]="label" [control]="$any(parentForm.get(controlName))"></validation-message>
-    </mat-error>
-  </mat-form-field>
-</div>

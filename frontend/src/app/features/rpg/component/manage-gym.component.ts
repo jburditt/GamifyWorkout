@@ -1,11 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
-import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
+import { LoggingFactory, LoggingService, TextboxComponent } from '@fullswing-angular-library';
 import { Equipment, Gym } from '@app/api/models';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
 import { MatButtonModule } from '@angular/material/button';
 import { EquipmentService, GymEquipmentService, GymService } from '@app/api/services';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';

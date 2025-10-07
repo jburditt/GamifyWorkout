@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TextboxComponent } from '@app/shared/components/form/textbox/textbox.component';
+import { TextboxComponent } from '@fullswing-angular-library';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';

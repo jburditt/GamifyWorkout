@@ -1,4 +1,4 @@
-import { Component, Input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -14,18 +14,20 @@ import { GymEquipmentService } from '@app/api/services';
     imports: [MatIconModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatCheckboxModule],
     selector: 'gym-equipment-table'
 })
-export class GymEquipmentTableComponent {
+export class GymEquipmentTableComponent
+{
   private readonly _loggingService: LoggingService;
 
-  @Input() canAddRow: boolean = false;
-  @Input() canSelect: boolean = false;
-
-  @Input() dataSource = new MatTableDataSource<Equipment>();
-  displayedColumns: string[] = ['icon', 'equipment', 'edit'];
+  canAddRow = input<boolean>(false);
+  canSelect = input<boolean>(false);
+  dataSource = input(new MatTableDataSource<Equipment>());
 
   addGymEquipment = output<string[]>();
   changeGymEquipment = output<string[]>();
   deleteGymEquipment = output<string>();
+
+  displayedColumns: string[] = ['icon', 'equipment', 'edit'];
+
   equipmentIds: string[] = [];
 
   constructor(private loggingFactory: LoggingFactory)
@@ -47,7 +49,7 @@ export class GymEquipmentTableComponent {
   }
 
   openDialogEmitter() {
-    let data = this.dataSource.data || (this.dataSource as unknown as Array<Equipment>);
+    let data = this.dataSource().data || (this.dataSource() as unknown as Array<Equipment>);
     let equipmentIds = data ? data.map(e => e.id as string) : [];
     this.addGymEquipment.emit(equipmentIds);
   }

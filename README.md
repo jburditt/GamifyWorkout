@@ -15,7 +15,7 @@ This demo focuses on two pages, see the menu items Inventory -> [Gym](/inventory
 # Features
 - OAuth authentication
 - Dependency Injection
-- NgRx -> Observables, Behavioural Subject, etc
+- RxJS -> Observables, Behavioural Subject, etc
 - OpenAPI generate -> Generate Angular API services and models from OpenAPI spec
 - Angular Material -> Datatable, tabs, form components, dialogs, drag and drop, slide toggle, etc
 - Entity Framework -> Seeding, API, migrations, CRUD entities, etc

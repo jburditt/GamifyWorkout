@@ -27,7 +27,7 @@ export class ManageGymComponent {
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     })
   });
-  equipment!: Equipment[];
+  equipment: Equipment[] = [];
 
   readonly dialog = inject(MatDialog);
 

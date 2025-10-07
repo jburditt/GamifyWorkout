@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LoggingService } from '@app/core/services/logging/logging-service.interface';
-import { LoggingFactory } from '@app/core/services/logging/logging.factory';
+import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({

@@ -1,6 +1,5 @@
 import { Component, Input, output } from '@angular/core';
-import { LoggingService } from '@app/core/services/logging/logging-service.interface';
-import { LoggingFactory } from '@app/core/services/logging/logging.factory';
+import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';

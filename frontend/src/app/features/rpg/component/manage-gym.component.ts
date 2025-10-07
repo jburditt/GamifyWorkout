@@ -1,6 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { LoggingService } from '@app/core/services/logging/logging-service.interface';
-import { LoggingFactory } from '@app/core/services/logging/logging.factory';
+import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 import { Equipment, Gym } from '@app/api/models';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';

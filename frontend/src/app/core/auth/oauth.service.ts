@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { LoggingFactory } from '@app/core/services/logging/logging.factory';
-import { LoggingService } from '@app/core/services/logging/logging-service.interface';
+import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 import { AuthenticationService } from '@app/core/auth/auth.interface';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigService } from '@fullswing-angular-library';

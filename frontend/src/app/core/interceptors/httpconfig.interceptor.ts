@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
-import { LoggingService } from '../services/logging/logging-service.interface';
-import { LoggingFactory } from '../services/logging/logging.factory';
+import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {

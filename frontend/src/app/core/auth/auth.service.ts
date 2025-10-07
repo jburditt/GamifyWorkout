@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, throwError } from "rxjs";
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoggingFactory } from '@app/core/services/logging/logging.factory';
-import { LoggingService } from '@app/core/services/logging/logging-service.interface';
+import { LoggingFactory, LoggingService } from '@fullswing-angular-library';
 import { AuthService } from '@app/api/services/auth.service';
 import { User } from '@app/api/models';
 import { StrictHttpResponse } from '@app/api/strict-http-response';

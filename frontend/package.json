@@ -16,7 +16,6 @@
   },
   "private": true,
   "dependencies": {
-    "fullswing-angular-library": "file:../../fullswing-angular/dist/fullswing-angular-library",
     "@angular/animations": "^20.0.2",
     "@angular/cdk": "^20.2.4",
     "@angular/common": "^20.0.2",
@@ -31,6 +30,7 @@
     "@ngworker/lumberjack": "^20.0.0",
     "@ngxpert/hot-toast": "^3.0.2",
     "angular-oauth2-oidc": "^17.0.1",
+    "fullswing-angular-library": "file:../../fullswing-angular/dist/fullswing-angular-library",
     "jest-editor-support": "*",
     "ng-matero": "^18.2.0",
     "ngx-ui-loader": "^19.0.0",

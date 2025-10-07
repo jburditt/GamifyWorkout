@@ -36,7 +36,7 @@ export class ManageGymComponent {
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
 
-  ngOnInit() {
+  protected ngOnInit() {
     this._loggingService.debug('ManageGymComponent initialized');
     this.form.get('name')!.setValue(this.gym().name);
     console.log("id", this.gym());
@@ -45,7 +45,7 @@ export class ManageGymComponent {
     });
   }
 
-  openDialog(equipmentIds: string[]) {
+  protected openDialog(equipmentIds: string[]) {
     const dialogRef = this.dialog.open(AddGymEquipmentDialog, { data: { equipmentIds: equipmentIds } });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,7 +62,7 @@ export class ManageGymComponent {
     });
   }
 
-  deleteGymEquipment(equipmentId: string): void {
+  protected deleteGymEquipment(equipmentId: string): void {
     this.equipment = this.equipment.filter(e => e.id != equipmentId);
     this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gym().id as string, equipmentId: equipmentId }).subscribe((response) => {
 

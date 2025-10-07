@@ -28,7 +28,7 @@ export class GymPageComponent implements OnInit {
 
   constructor(private gymService: GymService, private change: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.gymService.apiGymGet().subscribe({
       next: (gyms) => {
         this.gyms = gyms;
@@ -43,7 +43,7 @@ export class GymPageComponent implements OnInit {
     });
   }
 
-  insert() {
+  protected insert() {
     if (this.form.valid) {
       // TODO get userId from userService
       const newGym: Gym = { name: this.form.value.name };

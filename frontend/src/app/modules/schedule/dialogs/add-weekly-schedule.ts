@@ -19,13 +19,11 @@ export class AddWeeklyScheduleDialog {
     default: new FormControl()
   });
 
-  constructor() { }
-
-  dialogClose(): { name: string, default: boolean } {
+  protected dialogClose(): { name: string, default: boolean } {
     return { name: this.form.get('name')?.value, default: this.form.get('default')?.value || false };
   }
 
-  isFormValid(): boolean {
+  public isFormValid(): boolean {
     return this.form.valid;
   }
 }

@@ -13,7 +13,7 @@ export class WeekContainerComponent {
 
   constructor() { }
 
-  displayDate(i: number): string {
+  protected displayDate(i: number): string {
     var today = new Date();
     if (today.getDay() == i)
       return today.toDateString();

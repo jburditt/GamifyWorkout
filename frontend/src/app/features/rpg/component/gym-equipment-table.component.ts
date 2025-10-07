@@ -36,11 +36,11 @@ export class GymEquipmentTableComponent
     this._loggingService = this.loggingFactory.create(this.constructor.name);
   }
 
-  ngOnInit() {
+  protected ngOnInit() {
     this._loggingService.debug('GymEquipmentTableComponent initialized');
   }
 
-  onChange(event: any) {
+  protected onChange(event: any) {
     if (event.checked) {
       this.equipmentIds.push(event.source.value);
     } else {
@@ -49,7 +49,7 @@ export class GymEquipmentTableComponent
     this.changeGymEquipment.emit(this.equipmentIds);
   }
 
-  openDialogEmitter() {
+  protected openDialogEmitter() {
     let data = this.dataSource().data;
     let equipmentIds = data ? data.map(e => e.id as string) : [];
     this.addGymEquipment.emit(equipmentIds);

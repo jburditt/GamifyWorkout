@@ -29,7 +29,7 @@ export class WeekPageComponent {
 
   constructor(private scheduleService: ScheduleService) { }
 
-  openDialog(action: DialogAction) {
+  protected openDialog(action: DialogAction) {
     const dialogRef = this.dialog.open(AddWeeklyScheduleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -109,7 +109,7 @@ export class WeekdayDropContainer {
   data = input<Array<string>>([]);
   id = input.required<string>();
 
-  drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

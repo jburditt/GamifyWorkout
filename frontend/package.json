@@ -28,7 +28,7 @@
     "@angular/router": "^20.0.2",
     "@ngrx/store": "^20.0.1",
     "@ngworker/lumberjack": "^20.0.0",
-    "@ngxpert/hot-toast": "^3.0.2",
+    "@ngxpert/hot-toast": "^5.1.1",
     "angular-oauth2-oidc": "^17.0.1",
     "fullswing-angular-library": "file:../../fullswing-angular/dist/fullswing-angular-library",
     "jest-editor-support": "*",

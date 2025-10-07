@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource()">
+<table mat-table [dataSource]="dataSourceComputed()">
   <ng-container matColumnDef="icon">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
@@ -42,6 +42,6 @@
   }
 </table>
 
-@if (dataSource()?.data?.length || 0 > 10) {
+@if (false && dataSourceComputed()?.data?.length || 0 > 10) {
   <mat-paginator pageSize="10" showFirstLastButtons aria-label="Select page of gym equipment"></mat-paginator>
 }

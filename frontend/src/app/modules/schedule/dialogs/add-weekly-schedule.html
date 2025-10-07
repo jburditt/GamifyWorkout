@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Add Weekly Schedule</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="form">
-    <textbox [label]="'Name'" [controlName]="'name'" [parentForm]="form" />
+    <fs-textbox [label]="'Name'" [controlName]="'name'" [parentForm]="form" />
     <mat-slide-toggle [formControl]="$any(this.form.get('default'))">Save as Default</mat-slide-toggle>
   </form>
 </mat-dialog-content>

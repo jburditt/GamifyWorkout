@@ -9,7 +9,7 @@
     }
     <mat-tab label="+ Add">
       <form [formGroup]="form" (ngSubmit)="insert()">
-        <textbox label="Name" controlName="name" [parentForm]="form"></textbox>
+        <fs-textbox label="Name" controlName="name" [parentForm]="form" />
         <button type="submit" matButton="filled" [disabled]="form.invalid">Add Gym</button>
       </form>
     </mat-tab>

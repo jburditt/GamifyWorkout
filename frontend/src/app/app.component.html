@@ -1,15 +1,7 @@
 <mat-toolbar>
   <img src="assets/logo.png" alt="Logo" />
 
-  <button mat-menu-item [routerLink]="'/inventory/gym'">
-    <span>Inventory</span>
-  </button>
-
-  <button mat-menu-item [routerLink]="'/schedule/week'">
-    <span>Schedule</span>
-  </button>
-
-  <!--<fs-menu [items]="inventoryMenuItems">
+  <fs-menu [items]="inventoryMenuItems">
     <ng-content slot="menuLink">
       <a [class]="isActive('/inventory')">Inventory</a>
     </ng-content>
@@ -19,7 +11,7 @@
     <ng-content slot="menuLink">
       <a [class]="isActive('/schedule')">Schedule</a>
     </ng-content>
-  </fs-menu>-->
+  </fs-menu>
 
   <!--<fs-menu [label]="'Quest'"></fs-menu>-->
 

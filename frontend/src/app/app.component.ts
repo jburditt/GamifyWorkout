@@ -24,9 +24,9 @@ export class AppComponent implements OnDestroy {
   isLoggedIn: boolean = false;
 
   constructor(private authService: AuthenticationService) {
-    // this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
-    //   this.isLoggedIn = isLoggedIn;
-    // });
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
 
   login() {

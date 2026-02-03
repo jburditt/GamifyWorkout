@@ -1,5 +1,5 @@
 import { AppComponent } from '@app/app.component';
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
@@ -17,8 +17,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 };
 
 // ngrx/store
-import { provideStore, provideState } from '@ngrx/store';
+import { provideStore, provideState, StoreModule } from '@ngrx/store';
 import { playerReducer } from "@features/rpg/store/player.reducer";
+import { hydrationMetaReducer } from '@app/features/rpg/store/hydration.reducer';
+
 // uncomment for site-wide authentication required
 // export function initializeApp(configService: ConfigService, http: HttpClient, authService: AuthenticationService) {
 //   return (): Observable<boolean> => {
@@ -36,8 +38,9 @@ bootstrapApplication(AppComponent, {
     //     deps: [ConfigService, HttpClient, AuthenticationService],
     //     multi: true,
     // },
+    provideZoneChangeDetection(),
     ApiAuthenticationService,
-    provideOAuthService(),
+    //provideOAuthService(),
     provideAnimations(),
     provideRouter(routes),
     provideErrorHandler(),
@@ -52,10 +55,8 @@ bootstrapApplication(AppComponent, {
       NgxUiLoaderRouterModule.forRoot({ showForeground: false })
     ),
     // ngrx/store
-    provideStore(),
+    provideStore({ player: playerReducer }),
     provideState({ name: 'player', reducer: playerReducer }),
-    // TODO
-    provideStore()
 ]
 })
   .catch(err => console.error(err));

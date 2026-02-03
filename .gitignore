@@ -6,7 +6,7 @@
 /**/.vscode
 /**/bin
 /**/obj
-/gamifyworkout.client/obj
+/gamifyworkout/obj
 /GamifyWorkout.Server/bin
 /GamifyWorkout.Server/obj
 /Api/bin

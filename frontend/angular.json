@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gamifyworkout.client": {
+    "gamifyworkout": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -14,7 +14,7 @@
           "builder": "@angular/build:application",
           "options": {
             "outputPath": {
-              "base": "dist/gamifyworkout.client"
+              "base": "dist/gamifyworkout"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gamifyworkout.client:build:production"
+              "buildTarget": "gamifyworkout:build:production"
             },
             "development": {
-              "buildTarget": "gamifyworkout.client:build:development"
+              "buildTarget": "gamifyworkout:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "gamifyworkout.client:build"
+            "buildTarget": "gamifyworkout:build"
           }
         },
         "test": {
@@ -105,7 +105,7 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "gamifyworkout.client:build",
+            "browserTarget": "gamifyworkout:build",
             "compodoc": true,
             "compodocArgs": [
               "-e",
@@ -120,7 +120,7 @@
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "gamifyworkout.client:build",
+            "browserTarget": "gamifyworkout:build",
             "compodoc": true,
             "compodocArgs": [
               "-e",

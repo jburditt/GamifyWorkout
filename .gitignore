@@ -2,8 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
+/**/.vs
 /**/.vscode
 /**/bin
 /**/obj
 *.exe
+/terraform/.terraform/

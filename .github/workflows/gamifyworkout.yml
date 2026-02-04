@@ -1,9 +1,9 @@
-name: Test Azure Static Web Apps CI/CD
+name: Deploy GamifyWorkout to Azure Static Web App
 
 on:
   push:
     branches:
-      - add-gamifyworkout
+      - main
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -21,19 +21,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: jburditt/fullswing-angular-library
-          ref: main
-      - name: Test1
-        run: ls -la
       - uses: actions/checkout@v3
         with:
-          ref: add-gamifyworkout
           path: projects/gamifyworkout
           submodules: true
           lfs: false   
-      - name: Test2
-        run: ls -la
-      - name: Test3
-        run: cd projects && ls -la
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

@@ -22,17 +22,22 @@ jobs:
         with:
           repository: jburditt/fullswing-angular-library
           ref: main
-          path: /
+      - name: Test1
+        run: ls -la
+      - uses: actions/checkout@v3
+        with:
+          ref: add-gamifyworkout
+          path: projects/gamifyworkout
+          submodules: true
+          lfs: false   
+      - name: Test2
+        run: ls -la
+      - name: Test3
+        run: cd projects && ls -la
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
-      - uses: actions/checkout@v3
-        with:
-          ref: add-gamifyworkout
-          path: /
-          submodules: true
-          lfs: false   
       - name: Install Angular dependencies
         run: npm install      
       - name: Build Angular app

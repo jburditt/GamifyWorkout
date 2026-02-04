@@ -12,6 +12,24 @@ This demo focuses on two pages, see the menu items Inventory -> [Gym](/inventory
 - EntityFramework 8
 - Angular 20
 
+# System Design
+- *Azure Static Web App* - Gamify Workout website
+- *Azure Message Queue* - Chat messages
+- *Azure CosmosDB* - MSSQL database
+```mermaid
+architecture-beta
+    group api(cloud)[Azure Architecture]
+    service nosql(database)[CosmosDB] in api
+    service server(server)[App Service] in api
+    service db(database)[MSSQL] in api
+    service blob(database)[Blob Storage] in api
+    service message(cloud)[Message Queue] in api
+    message:L <--> R:server
+    message:B <--> T:nosql
+    message:R <--> L:db
+    blob:T --> B:server
+```
+
 # Features
 - OAuth authentication
 - Dependency Injection
@@ -21,6 +39,9 @@ This demo focuses on two pages, see the menu items Inventory -> [Gym](/inventory
 - Entity Framework -> Seeding, API, migrations, CRUD entities, etc
 - Angular Features -> Dynamic Routing, Content Projection, Form Controls/Group, etc
 - Axure Wireframes
+
+# Deploy
+black-beach-09b2c651e.1.azurestaticapps.net
 
 # TODO
 - Gym page bugs and missing features

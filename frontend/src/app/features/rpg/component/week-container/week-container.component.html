@@ -8,13 +8,13 @@
   <table class="weekly-calendar" cellspacing="0" cellpadding="10">
     <thead>
       <tr>
-        <td class="topRowCell">{{ displayDate(1) }}</td>
-        <td class="topRowCell">{{ displayDate(2) }}</td>
-        <td class="topRowCell">{{ displayDate(3) }}</td>
-        <td class="topRowCell">{{ displayDate(4) }}</td>
-        <td class="topRowCell">{{ displayDate(5) }}</td>
-        <td class="topRowCell">{{ displayDate(6) }}</td>
-        <td class="topRowCell">{{ displayDate(0) }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(1) | date }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(2) | date }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(3) | date }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(4) | date }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(5) | date }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(6) | date }}</td>
+        <td class="topRowCell">{{ getTodayOrNull(0) | date }}</td>
       </tr>
       <tr>
         <th>Monday</th>

@@ -6,12 +6,12 @@ variable "static_web_app_name" {
   default = "stapp-gamifyworkout"
 }
 
-variable "db_user" {
-  default = "gamifyworkout"
+variable "db_account" {
+  default = "cosno-account"
 }
 
 variable "db_name" {
-  default = "gamifyworkout"
+  default = "cosmos-gamifyworkout"
 }
 
 variable "location" {

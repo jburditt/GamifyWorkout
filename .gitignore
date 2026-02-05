@@ -7,4 +7,10 @@
 /**/bin
 /**/obj
 *.exe
+
+# terraform
 /terraform/.terraform/
+/terraform/*.tfstate
+/terraform/*.tfstate.*
+/terraform/.terraform.tfstate.lock.info
+/terraform/crash.log

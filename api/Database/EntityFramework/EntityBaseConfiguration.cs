@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Database
 {
-    public abstract class EntityBaseConfiguration<T> : IEntityTypeConfiguration<T> where T : class, IBaseEntity
+    public abstract class EntityBaseConfiguration<T> : IEntityTypeConfiguration<T> where T : class, Identifier
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {

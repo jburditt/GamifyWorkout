@@ -2,16 +2,16 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
 ## Libary Dependency
-The library must be located at `../fullswing-angular` folder or you must update tsconfig.json and package.json:
-```   # tsconfig.json
-"@fullswing-angular-library": [
-  "../../fullswing-angular/dist/fullswing-angular-library"
-],
+The repository must be cloned within the 'fullswing-angular-library' repository, in the folder 'projects/gamifyworkout.
+```bash
+git clone https://github.com/jburditt/fullswing-angular-library.git
+cd projects
+mkdir gamifyworkout
+cd gamifyworkout
+git clone https://github.com/jburditt/GamifyWorkout.git .
 ```
-```   # package.json
-"dependencies": {
-  "fullswing-angular-library": "file:../../fullswing-angular/dist/fullswing-angular-library",
-```
+Now you can build, run, and test the frontend project from the root folder in fullswing-angular-library.
+
 
 ## Deploy using Github Actions
 - Create a new static web app with Deployment Token (not Github Id) and see the [Workflow](/.github/workflows/test.yml)

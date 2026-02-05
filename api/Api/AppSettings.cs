@@ -5,6 +5,7 @@ namespace Api;
 public class AppSettings : Settings
 {
     public DatabaseSettings Database { get; private set; }
+    public FileStorageSettings FileStore { get; private set; }
     //public IConfiguration Configuration { get; private set; }
     //public IHostEnvironment Environment { get; private set; }
     //public bool IsProduction => Environment.IsProduction();
@@ -16,7 +17,8 @@ public class AppSettings : Settings
 
         //Configuration = configuration;
         //Environment = environment;
-        Database = new DatabaseSettings(configuration["Database:AccountName"]?.ToString(), configuration.GetConnectionString("DefaultConnection"));
+        Database = new DatabaseSettings(configuration.GetConnectionString("DefaultConnection"));
+        FileStore = new FileStorageSettings(configuration.GetConnectionString("AzureBlobStorage"));
     }
 }
 

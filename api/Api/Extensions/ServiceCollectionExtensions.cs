@@ -9,17 +9,18 @@ namespace Api
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterServices(this IServiceCollection services, Settings settings)
         {
             // database
-            services.AddDbContextFactory<EfDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextFactory<EfDbContext>(options => options.UseSqlServer(settings.Database.ConnectionString));
+            services.AddTransient<Repository, EFRepository>();
 
             // authentication
             services.AddHttpContextAccessor();
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>()?.HttpContext?.User);
 
             // blob storage
-            services.AddSingleton<IStorageService>(provider => new AzureBlobStorageService(configuration, "workouts"));
+            services.AddSingleton<IStorageService>(provider => new AzureBlobStorageService(settings, "workouts"));
 
             // mapping service
             services.AddSingleton<IMappingService, AutoMapperService>();

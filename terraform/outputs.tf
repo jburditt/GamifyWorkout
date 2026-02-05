@@ -13,12 +13,3 @@ output "record" {
 output "soa_record" {
   value = azurerm_dns_zone.dns_zone.soa_record
 }
-
-output "endpoint" {
-  value = azurerm_cosmosdb_account.db_account.endpoint
-}
-
-output "connection-string" {
-  value = azurerm_cosmosdb_account.db_account.primary_sql_connection_string
-  sensitive = true
-}

@@ -16,7 +16,19 @@ public class EfDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //modelBuilder.Entity<Schedule>().Property(p => p.MuscleGroupFilter).HasConversion(
+        //    v => string.Join(',', v),
+        //    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(s => Enum.Parse<MuscleGroup>(s)).ToList()
+        //);
+
         modelBuilder.Entity<WorkoutLog>().HasKey(wl => new { wl.ScheduleId, wl.ExerciseId, wl.Date });
+
+        modelBuilder.Entity<Gym>().HasMany(g => g.Equipment)
+            .WithMany(e => e.Gyms)
+            .UsingEntity<GymEquipment>(
+                j => j.HasOne<Equipment>().WithMany().HasForeignKey(ge => ge.EquipmentId),
+                j => j.HasOne<Gym>().WithMany().HasForeignKey(ge => ge.GymId),
+                j => { j.HasKey(t => new { t.GymId, t.EquipmentId }); });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -24,7 +36,8 @@ public class EfDbContext : DbContext
         optionsBuilder.UseSeeding((context, _) =>
         {
             context.Set<User>().ExecuteDelete();
-            var userId = context.Set<User>().Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" }).Entity.Id;
+            var userId = context.Set<User>().Add(new User { Email = "jburditt@mailinator.com", FirstName = "Jebb", LastName = "Burditt", Username = "jburditt" })
+                .Entity.Id;
 
             context.Set<Equipment>().ExecuteDelete();
             var equipmentId = new Guid[4];
@@ -38,10 +51,10 @@ public class EfDbContext : DbContext
             context.Set<Gym>().Add(new Gym { Name = "Globe Fitness", UserId = userId.Value });
 
             context.Set<GymEquipment>().ExecuteDelete();
-            context.Set<GymEquipment>().Add(new Core.GymEquipment { EquipmentId = equipmentId[0], GymId = gymId });
-            context.Set<GymEquipment>().Add(new Core.GymEquipment { EquipmentId = equipmentId[1], GymId = gymId });
-            context.Set<GymEquipment>().Add(new Core.GymEquipment { EquipmentId = equipmentId[2], GymId = gymId });
-            context.Set<GymEquipment>().Add(new Core.GymEquipment { EquipmentId = equipmentId[3], GymId = gymId });
+            context.Set<GymEquipment>().Add(new GymEquipment { EquipmentId = equipmentId[0], GymId = gymId });
+            context.Set<GymEquipment>().Add(new GymEquipment { EquipmentId = equipmentId[1], GymId = gymId });
+            context.Set<GymEquipment>().Add(new GymEquipment { EquipmentId = equipmentId[2], GymId = gymId });
+            context.Set<GymEquipment>().Add(new GymEquipment { EquipmentId = equipmentId[3], GymId = gymId });
 
             context.SaveChanges();
         });

@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-env: 
+env:
   HUGO_VERSION: 0.146.7
 
 jobs:
@@ -25,15 +25,15 @@ jobs:
         with:
           path: projects/gamifyworkout
           submodules: true
-          lfs: false   
+          lfs: false
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
       - name: Install Angular dependencies
-        run: npm install      
+        run: npm install
       - name: Build Angular app
-        run: npm run build gamifyworkout     
+        run: npm run build gamifyworkout
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -41,7 +41,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_BAY_0CE44D31E }}
           action: "upload"
           app_location: "/dist/gamifyworkout/browser" # Angular static App path
-          api_location: "/projects/gamifyworkout/api/func-app" # Api source code path - optional
+          api_location: "/projects/gamifyworkout/api/Functions" # Api source code path - optional
           skip_app_build: true
           output_location: ""
 

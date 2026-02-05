@@ -9,13 +9,14 @@ using Microsoft.OData.Edm.Vocabularies;
 using Microsoft.OData.ModelBuilder;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// odata
 var odataRootPath = $"api/v1/odata";
 builder.Services
     .AddControllers()
+    .AddJsonOptions(options => {  options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; })
     .AddOData(options =>
     {
         options.Conventions.Remove(options.Conventions.OfType<MetadataRoutingConvention>().First());
@@ -23,9 +24,9 @@ builder.Services
     });
 
 var corsPolicyName = "MyAllowedCorsOrigins";
-builder.Services.AddAppSettings(builder.Environment);
+var settings = builder.Services.AddAppSettings(builder.Environment);
 builder.Services.AddCorsPolicy(corsPolicyName);
-builder.Services.RegisterServices(builder.Configuration);
+builder.Services.RegisterServices(settings);
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -56,11 +57,7 @@ app.MapFallbackToFile("/index.html");
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    DbContext context;
-    if (app.Environment.IsDevelopment())
-        context = services.GetRequiredService<EfDbContext>();
-    else
-        context = services.GetRequiredService<CosmosDbContext>();
+    var context = services.GetRequiredService<EfDbContext>();
     context.Database.Migrate();
 }
 

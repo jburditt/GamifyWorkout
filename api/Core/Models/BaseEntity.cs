@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public abstract class BaseEntity : IBaseEntity
+    public abstract class BaseEntity : Identifier
     {
         [Key]
         public Guid Id { get; set; }

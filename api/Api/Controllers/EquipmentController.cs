@@ -7,36 +7,24 @@ namespace Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EquipmentController : ControllerBase
+    public class EquipmentController(Repository repository) : ControllerBase
     {
-        private readonly IDbContextFactory<EfDbContext> _contextFactory;
-
-        public EquipmentController(IDbContextFactory<EfDbContext> contextFactory)
-        {
-            _contextFactory = contextFactory;
-        }
+        private readonly Repository _repository = repository;
 
         [HttpGet]
         [Produces("application/json")]
         public ActionResult<List<Equipment>> Get()
         {
-            var context = _contextFactory.CreateDbContext();
-            var equipment = context.Equipment.ToList();
+            var equipment = _repository.All<Equipment>();
             return Ok(equipment);
         }
-
 
         [HttpGet("{id}")]
         [Produces("application/json")]
         public ActionResult<List<Equipment>> GetByGym(Guid id)
         {
-            var context = _contextFactory.CreateDbContext();
-            var equipment = (
-                from e in context.Equipment
-                join ge in context.GymEquipment on e.Id equals ge.EquipmentId
-                where ge.GymId.Equals(id)
-                select e)
-                .ToList();
+            var equipment = _repository.Get<Gym>(id, g => g.Equipment)
+                .Equipment;
             return Ok(equipment);
         }
     }

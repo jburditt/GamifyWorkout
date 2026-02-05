@@ -8,9 +8,9 @@ namespace Api
     {
         private readonly CloudBlobContainer _blobContainer;
 
-        public AzureBlobStorageService(IConfiguration configuration, string containerName)
+        public AzureBlobStorageService(Settings settings, string containerName)
         {
-            var connectionString = configuration.GetConnectionString("AzureBlobStorage");
+            var connectionString = settings.FileStore.ConnectionString;
             if (string.IsNullOrEmpty(connectionString))
             {
                 throw new MissingFieldException($"{nameof(AzureBlobStorageService)} connection string is missing.");

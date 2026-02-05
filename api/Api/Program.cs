@@ -23,6 +23,7 @@ builder.Services
     });
 
 var corsPolicyName = "MyAllowedCorsOrigins";
+builder.Services.AddAppSettings(builder.Environment);
 builder.Services.AddCorsPolicy(corsPolicyName);
 builder.Services.RegisterServices(builder.Configuration);
 builder.Services.ConfigureAuth(builder.Configuration);
@@ -55,7 +56,11 @@ app.MapFallbackToFile("/index.html");
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<EfDbContext>();
+    DbContext context;
+    if (app.Environment.IsDevelopment())
+        context = services.GetRequiredService<EfDbContext>();
+    else
+        context = services.GetRequiredService<CosmosDbContext>();
     context.Database.Migrate();
 }
 

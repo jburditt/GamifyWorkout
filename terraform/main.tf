@@ -3,11 +3,30 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
+# Static Web App
+
 resource "azurerm_static_web_app" "static_web_app" {
   name                = var.static_web_app_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
+
+# CosmosDb
+
+resource "azurerm_cosmosdb_account" "dbuser" {
+  name                = var.db_user
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_cosmosdb_sql_database" "db" {
+  name                = var.db_name
+  resource_group_name = data.azurerm_cosmosdb_account.dbuser.resource_group_name
+  account_name        = data.azurerm_cosmosdb_account.dbuser.name
+  throughput          = 400
+}
+
+# Custom Domain
 
 resource "azurerm_dns_zone" "dns_zone" {
   name = var.domain

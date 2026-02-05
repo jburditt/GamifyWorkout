@@ -6,6 +6,14 @@ variable "static_web_app_name" {
   default = "stapp-gamifyworkout"
 }
 
+variable "db_user" {
+  default = "gamifyworkout"
+}
+
+variable "db_name" {
+  default = "gamifyworkout"
+}
+
 variable "location" {
   default = "westus2"
 }

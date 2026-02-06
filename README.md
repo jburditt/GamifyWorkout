@@ -24,11 +24,10 @@ npm run deploy
 
 ## Custom domain
 NOTES to myself:
-- *AWS Route 53* - add CNAME e.g. www with value from Azure resource e.g. blue-smoke-0eefaf11e.3.azurestaticapps.net
-- *TODO* - is the A record needed? How did I optain 20.109.133.32 and is it static?
-  - Azure Public IP of a VM, App Gateway, Load Balancer, Firewall, etc
-  - Static Public IP assigned to an App Service (via App Service Environment or Front Door)
-
+- *AWS Route 53* 
+  - add CNAME e.g. www with value from Azure resource e.g. blue-smoke-0eefaf11e.3.azurestaticapps.net
+  - add A record with blank name and value by pinging the above?
+  
 ## Development server
 Run `ng s` for a dev server. Navigate to `https://localhost:4200/`. The application will automatically reload if you change any of the source files.
 

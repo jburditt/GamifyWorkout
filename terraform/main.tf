@@ -1,14 +1,50 @@
 resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
+  name     = "rg-${var.project}"
   location = var.location
 }
 
 # Static Web App
 
 resource "azurerm_static_web_app" "static_web_app" {
-  name                = var.static_web_app_name
+  name                = "stapp-${var.project}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+
+  app_settings = {
+    "SqlDbConnectionString" = format(
+      "Server=tcp:%s.database.windows.net,1433;Initial Catalog=%s;Persist Security Info=False;User ID=%s;Password=%s;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+      azurerm_mssql_server.sql_server.name,
+      azurerm_mssql_database.sql_database.name,
+      azurerm_mssql_server.sql_server.administrator_login,
+      azurerm_mssql_server.sql_server.administrator_login_password
+    )
+  }
+}
+
+# Sql Database
+
+resource "random_password" "sql_password" {
+  length              = 16
+  special             = true
+  upper               = true
+  lower               = true
+  numeric             = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "azurerm_mssql_server" "sql_server" {
+  name                         = "sql-${var.project}"
+  resource_group_name          = azurerm_resource_group.rg.name
+  location                     = azurerm_resource_group.rg.location
+  version                      = "12.0"
+  administrator_login          = "sqladminuser"
+  administrator_login_password = random_password.sql_password.result
+}
+
+resource "azurerm_mssql_database" "sql_database" {
+  name                = "sqldb-${var.project}"
+  server_id           = azurerm_mssql_server.sql_server.id
+  sku_name            = "Free"
 }
 
 # Custom Domain

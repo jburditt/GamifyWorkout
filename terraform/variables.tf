@@ -1,9 +1,9 @@
-variable "resource_group_name" {
-  default = "rg-gamifyworkout"
+variable subscription_id {
+  default = "ca62117d-82a8-4604-be26-46e1c3025e8b"
 }
 
-variable "static_web_app_name" {
-  default = "stapp-gamifyworkout"
+variable "project" {
+  default = "gamifyworkout-dev"
 }
 
 variable "location" {

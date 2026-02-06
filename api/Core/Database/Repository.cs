@@ -128,11 +128,6 @@ public interface Repository
     int Count<T>(Expression<Func<T, bool>> predicate) where T : class;
 
     /// <summary>
-    /// Saves the changes.
-    /// </summary>
-    void SaveChanges();
-
-    /// <summary>
     /// Execute query and return queryable entity object list
     /// </summary>
     /// <param name="query"></param>

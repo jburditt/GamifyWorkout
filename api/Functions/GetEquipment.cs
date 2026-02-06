@@ -20,7 +20,8 @@ public class GetEquipment
     [Function("Equipment")]
     public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "Equipment/{id}")] HttpRequest req, string id)
     {
-        _logger.LogInformation("C# HTTP trigger function processed a request for Equipment Id: {Id}", id);
+        var test = Environment.GetEnvironmentVariable("APPLICATIONINSIGHTS_CONNECTION_STRING");
+        _logger.LogInformation("C# HTTP trigger function processed a request for Equipment Id: {Id}", test);
         var equipment = _repository.All<Equipment>();
         return new JsonResult(equipment);
     }

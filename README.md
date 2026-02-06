@@ -14,7 +14,7 @@ Now you can build, run, and test the frontend project from the root folder in fu
 
 
 ## Deploy using Github Actions
-- Create a new static web app with Deployment Token (not Github Id) and see the [Workflow](/.github/workflows/test.yml)
+- Create a new static web app with Deployment Token (not Github Id) and see the [Workflow](https://github.com/jburditt/GamifyWorkout/.github/workflows/gamifyworkout.yml)
 
 ## Deploy using Azure CLI
 ```bash
@@ -27,6 +27,7 @@ NOTES to myself:
 - *AWS Route 53* 
   - add CNAME e.g. www with value from Azure resource e.g. blue-smoke-0eefaf11e.3.azurestaticapps.net
   - add A record with blank name and value by pinging the above?
+- *Azure* - Static Web App -> Custom domains CNAME www name and value matching above
   
 ## Development server
 Run `ng s` for a dev server. Navigate to `https://localhost:4200/`. The application will automatically reload if you change any of the source files.

@@ -12,18 +12,18 @@ var builder = FunctionsApplication.CreateBuilder(args);
 
 builder.ConfigureFunctionsWebApplication();
 
-var password = Environment.GetEnvironmentVariable("SqlDbPassword");
+var connectionString = Environment.GetEnvironmentVariable("SqlDbConnectionString");
 
 builder.Services
     .AddApplicationInsightsTelemetryWorkerService()
     .ConfigureFunctionsApplicationInsights()
-    // TODO figure out why this doesn't work
+    // TODO figure out why this doesn't work and remove static Global.DefaultJsonSerializeSettings
     .Configure<JsonSerializerOptions>(options =>
     {
         options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     })
-    .AddDbContextFactory<EfDbContext>(options => options.UseSqlServer($"Server=tcp:sql-gamifyworkout.database.windows.net,1433;Initial Catalog=sqldb-gamifyworkout;Persist Security Info=False;User ID=CloudSA84a11d95;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+    .AddDbContextFactory<EfDbContext>(options => options.UseSqlServer(connectionString))
     .AddTransient<Repository, EFRepository>();
 //using (var scope = app.Services.CreateScope())
 //{

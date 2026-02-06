@@ -2,7 +2,7 @@
   "profiles": {
     "api": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7030",
+      "commandLineArgs": "--port 8080",
       "launchBrowser": false
     }
   }

@@ -27,9 +27,8 @@ public class GymController(Repository repository) : ControllerBase
     [Produces("application/json")]
     public bool Post([FromBody] Gym gym)
     {
-        //var result = _repository.Insert(gym);
-        //return result;
-        return false;
+        var result = _repository.Insert(gym);
+        return result != null;
     }
 }
 

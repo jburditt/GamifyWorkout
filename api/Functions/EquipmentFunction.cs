@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Functions;
 
-public class GetEquipment(Repository repository, ILogger<GetEquipment> logger)
+public class EquipmentFunction(Repository repository, ILogger<EquipmentFunction> logger)
 {
-    private readonly ILogger<GetEquipment> _logger = logger;
+    private readonly ILogger<EquipmentFunction> _logger = logger;
     private readonly Repository _repository = repository;
 
 
@@ -17,7 +17,7 @@ public class GetEquipment(Repository repository, ILogger<GetEquipment> logger)
     {
         try 
         { 
-            _logger.LogInformation("C# HTTP trigger function processed a request for GetEquipment.GetAll");
+            _logger.LogInformation("C# HTTP trigger function processed a request for EquipmentFunction.GetAll");
             var equipment = _repository.All<Equipment>();
             return new JsonResult(equipment, Global.DefaultJsonSerializeSettings);
         } 
@@ -33,8 +33,8 @@ public class GetEquipment(Repository repository, ILogger<GetEquipment> logger)
     {
         try
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request for GetEquipment.GetByGym Id: {Id}", id);
-            var equipment = _repository.Get<Gym>(id, g => g.Equipment)?
+            _logger.LogInformation("C# HTTP trigger function processed a request for EquipmentFunction.GetByGym Id: {Id}", id);
+            var equipment = _repository.Get<Core.Gym>(id, g => g.Equipment)?
                 .Equipment;
             return new JsonResult(equipment, Global.DefaultJsonSerializeSettings);
         } 

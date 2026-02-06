@@ -20,6 +20,22 @@ public class EFRepository : Repository
         _context = context;
     }
 
+    public virtual T Insert<T>(T obj) where T : class
+    {
+        obj.ThrowIfNull();
+        if (obj is CreatedOn)
+        {
+            (obj as CreatedOn).CreatedOn = DateTime.Now;
+        }
+        if (obj is ModifiedOn)
+        {
+            (obj as ModifiedOn).ModifiedOn = DateTime.Now;
+        }
+        var newEntry = _context.Set<T>().Add(obj);
+        _context.SaveChanges();
+        return newEntry.Entity;
+    }
+
     public IQueryable<T> All<T>(string[] includes = null) where T : class
     {
         //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
@@ -136,23 +152,6 @@ public class EFRepository : Repository
     public virtual int Count<T>(Expression<Func<T, bool>> predicate) where T : class
     {
         return _context.Set<T>().Count(predicate);
-    }
-
-    public virtual T Create<T>(T TObject) where T : class
-    {
-        //ADD CREATE DATE IF APPLICABLE
-        if (TObject is CreatedOn)
-        {
-            (TObject as CreatedOn).CreatedOn = DateTime.Now;
-        }
-        //ADD LAST MODIFIED DATE IF APPLICABLE
-        if (TObject is ModifiedOn)
-        {
-            (TObject as ModifiedOn).ModifiedOn = DateTime.Now;
-        }
-        var newEntry = _context.Set<T>().Add(TObject);
-        _context.SaveChanges();
-        return newEntry.Entity;
     }
 
     public virtual int Delete<T>(T TObject) where T : class

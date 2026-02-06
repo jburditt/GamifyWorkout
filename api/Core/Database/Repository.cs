@@ -74,7 +74,7 @@ public interface Repository
     /// </summary>
     /// <param name="t">Specified a new object to create.</param>
     /// <returns></returns>
-    T Create<T>(T t) where T : class;
+    T Insert<T>(T t) where T : class;
 
     /// <summary>
     /// Delete the object from database.

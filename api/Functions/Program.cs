@@ -15,7 +15,7 @@ builder.Services
     .ConfigureFunctionsApplicationInsights();
 
 var password = Environment.GetEnvironmentVariable("SqlDbPassword");
-builder.Services.AddDbContextFactory<EfDbContext>(options => options.UseSqlServer($"Server=tcp:sql-gamifyworkout.database.windows.net,1433;Initial Catalog=sqldb-gamifyworkout;Persist Security Info=False;User ID=CloudSA84a11d95;Password=${password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+builder.Services.AddDbContextFactory<EfDbContext>(options => options.UseSqlServer($"Server=tcp:sql-gamifyworkout.database.windows.net,1433;Initial Catalog=sqldb-gamifyworkout;Persist Security Info=False;User ID=CloudSA84a11d95;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
 builder.Services.AddTransient<Repository, EFRepository>();
 //using (var scope = app.Services.CreateScope())
 //{

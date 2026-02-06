@@ -6,6 +6,6 @@
   </div>
 
   <!-- TODO remove [canAddRow] hack -->
-  <gym-equipment-table class="shrinkwrap" [equipment]="$any(equipment)" [canAddRow]="equipment.length < 4" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
+  <gym-equipment-table class="shrinkwrap" [equipment]="$any(equipment)" [canAddRow]="canAddRow(equipment)" (addGymEquipment)="openDialog($event)" (deleteGymEquipment)="deleteGymEquipment($event)" />
 
 </form>

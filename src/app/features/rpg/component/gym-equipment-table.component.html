@@ -42,6 +42,6 @@
   }
 </table>
 
-@if (dataSource().data.length > 10) {
+@if (showPaginator(dataSource().data)) {
   <mat-paginator pageSize="10" showFirstLastButtons aria-label="Select page of gym equipment"></mat-paginator>
 }

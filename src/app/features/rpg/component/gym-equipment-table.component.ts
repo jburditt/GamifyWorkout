@@ -54,4 +54,8 @@ export class GymEquipmentTableComponent
     let equipmentIds = data ? data.map(e => e.id as string) : [];
     this.addGymEquipment.emit(equipmentIds);
   }
+
+  protected showPaginator(data: Equipment[]): boolean {
+    return data && data.length > 10;
+  }
 }

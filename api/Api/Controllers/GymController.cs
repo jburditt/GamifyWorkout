@@ -7,21 +7,16 @@ namespace Api;
 
 [Route("api/[controller]")]
 [ApiController]
-public class GymController : ControllerBase
+public class GymController(Repository repository) : ControllerBase
 {
-    private readonly IDbContextFactory<EfDbContext> _contextFactory;
+    private readonly Repository _repository = repository;
 
-    public GymController(IDbContextFactory<EfDbContext> contextFactory)
-    {
-        _contextFactory = contextFactory;
-    }
 
     [HttpGet]
     [Produces("application/json")]
     public ActionResult<List<Gym>> Get()
     {
-        var context = _contextFactory.CreateDbContext();
-        var gyms = context.Gyms
+        var gyms = _repository.All<Gym>()
             // TODO get userId from Claims
             //.Where(g => g.UserId == new Guid("113C9AA8-F4C3-4DE7-2FCE-08DDF89CDBF6"))
             .ToList();
@@ -32,9 +27,9 @@ public class GymController : ControllerBase
     [Produces("application/json")]
     public bool Post([FromBody] Gym gym)
     {
-        var context = _contextFactory.CreateDbContext();
-        context.Gyms.Add(gym);
-        return context.SaveChanges() > 0;
+        //var result = _repository.Insert(gym);
+        //return result;
+        return false;
     }
 }
 

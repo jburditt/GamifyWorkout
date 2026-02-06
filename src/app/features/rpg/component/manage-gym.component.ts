@@ -39,7 +39,7 @@ export class ManageGymComponent {
   protected ngOnInit() {
     this._loggingService.debug('ManageGymComponent initialized');
     this.form.get('name')!.setValue(this.gym().name);
-    console.log("id", this.gym());
+    console.log("gym", this.gym());
     this.equipmentService.apiEquipmentIdGet({ id: this.gym().id! }).subscribe((equipment) => {
       this.equipment = equipment;
     });
@@ -67,5 +67,11 @@ export class ManageGymComponent {
     this.gymEquipmentService.apiGymEquipmentGymIdEquipmentIdDelete({ gymId: this.gym().id as string, equipmentId: equipmentId }).subscribe((response) => {
 
     });
+  }
+
+  protected canAddRow(equipment: Equipment[]): boolean {
+    if (equipment && equipment.length)
+      return equipment.length < 4;
+    return true;
   }
 }

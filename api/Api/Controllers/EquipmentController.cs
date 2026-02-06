@@ -13,7 +13,7 @@ namespace Api
 
         [HttpGet]
         [Produces("application/json")]
-        public ActionResult<List<Equipment>> Get()
+        public ActionResult<List<Equipment>> GetAll()
         {
             var equipment = _repository.All<Equipment>();
             return Ok(equipment);

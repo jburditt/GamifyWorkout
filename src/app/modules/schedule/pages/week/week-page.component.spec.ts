@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { WeekPageComponent } from './week-page.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TestProvider } from '@app/test-provider';
 
 describe('WeekPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WeekPageComponent, DragDropModule],
+      imports: [TestProvider, WeekPageComponent, DragDropModule],
     }).compileComponents();
   });
 

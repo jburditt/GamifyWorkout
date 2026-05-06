@@ -16,7 +16,7 @@
         "src/app/features/*"
       ],
       "fullswing-angular-library": [
-        "../../projects/fullswing-angular-library/src/public-api"
+        "../fullswing-angular-library/src/public-api"
       ]
     }
   },

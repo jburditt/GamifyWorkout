@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { GymPageComponent } from '@app/modules/inventory/pages/gym.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TestProvider } from '@app/test-provider';
 
 describe('GymPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GymPageComponent, ReactiveFormsModule],
+      imports: [TestProvider, GymPageComponent, ReactiveFormsModule],
     }).compileComponents();
   });
 

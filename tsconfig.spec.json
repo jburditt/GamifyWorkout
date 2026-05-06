@@ -3,12 +3,24 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "../../out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"
+      ],
+      "fullswing-angular-library": [
+        "../../projects/fullswing-angular-library/src/public-api"
+      ]
+    }
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.spec.ts"
   ]
 }

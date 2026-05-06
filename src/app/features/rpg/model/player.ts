@@ -28,6 +28,11 @@ export class Player extends BaseCreature {
     this.mp = this.maxMp;
     this._experience = 0;
     this._maxExperience = Math.floor(10 + (level - 1)) * 1.2;
+    this.experiencePoints = 0;
+  }
+
+  public killEnemy(enemy: BaseCreature) {
+    this.experience += enemy.experiencePoints;
   }
 
   protected levelUp() {

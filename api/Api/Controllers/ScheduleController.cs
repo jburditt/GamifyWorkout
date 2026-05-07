@@ -16,6 +16,21 @@ public class ScheduleController : ControllerBase
         _contextFactory = contextFactory;
     }
 
+    [HttpGet("today/muscle")]
+    [Produces("application/json")]
+    public ActionResult<List<MuscleGroup>> GetTodayMuscleGroups() 
+    {
+        return new List<MuscleGroup>() { MuscleGroup.Arms, MuscleGroup.Back, MuscleGroup.Core };
+    }
+
+    [HttpGet("today/exercise")]
+    [Produces("application/json")]
+    public ActionResult<List<Exercise>> GetTodayExercises()
+    {
+        var exercise1 = new Exercise() { Description = "Bicycle Kick", Icon = "bicycle.png", Name = "Bicycle Kick", PrimaryMuscle = Muscle.Abs, PrimaryMuscleGroup = MuscleGroup.Core };
+        return new List<Exercise>() { exercise1 };
+    }
+
     [HttpGet("{monday}")]
     [Produces("application/json")]
     public ActionResult<List<WeeklySchedule>> Get(DateOnly monday)

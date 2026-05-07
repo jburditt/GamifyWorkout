@@ -1,6 +1,10 @@
 # GamifyworkoutClient
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
+## Generate API services and models
+- Run the API to host the swagger file
+- Run `npx ng-openapi-gen --input http://localhost:8080/swagger/v1/swagger.json --output src/app/api --exclude-tags Metadata`
+
 ## Libary Dependency
 The repository must be cloned within the 'fullswing-angular-library' repository, in the folder 'projects/gamifyworkout.
 ```bash
@@ -11,7 +15,6 @@ cd gamifyworkout
 git clone https://github.com/jburditt/GamifyWorkout.git .
 ```
 Now you can build, run, and test the frontend project from the root folder in fullswing-angular-library.
-
 
 ## Deploy using Github Actions
 - Create a new static web app with Deployment Token (not Github Id) and see the [Workflow](https://github.com/jburditt/GamifyWorkout/.github/workflows/gamifyworkout.yml)

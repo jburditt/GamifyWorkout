@@ -15,12 +15,68 @@ import { apiScheduleMondayGet } from '../fn/schedule/api-schedule-monday-get';
 import { ApiScheduleMondayGet$Params } from '../fn/schedule/api-schedule-monday-get';
 import { apiSchedulePost } from '../fn/schedule/api-schedule-post';
 import { ApiSchedulePost$Params } from '../fn/schedule/api-schedule-post';
+import { apiScheduleTodayExerciseGet } from '../fn/schedule/api-schedule-today-exercise-get';
+import { ApiScheduleTodayExerciseGet$Params } from '../fn/schedule/api-schedule-today-exercise-get';
+import { apiScheduleTodayMuscleGet } from '../fn/schedule/api-schedule-today-muscle-get';
+import { ApiScheduleTodayMuscleGet$Params } from '../fn/schedule/api-schedule-today-muscle-get';
+import { Exercise } from '../models/exercise';
+import { MuscleGroup } from '../models/muscle-group';
 import { WeeklySchedule } from '../models/weekly-schedule';
 
 @Injectable({ providedIn: 'root' })
 export class ScheduleService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `apiScheduleTodayMuscleGet()` */
+  static readonly ApiScheduleTodayMuscleGetPath = '/api/Schedule/today/muscle';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiScheduleTodayMuscleGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiScheduleTodayMuscleGet$Response(params?: ApiScheduleTodayMuscleGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<MuscleGroup>>> {
+    return apiScheduleTodayMuscleGet(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiScheduleTodayMuscleGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiScheduleTodayMuscleGet(params?: ApiScheduleTodayMuscleGet$Params, context?: HttpContext): Observable<Array<MuscleGroup>> {
+    return this.apiScheduleTodayMuscleGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<MuscleGroup>>): Array<MuscleGroup> => r.body)
+    );
+  }
+
+  /** Path part for operation `apiScheduleTodayExerciseGet()` */
+  static readonly ApiScheduleTodayExerciseGetPath = '/api/Schedule/today/exercise';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiScheduleTodayExerciseGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiScheduleTodayExerciseGet$Response(params?: ApiScheduleTodayExerciseGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Exercise>>> {
+    return apiScheduleTodayExerciseGet(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiScheduleTodayExerciseGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiScheduleTodayExerciseGet(params?: ApiScheduleTodayExerciseGet$Params, context?: HttpContext): Observable<Array<Exercise>> {
+    return this.apiScheduleTodayExerciseGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<Exercise>>): Array<Exercise> => r.body)
+    );
   }
 
   /** Path part for operation `apiScheduleMondayGet()` */

@@ -90,7 +90,11 @@ projects/gamifyworkout/src/app/
 │   │   ├── components/           # Reusable child components
 │   │   └── dialogs/              # Material dialogs
 │   └── schedule/
-│
+|       ├── pages/                # Full-page components
+│       |   ├── week-page.component.ts  # Weekly Schedule Page
+│       |   └── today-page.component.ts # Today's Schedule Page
+│       └── dialogs/              # Material dialogs
+|
 ├── shared/                       # Shared across modules
 │   ├── components/
 │   └── services/

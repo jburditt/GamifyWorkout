@@ -1,4 +1,4 @@
-# Gym Management Feature Specification
+# Today's Schedule Feature Specification
 
 > Full-stack specification for managing exercises for today
 
@@ -6,8 +6,8 @@
 
 | Property | Value |
 |----------|-------|
-| **Spec ID** | `exercise` |
-| **Title** | Exercise Management |
+| **Spec ID** | `today-schedule` |
+| **Title** | Today's Schedule |
 | **Status** | Design |
 | **Last Updated** |  |
 | **Version** | 1.0.0 |
@@ -316,8 +316,8 @@ UI Re-render (new tab created)
 ### Frontend Implementation
 
 - **Main Component**: [today-schedule.component.ts](../src/app/modules/schedule/pages/today-schedule.component.ts)
-- **Add Exercise Dialog**: [add-exercise.ts](../src/app/modules/schedule/dialogs/add-exercise.ts)
-- **Auto-Generated Services**: [src/app/api/services/](../src/app/api/services/) - GymService, EquipmentService, GymEquipmentService
+- **Add Exercise Dialog**: [add-exercise.component.ts](../src/app/modules/schedule/dialogs/add-exercise.component.ts)
+- **Auto-Generated Services**: [src/app/api/services/](../src/app/api/services/) - WorkoutLogService, ExerciseService, ScheduleService
 
 ### Backend Implementation
 

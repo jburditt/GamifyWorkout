@@ -2,7 +2,7 @@
 
 namespace Core;
 
-public class WorkoutLog
+public class WorkoutLog : BaseEntity
 {
     [ForeignKey("Schedule.Id")]
     public Guid ScheduleId { get; set; }

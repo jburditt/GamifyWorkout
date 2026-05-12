@@ -46,6 +46,16 @@ public class ScheduleController : ControllerBase
         return Ok(weeklySchedule);
     }
 
+    [HttpPost("exercise")]
+    [Produces("application/json")]
+    public ActionResult<WorkoutLog> PostExercise([FromBody] WorkoutLog workoutLog)
+    {
+        var context = _contextFactory.CreateDbContext();
+        context.WorkoutLog.Add(workoutLog);
+        context.SaveChanges();
+        return Ok(workoutLog);
+    }
+
     [HttpPost]
     [Produces("application/json")]
     public ActionResult<bool> Post([FromBody] WeeklySchedule weeklySchedule)

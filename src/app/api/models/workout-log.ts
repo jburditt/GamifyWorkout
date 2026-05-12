@@ -7,6 +7,7 @@ export interface WorkoutLog {
   date?: string;
   duration?: TimeSpan;
   exerciseId?: string;
+  id?: string;
   reps?: number;
   scheduleId?: string;
   sets?: number;

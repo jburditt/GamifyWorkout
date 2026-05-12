@@ -19,6 +19,9 @@ import { apiScheduleTodayExerciseGet } from '../fn/schedule/api-schedule-today-e
 import { ApiScheduleTodayExerciseGet$Params } from '../fn/schedule/api-schedule-today-exercise-get';
 import { apiScheduleTodayMuscleGet } from '../fn/schedule/api-schedule-today-muscle-get';
 import { ApiScheduleTodayMuscleGet$Params } from '../fn/schedule/api-schedule-today-muscle-get';
+import { apiScheduleExercisePost } from '../fn/schedule/api-schedule-exercise-post';
+import { ApiScheduleExercisePost$Params } from '../fn/schedule/api-schedule-exercise-post';
+import { WorkoutLog } from '../models/workout-log';
 import { Exercise } from '../models/exercise';
 import { MuscleGroup } from '../models/muscle-group';
 import { WeeklySchedule } from '../models/weekly-schedule';
@@ -79,7 +82,30 @@ export class ScheduleService extends BaseService {
     );
   }
 
-  /** Path part for operation `apiScheduleMondayGet()` */
+  /** Path part for operation `apiScheduleExercisePost()` */
+  static readonly ApiScheduleExercisePostPath = '/api/Schedule/exercise';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiScheduleExercisePost()` instead.
+   *
+   * This method sends a `POST` request.
+   */
+  apiScheduleExercisePost$Response(params: ApiScheduleExercisePost$Params, context?: HttpContext): Observable<StrictHttpResponse<WorkoutLog>> {
+    return apiScheduleExercisePost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiScheduleExercisePost$Response()` instead.
+   *
+   * This method sends a `POST` request.
+   */
+  apiScheduleExercisePost(params: ApiScheduleExercisePost$Params, context?: HttpContext): Observable<WorkoutLog> {
+    return this.apiScheduleExercisePost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<WorkoutLog>): WorkoutLog => r.body)
+    );
+  }
   static readonly ApiScheduleMondayGetPath = '/api/Schedule/{monday}';
 
   /**

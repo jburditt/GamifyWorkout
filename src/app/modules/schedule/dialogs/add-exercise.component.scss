@@ -1,0 +1,13 @@
+.add-exercise-dialog {
+  min-width: 320px;
+}
+
+mat-dialog-content {
+  display: grid;
+  gap: 16px;
+}
+
+.form-error {
+  color: #b00020;
+  font-size: 0.9rem;
+}

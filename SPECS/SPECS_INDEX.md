@@ -14,7 +14,7 @@
 | `authentication.spec.md` | Authentication | Completed | Azure OAuth, JWT claims, route protection | `shared-services.spec.md` |
 | `shared-services.spec.md` | Shared Services | Completed | Repository, AutoMapper, storage, OpenAPI client | `SPEC_TEMPLATE.md`, `SPEC_GUIDE.md` |
 | `ARCHITECTURE_DECISIONS.md` | Architecture Decisions | Completed | Rationale for major architecture and design choices | `SPEC_GUIDE.md`, `shared-services.spec.md` |
-| `today-schedule.spec.md` | Exercises listed for today | Design | Exercises | `shared-services.spec.md`, `authentication.spec.md` |
+| `today-schedule.spec.md` | Today's Schedule | In Progress | Exercises listed for today, navigation menu item | `shared-services.spec.md`, `authentication.spec.md`, `weekly-schedule.spec.md` |
 
 ## How to Use This Index
 

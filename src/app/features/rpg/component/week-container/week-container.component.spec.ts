@@ -9,17 +9,41 @@ describe('WeekContainerComponent', () => {
     }).compileComponents();
   });
 
-  it('should create', () => {
+  function createComponent(help = 'Test help') {
     const fixture = TestBed.createComponent(WeekContainerComponent);
-    const component = fixture.componentInstance;
-    expect(component).toBeTruthy();
+    fixture.componentRef.setInput('help', help);
+    fixture.detectChanges();
+    return fixture;
+  }
+
+  it('should create', () => {
+    expect(createComponent().componentInstance).toBeTruthy();
   });
 
-  // it('should highlight today', async () => {
-  //   const fixture = TestBed.createComponent(WeekContainerComponent);
-  //   await fixture.whenStable();
-  //   const compiled = fixture.nativeElement;
-  //   // Assume today is highlighted
-  //   expect(compiled.querySelector('.today')).toBeTruthy();
-  // });
+  describe('getTodayOrNull', () => {
+    it('returns a Date when the index matches today\'s day of week', () => {
+      const { componentInstance } = createComponent();
+      const todayIndex = new Date().getDay();
+      const result = (componentInstance as any).getTodayOrNull(todayIndex);
+      expect(result).toBeInstanceOf(Date);
+    });
+
+    it('returns null when the index does not match today\'s day of week', () => {
+      const { componentInstance } = createComponent();
+      const todayIndex = new Date().getDay();
+      const otherIndex = (todayIndex + 1) % 7;
+      const result = (componentInstance as any).getTodayOrNull(otherIndex);
+      expect(result).toBeNull();
+    });
+
+    it('returns a Date that represents today', () => {
+      const { componentInstance } = createComponent();
+      const todayIndex = new Date().getDay();
+      const result = (componentInstance as any).getTodayOrNull(todayIndex) as Date;
+      const today = new Date();
+      expect(result.getDate()).toBe(today.getDate());
+      expect(result.getMonth()).toBe(today.getMonth());
+      expect(result.getFullYear()).toBe(today.getFullYear());
+    });
+  });
 });

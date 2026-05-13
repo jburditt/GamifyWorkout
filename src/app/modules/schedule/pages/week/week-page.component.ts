@@ -37,21 +37,16 @@ export class WeekPageComponent {
       console.log(`Dialog isDefault: ${result.default}`);
       if (result && action == 'Save') {
         let today = new Date();
-        let dayOfWeek = today.getDay();
-        let monday = new Date();
-        monday.setDate(today.getDate() + dayOfWeek - 1);
-        let tuesday = new Date();
-        tuesday.setDate(today.getDate() + dayOfWeek);
-        let wednesday = new Date();
-        wednesday.setDate(today.getDate() + dayOfWeek + 1);
-        let thursday = new Date();
-        thursday.setDate(today.getDate() + dayOfWeek + 2);
-        let friday = new Date();
-        friday.setDate(today.getDate() + dayOfWeek + 3);
-        let saturday = new Date();
-        saturday.setDate(today.getDate() + dayOfWeek + 4);
-        let sunday = new Date();
-        sunday.setDate(today.getDate() + dayOfWeek + 5);
+        // getDay() returns 0=Sun..6=Sat; treat Sunday as 7 so Monday is always offset 0
+        let dayOfWeek = today.getDay() === 0 ? 7 : today.getDay();
+        let monday = new Date(today);
+        monday.setDate(today.getDate() - dayOfWeek + 1);
+        let tuesday = new Date(monday); tuesday.setDate(monday.getDate() + 1);
+        let wednesday = new Date(monday); wednesday.setDate(monday.getDate() + 2);
+        let thursday = new Date(monday); thursday.setDate(monday.getDate() + 3);
+        let friday = new Date(monday); friday.setDate(monday.getDate() + 4);
+        let saturday = new Date(monday); saturday.setDate(monday.getDate() + 5);
+        let sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
 
         const weeklySchedule: WeeklySchedule = {
           monday: {

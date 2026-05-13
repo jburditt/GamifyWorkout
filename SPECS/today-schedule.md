@@ -8,8 +8,8 @@
 |----------|-------|
 | **Spec ID** | `today-schedule` |
 | **Title** | Today's Schedule |
-| **Status** | Design |
-| **Last Updated** |  |
+| **Status** | In Progress |
+| **Last Updated** | 2026-05-12 |
 | **Version** | 1.0.0 |
 | **Related Specs** | [weekly-schedule.spec.md](./weekly-schedule.spec.md), [authentication.spec.md](./authentication.spec.md) |
 | **Implemented In** | Frontend: `projects/gamifyworkout/src/app/modules/schedule`, Backend: `projects/gamifyworkout/api/` |
@@ -114,7 +114,7 @@ See Schedule.cs, User.cs, WorkoutLog.cs, and BaseEntity.cs
 GET /api/schedule/today/muscle
 ```
 
-**Description**: Retrieve muscle groups assigned to today on the weekly schedule. (TODO: filter by current user).
+**Description**: Retrieve muscle groups assigned to today on the weekly schedule. Load the weekly schedule using today's date. If there is no weekly schedule for this week, load the default template instead. Return the muscle groups in the weekly schedule that match today's date.
 
 **Authentication**: Not enforced (TODO: should require JWT Bearer token)
 
@@ -161,6 +161,23 @@ GET /api/schedule/today/exercise
 ---
 
 ## 4. Components & Services (Frontend)
+
+### Navigation
+
+Today's Schedule is accessible via the **Schedule** top-level menu in the app toolbar.
+
+**File**: `src/app/app.component.ts`
+
+```typescript
+scheduleMenuItems: Array<MenuItem> = [
+  new MenuItem('Weekly Schedule', '/schedule/week', 'calendar_today'),
+  new MenuItem('Today\'s Schedule', '/schedule/today', 'today')
+];
+```
+
+**Route**: `/schedule/today` (defined in `src/app/modules/schedule/schedule.routes.ts`)
+
+---
 
 ### Service Specifications
 

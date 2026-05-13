@@ -98,6 +98,42 @@ describe('WeekPageComponent', () => {
     });
   });
 
+  describe('save', () => {
+    it('clicking the Save button calls apiSchedulePost with YYYY-MM-DD dates for each day', () => {
+      const fixture = createComponent();
+      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+      const saveButton = Array.from(buttons).find(b => b.textContent?.trim() === 'Save')!;
+      saveButton.click();
+      fixture.detectChanges();
+
+      expect(scheduleServiceSpy.apiSchedulePost).toHaveBeenCalledOnceWith({
+        body: jasmine.objectContaining({
+          monday: jasmine.objectContaining({ date: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
+          tuesday: jasmine.objectContaining({ date: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
+          sunday: jasmine.objectContaining({ date: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
+        })
+      });
+    });
+
+    it('clicking the Save button sends the current muscle groups for each day', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({
+        monday: { muscleGroupFilter: [MuscleGroup.Chest] },
+        tuesday: { muscleGroupFilter: [MuscleGroup.Back] },
+      } as unknown as WeeklySchedule[]));
+
+      const fixture = createComponent();
+      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+      const saveButton = Array.from(buttons).find(b => b.textContent?.trim() === 'Save')!;
+      saveButton.click();
+      fixture.detectChanges();
+
+      const body = scheduleServiceSpy.apiSchedulePost.calls.mostRecent().args[0]!.body!;
+      expect(body.monday?.muscleGroupFilter).toEqual([MuscleGroup.Chest]);
+      expect(body.tuesday?.muscleGroupFilter).toEqual([MuscleGroup.Back]);
+      expect(body.wednesday?.muscleGroupFilter).toEqual([]);
+    });
+  });
+
   describe('clear', () => {
     it('empties all day arrays', () => {
       scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({

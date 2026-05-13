@@ -18,9 +18,23 @@ public class ScheduleController : ControllerBase
 
     [HttpGet("today/muscle")]
     [Produces("application/json")]
-    public ActionResult<List<MuscleGroup>> GetTodayMuscleGroups() 
+    public ActionResult<List<MuscleGroup>> GetTodayMuscleGroups()
     {
-        return new List<MuscleGroup>() { MuscleGroup.Arms, MuscleGroup.Back, MuscleGroup.Core };
+        var today = DateOnly.FromDateTime(DateTime.Today);
+        var context = _contextFactory.CreateDbContext();
+
+        var schedule = context.Schedule
+            // TODO: filter by authenticated user
+            .Where(s => s.Date == today)
+            .FirstOrDefault();
+
+        if (schedule?.MuscleGroupFilter == null)
+        {
+            // TODO: load default template when no schedule exists for this week
+            return Ok(new List<MuscleGroup>());
+        }
+
+        return Ok(schedule.MuscleGroupFilter);
     }
 
     [HttpGet("today/exercise")]
@@ -56,7 +70,7 @@ public class ScheduleController : ControllerBase
         return Ok(workoutLog);
     }
 
-    [HttpPost("weekly")]
+    [HttpPost]
     [Produces("application/json")]
     public ActionResult<bool> Post([FromBody] WeeklySchedule weeklySchedule)
     {

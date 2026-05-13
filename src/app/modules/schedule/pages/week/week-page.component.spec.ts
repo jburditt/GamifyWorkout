@@ -3,12 +3,17 @@ import { WeekPageComponent, WeekdayDropContainer } from './week-page.component';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { TestProvider } from '@app/test-provider';
 import { ScheduleService } from '@app/api/services';
-import { MuscleGroup } from '@app/api/models';
-import { of } from 'rxjs';
+import { MuscleGroup, WeeklySchedule } from '@app/api/models';
+import { of, throwError } from 'rxjs';
 
 describe('WeekPageComponent', () => {
+  let scheduleServiceSpy: jasmine.SpyObj<ScheduleService>;
+
   beforeEach(async () => {
-    const scheduleServiceSpy = jasmine.createSpyObj('ScheduleService', { apiSchedulePost: of(true) });
+    scheduleServiceSpy = jasmine.createSpyObj('ScheduleService', {
+      apiSchedulePost: of(true),
+      apiScheduleMondayGet: of({}),
+    });
 
     await TestBed.configureTestingModule({
       imports: [TestProvider, WeekPageComponent, DragDropModule],
@@ -26,17 +31,6 @@ describe('WeekPageComponent', () => {
     expect(createComponent().componentInstance).toBeTruthy();
   });
 
-  it('all day arrays are empty on init', () => {
-    const { componentInstance: component } = createComponent();
-    expect(component.monday).toEqual([]);
-    expect(component.tuesday).toEqual([]);
-    expect(component.wednesday).toEqual([]);
-    expect(component.thursday).toEqual([]);
-    expect(component.friday).toEqual([]);
-    expect(component.saturday).toEqual([]);
-    expect(component.sunday).toEqual([]);
-  });
-
   it('activity list contains all 8 muscle groups', () => {
     const { componentInstance: component } = createComponent();
     expect(component.activity.length).toBe(8);
@@ -45,6 +39,147 @@ describe('WeekPageComponent', () => {
     expect(component.activity).toContain(MuscleGroup.Chest);
     expect(component.activity).toContain(MuscleGroup.Back);
     expect(component.activity).toContain(MuscleGroup.Legs);
+  });
+
+  describe('ngOnInit', () => {
+    it('calls apiScheduleMondayGet with this week\'s Monday date in YYYY-MM-DD format', () => {
+      createComponent();
+      expect(scheduleServiceSpy.apiScheduleMondayGet).toHaveBeenCalledOnceWith({
+        monday: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/)
+      });
+    });
+
+    it('populates all day arrays from the API response', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({
+        monday:    { muscleGroupFilter: [MuscleGroup.Chest] },
+        tuesday:   { muscleGroupFilter: [MuscleGroup.Back] },
+        wednesday: { muscleGroupFilter: [MuscleGroup.Legs] },
+        thursday:  { muscleGroupFilter: [MuscleGroup.Shoulders] },
+        friday:    { muscleGroupFilter: [MuscleGroup.Arms] },
+        saturday:  { muscleGroupFilter: [MuscleGroup.Core] },
+        sunday:    { muscleGroupFilter: [MuscleGroup.Cardio] },
+      } as unknown as WeeklySchedule[]));
+
+      const { componentInstance: component } = createComponent();
+
+      expect(component.monday).toEqual([MuscleGroup.Chest]);
+      expect(component.tuesday).toEqual([MuscleGroup.Back]);
+      expect(component.wednesday).toEqual([MuscleGroup.Legs]);
+      expect(component.thursday).toEqual([MuscleGroup.Shoulders]);
+      expect(component.friday).toEqual([MuscleGroup.Arms]);
+      expect(component.saturday).toEqual([MuscleGroup.Core]);
+      expect(component.sunday).toEqual([MuscleGroup.Cardio]);
+    });
+
+    it('leaves all day arrays empty when the API returns no schedule', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(throwError(() => new Error('Not found')));
+
+      const { componentInstance: component } = createComponent();
+
+      expect(component.monday).toEqual([]);
+      expect(component.tuesday).toEqual([]);
+      expect(component.wednesday).toEqual([]);
+      expect(component.thursday).toEqual([]);
+      expect(component.friday).toEqual([]);
+      expect(component.saturday).toEqual([]);
+      expect(component.sunday).toEqual([]);
+    });
+
+    it('leaves a day array empty when that day has no muscle groups in the schedule', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({
+        monday: { muscleGroupFilter: [MuscleGroup.Chest] },
+      } as unknown as WeeklySchedule[]));
+
+      const { componentInstance: component } = createComponent();
+
+      expect(component.monday).toEqual([MuscleGroup.Chest]);
+      expect(component.tuesday).toEqual([]);
+      expect(component.sunday).toEqual([]);
+    });
+  });
+
+  describe('save', () => {
+    it('clicking the Save button calls apiSchedulePost with YYYY-MM-DD dates for each day', () => {
+      const fixture = createComponent();
+      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+      const saveButton = Array.from(buttons).find(b => b.textContent?.trim() === 'Save')!;
+      saveButton.click();
+      fixture.detectChanges();
+
+      expect(scheduleServiceSpy.apiSchedulePost).toHaveBeenCalledOnceWith({
+        body: jasmine.objectContaining({
+          monday: jasmine.objectContaining({ date: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
+          tuesday: jasmine.objectContaining({ date: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
+          sunday: jasmine.objectContaining({ date: jasmine.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
+        })
+      });
+    });
+
+    it('clicking the Save button sends the current muscle groups for each day', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({
+        monday: { muscleGroupFilter: [MuscleGroup.Chest] },
+        tuesday: { muscleGroupFilter: [MuscleGroup.Back] },
+      } as unknown as WeeklySchedule[]));
+
+      const fixture = createComponent();
+      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+      const saveButton = Array.from(buttons).find(b => b.textContent?.trim() === 'Save')!;
+      saveButton.click();
+      fixture.detectChanges();
+
+      const body = scheduleServiceSpy.apiSchedulePost.calls.mostRecent().args[0]!.body!;
+      expect(body.monday?.muscleGroupFilter).toEqual([MuscleGroup.Chest]);
+      expect(body.tuesday?.muscleGroupFilter).toEqual([MuscleGroup.Back]);
+      expect(body.wednesday?.muscleGroupFilter).toEqual([]);
+    });
+  });
+
+  describe('clear', () => {
+    it('empties all day arrays', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({
+        monday:    { muscleGroupFilter: [MuscleGroup.Chest, MuscleGroup.Core] },
+        tuesday:   { muscleGroupFilter: [MuscleGroup.Back] },
+        wednesday: { muscleGroupFilter: [MuscleGroup.Legs] },
+        thursday:  { muscleGroupFilter: [MuscleGroup.Shoulders] },
+        friday:    { muscleGroupFilter: [MuscleGroup.Arms] },
+        saturday:  { muscleGroupFilter: [MuscleGroup.Core] },
+        sunday:    { muscleGroupFilter: [MuscleGroup.Cardio] },
+      } as unknown as WeeklySchedule[]));
+
+      const { componentInstance: component } = createComponent();
+      (component as any).clear();
+
+      expect(component.monday).toEqual([]);
+      expect(component.tuesday).toEqual([]);
+      expect(component.wednesday).toEqual([]);
+      expect(component.thursday).toEqual([]);
+      expect(component.friday).toEqual([]);
+      expect(component.saturday).toEqual([]);
+      expect(component.sunday).toEqual([]);
+    });
+
+    it('clear button is rendered in the toolbar', () => {
+      const fixture = createComponent();
+      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+      const labels = Array.from(buttons).map(b => b.textContent?.trim());
+      expect(labels).toContain('Clear');
+    });
+
+    it('clicking the Clear button empties all day arrays', () => {
+      scheduleServiceSpy.apiScheduleMondayGet.and.returnValue(of({
+        monday: { muscleGroupFilter: [MuscleGroup.Chest] },
+        tuesday: { muscleGroupFilter: [MuscleGroup.Back] },
+      } as unknown as WeeklySchedule[]));
+
+      const fixture = createComponent();
+      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+      const clearButton = Array.from(buttons).find(b => b.textContent?.trim() === 'Clear')!;
+      clearButton.click();
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.monday).toEqual([]);
+      expect(fixture.componentInstance.tuesday).toEqual([]);
+    });
   });
 });
 

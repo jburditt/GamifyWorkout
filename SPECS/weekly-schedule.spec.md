@@ -9,7 +9,7 @@
 | **Spec ID** | `weekly-schedule` |
 | **Title** | Weekly Schedule Management |
 | **Status** | In Progress (core UI complete, API integration partial) |
-| **Last Updated** | 2024-01-15 |
+| **Last Updated** | 2026-05-13 |
 | **Version** | 1.0.0 |
 | **Related Specs** | [gym-management.spec.md](./gym-management.spec.md), [shared-services.spec.md](./shared-services.spec.md) |
 | **Implemented In** | Frontend: `projects/gamifyworkout/src/app/modules/schedule/`, Backend: `projects/gamifyworkout/api/Api/Controllers/ScheduleController.cs` |
@@ -20,15 +20,17 @@
 
 ### What This Feature Does
 
-Weekly Schedule allows users to plan weekly workouts by dragging and dropping muscle groups (or exercise types) into each day of the week. Users can create a customized weekly schedule, save it with a name and optional "default" flag, and retrieve saved schedules for specific weeks.
+Weekly Schedule allows users to plan weekly workouts by dragging and dropping muscle groups (or exercise types) into each day of the week. Users can create a customized weekly schedule, save it directly, and retrieve saved schedules for specific weeks.
 
 **Key Capabilities**:
 - Drag-and-drop muscle groups into weekday columns
 - Visual week-at-a-glance workout planning (Monday-Sunday)
-- Save weekly schedules with optional template naming
+- Save weekly schedule directly via the Save button (no dialog)
 - Load existing schedules for any given week
 - Filter exercises by primary muscle group
 - Reusable schedule templates (planned)
+- On page load, the current weekly schedule is loaded from API '/api/Schedule/{monday}', if any. If no weekly schedule exists for this week, load the default schedule, if it exists (TODO).
+- A 'Clear' button to the left of the 'Save' button, clears the weekly schedule of muscle groups. Use a secondary style/class for the 'Clear' button, so the button is not a call to action like the 'Save' button.
 
 ### Key Responsibilities
 
@@ -85,298 +87,9 @@ WeeklySchedule DTO (aggregates 7 Schedule records)
 
 **Auto-generated from OpenAPI spec in `src/app/api/models/`**
 
-```typescript
-/**
- * Represents muscle group categories for workout planning
- * Used for schedule filtering and exercise selection
- */
-export enum MuscleGroup {
-  Any = 'Any',
-  Arms = 'Arms',
-  Back = 'Back',
-  Cardio = 'Cardio',
-  Chest = 'Chest',
-  Core = 'Core',
-  Legs = 'Legs',
-  Shoulders = 'Shoulders'
-}
-
-/**
- * Represents a single day's workout schedule
- */
-export interface Schedule {
-  id?: string;  // Guid
-  userId?: string;  // Guid of schedule owner
-  date?: string;  // DateOnly as ISO date string "YYYY-MM-DD"
-  muscleGroupFilter?: MuscleGroup[];  // Array of selected muscle groups for the day
-  workouts?: WorkoutLog[];  // Associated workout exercises for the day
-}
-
-/**
- * Represents a recorded workout session entry
- * Tracks sets, reps, and weight for a specific exercise
- */
-export interface WorkoutLog {
-  scheduleId?: string;  // Foreign key to Schedule
-  exerciseId?: string;  // Foreign key to Exercise
-  date?: string;  // Date of workout (ISO format)
-  sets?: number;  // Number of sets performed
-  reps?: number;  // Reps per set
-  weight?: number;  // Weight in pounds/kg
-}
-
-/**
- * Represents an exercise (pre-defined exercises library)
- */
-export interface Exercise {
-  id?: string;  // Guid
-  name?: string;  // Exercise name (e.g., "Bench Press")
-  description?: string;  // How to perform the exercise
-  icon?: string;  // Icon identifier
-  primaryMuscleGroup?: MuscleGroup;  // Main muscle group targeted
-  primaryMuscle?: Muscle;  // Specific primary muscle
-  secondaryMuscleGroup?: MuscleGroup;  // Secondary muscle group
-  secondaryMuscle?: Muscle;  // Specific secondary muscle
-}
-
-/**
- * Detailed muscle targeting (17 total)
- */
-export enum Muscle {
-  Abs = 'Abs',
-  Abductors = 'Abductors',
-  Adductors = 'Adductors',
-  Biceps = 'Biceps',
-  Calves = 'Calves',
-  Chest = 'Chest',
-  Forearms = 'Forearms',
-  Glutes = 'Glutes',
-  Hamstrings = 'Hamstrings',
-  Lats = 'Lats',
-  LowerBack = 'LowerBack',
-  MiddleBack = 'MiddleBack',
-  Neck = 'Neck',
-  Quadriceps = 'Quadriceps',
-  Shoulders = 'Shoulders',
-  Traps = 'Traps',
-  Triceps = 'Triceps'
-}
-
-/**
- * Aggregated weekly schedule (7 days)
- * Frontend uses this for saving, backend returns for loading
- */
-export interface WeeklySchedule {
-  monday?: Schedule;
-  tuesday?: Schedule;
-  wednesday?: Schedule;
-  thursday?: Schedule;
-  friday?: Schedule;
-  saturday?: Schedule;
-  sunday?: Schedule;
-}
-```
-
 ### C# Models (Backend)
 
 **Located in `api/Core/Models/`**
-
-```csharp
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-
-namespace Core;
-
-/// <summary>
-/// Represents a single day's workout schedule
-/// One record per day per user
-/// </summary>
-public class Schedule : BaseEntity
-{
-    /// <summary>
-    /// Owner of the schedule (Foreign Key to User)
-    /// </summary>
-    [ForeignKey("User.Id")]
-    [JsonIgnore]
-    public Guid UserId { get; set; }
-
-    /// <summary>
-    /// Date of the schedule (DateOnly - date only, no time)
-    /// Format: YYYY-MM-DD
-    /// </summary>
-    public DateOnly Date { get; set; }
-
-    /// <summary>
-    /// Array of muscle groups planned for this day
-    /// TODO: Currently stored as JSON string '[2,3]' - normalize to separate table
-    /// Should be: ICollection<ScheduleMuscleGroup> for normalization
-    /// </summary>
-    public List<MuscleGroup>? MuscleGroupFilter { get; set; }
-
-    /// <summary>
-    /// Navigation property: Workouts performed on this schedule
-    /// </summary>
-    public ICollection<WorkoutLog>? Workouts { get; set; }
-}
-
-/// <summary>
-/// Represents a recorded workout entry (sets, reps, weight)
-/// Tracks actual performance of an exercise on a specific day
-/// </summary>
-public class WorkoutLog
-{
-    /// <summary>
-    /// Foreign Key to Schedule
-    /// </summary>
-    [ForeignKey("Schedule.Id")]
-    public Guid ScheduleId { get; set; }
-
-    /// <summary>
-    /// Foreign Key to Exercise (template/definition)
-    /// </summary>
-    [ForeignKey("Exercise.Id")]
-    public Guid ExerciseId { get; set; }
-
-    /// <summary>
-    /// Date the workout was performed (redundant with Schedule.Date, but included for flexibility)
-    /// </summary>
-    public DateOnly Date { get; set; }
-
-    /// <summary>
-    /// Number of sets performed (e.g., 3)
-    /// </summary>
-    public int Sets { get; set; }
-
-    /// <summary>
-    /// Reps per set (e.g., 10)
-    /// </summary>
-    public int Reps { get; set; }
-
-    /// <summary>
-    /// Weight used in pounds or kg (e.g., 225.5)
-    /// </summary>
-    public double Weight { get; set; }
-}
-
-/// <summary>
-/// Pre-defined exercise template (library entry)
-/// </summary>
-public class Exercise : BaseEntity
-{
-    /// <summary>
-    /// Exercise name (e.g., "Bench Press", "Squats")
-    /// </summary>
-    public required string Name { get; set; }
-
-    /// <summary>
-    /// How to perform the exercise
-    /// </summary>
-    public required string Description { get; set; }
-
-    /// <summary>
-    /// Icon identifier for UI display
-    /// </summary>
-    public required string Icon { get; set; }
-
-    /// <summary>
-    /// Primary muscle group (e.g., Chest, Legs)
-    /// </summary>
-    public MuscleGroup PrimaryMuscleGroup { get; set; }
-
-    /// <summary>
-    /// Primary specific muscle (e.g., Pectoralis for Chest)
-    /// </summary>
-    public Muscle PrimaryMuscle { get; set; }
-
-    /// <summary>
-    /// Secondary muscle group (if exercise works multiple groups)
-    /// </summary>
-    public MuscleGroup? SecondaryMuscleGroup { get; set; }
-
-    /// <summary>
-    /// Secondary specific muscle
-    /// </summary>
-    public Muscle? SecondaryMuscle { get; set; }
-}
-
-/// <summary>
-/// Muscle group categories for filtering exercises
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum MuscleGroup
-{
-    Any,
-    Arms,
-    Back,
-    Cardio,
-    Chest,
-    Core,
-    Legs,
-    Shoulders
-}
-
-/// <summary>
-/// 17 detailed muscle groups for precise targeting
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum Muscle
-{
-    Abs,
-    Abductors,
-    Adductors,
-    Biceps,
-    Calves,
-    Chest,
-    Forearms,
-    Glutes,
-    Hamstrings,
-    Lats,
-    LowerBack,
-    MiddleBack,
-    Neck,
-    Quadriceps,
-    Shoulders,
-    Traps,
-    Triceps
-}
-
-/// <summary>
-/// Aggregated weekly schedule (7 Schedule records)
-/// Used for API responses and requests
-/// </summary>
-public class WeeklySchedule
-{
-    public Schedule? Monday { get; set; }
-    public Schedule? Tuesday { get; set; }
-    public Schedule? Wednesday { get; set; }
-    public Schedule? Thursday { get; set; }
-    public Schedule? Friday { get; set; }
-    public Schedule? Saturday { get; set; }
-    public Schedule? Sunday { get; set; }
-
-    public WeeklySchedule() { }
-
-    /// <summary>
-    /// Constructor to aggregate 7 Schedule records into WeeklySchedule
-    /// </summary>
-    /// <param name="schedules">Exactly 7 Schedule records (Mon-Sun)</param>
-    /// <exception cref="ArgumentException">Thrown if not exactly 7 schedules</exception>
-    public WeeklySchedule(List<Schedule> schedules)
-    {
-        if (schedules == null || schedules.Count != 7)
-            throw new ArgumentException("There should be exactly 7 schedules.");
-
-        Monday = schedules[0];
-        Tuesday = schedules[1];
-        Wednesday = schedules[2];
-        Thursday = schedules[3];
-        Friday = schedules[4];
-        Saturday = schedules[5];
-        Sunday = schedules[6];
-    }
-}
-```
 
 ### Entity Relationships
 
@@ -522,26 +235,6 @@ true
 
 **Purpose**: HTTP client for schedule operations
 
-**Methods**:
-
-```typescript
-/**
- * Get weekly schedule starting from given Monday
- * @param request - Request with Monday date
- * @param request.monday - DateOnly as "YYYY-MM-DD"
- * @returns Observable of WeeklySchedule
- */
-apiScheduleGet(request: { monday: string }): Observable<WeeklySchedule> { }
-
-/**
- * Save weekly schedule (all 7 days at once)
- * @param request - Request with WeeklySchedule payload
- * @param request.body - WeeklySchedule with days to save
- * @returns Observable of boolean success
- */
-apiSchedulePost(request: { body: WeeklySchedule }): Observable<boolean> { }
-```
-
 **Dependencies**:
 - HttpClient (Angular)
 - Configuration (OpenAPI base URL)
@@ -562,63 +255,22 @@ apiSchedulePost(request: { body: WeeklySchedule }): Observable<boolean> { }
 
 **Outputs**: None
 
-**Class Properties**:
-
-```typescript
-/**
- * Available muscle groups to drag from pool
- */
-activity: Array<MuscleGroup> = [
-  MuscleGroup.Any,
-  MuscleGroup.Cardio,
-  MuscleGroup.Core,
-  MuscleGroup.Chest,
-  MuscleGroup.Back,
-  MuscleGroup.Shoulders,
-  MuscleGroup.Arms,
-  MuscleGroup.Legs
-];
-
-/**
- * Muscle groups scheduled for each day (arrays for drag-drop zones)
- */
-monday: Array<MuscleGroup> = [];
-tuesday: Array<MuscleGroup> = [];
-wednesday: Array<MuscleGroup> = [];
-thursday: Array<MuscleGroup> = [];
-friday: Array<MuscleGroup> = [];
-saturday: Array<MuscleGroup> = [];
-sunday: Array<MuscleGroup> = [];
-
-/**
- * Material Dialog reference
- */
-readonly dialog = inject(MatDialog);
-```
-
 **Lifecycle**:
 
 ```typescript
 constructor(private scheduleService: ScheduleService) { }
 
-protected openDialog(action: DialogAction): void {
-  // 1. Open AddWeeklyScheduleDialog
-  // 2. Get dialog result (name and default flag)
-  // 3. If action == 'Save':
-  //    - Calculate dates for each day of current week
-  //    - Create WeeklySchedule DTO with current monday-sunday arrays
-  //    - Call scheduleService.apiSchedulePost()
-  //    - On success: log success
-  //    - On error: log error
-  // 4. If cancelled: do nothing
+protected save(): void {
+  // 1. Calculate dates for each day of current week (Mon-Sun)
+  // 2. Create WeeklySchedule DTO with current monday-sunday arrays
+  // 3. Call scheduleService.apiSchedulePost()
 }
 ```
 
 **Template Structure**:
 - Activity pool (draggable muscle group items)
 - Weekday columns (Mon-Sun, drop zones for muscle groups)
-- "Save" and "Save Template" buttons
-- Dialog for naming template
+- "Save" and "Save Template" buttons (Save Template disabled/placeholder)
 
 **Business Logic**:
 
@@ -655,13 +307,11 @@ this.scheduleService.apiSchedulePost({ body: weeklySchedule }).subscribe(...);
 |-------|----------|--------|---|
 | Date calculation uses toLocaleDateString() | Medium | Open | Could use toISOString() for consistency |
 | No error handling for save failures | High | Open | Silent failure - user doesn't know if save succeeded |
-| Dialog result type not fully typed | Low | Open | Returns { name: string, default: boolean } |
 | Can drag duplicate muscle groups to same day | Low | Open | Allow duplicates (not prevented by CDK) |
 | No ability to remove items from schedule | Medium | Planned | Implement swipe or drag-to-trash |
 
 **Child Components**:
 - `WeekdayDropContainer` (drop zone for each day)
-- `AddWeeklyScheduleDialog` (modal for naming)
 
 ---
 
@@ -725,51 +375,6 @@ drop(event: CdkDropListDropped<MuscleGroup[]>): void {
 
 ---
 
-#### AddWeeklyScheduleDialog
-
-**File**: `src/app/modules/schedule/dialogs/add-weekly-schedule.ts`
-
-**Purpose**: Dialog for naming weekly schedule templates
-
-**Component**:
-```typescript
-@Component({
-  templateUrl: 'add-weekly-schedule.html',
-  imports: [ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, TextboxComponent, MatSlideToggleModule]
-})
-export class AddWeeklyScheduleDialog {
-  form: FormGroup = new FormGroup({
-    name: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-    }),
-    default: new FormControl()
-  });
-
-  protected dialogClose(): { name: string, default: boolean } {
-    return { 
-      name: this.form.get('name')?.value, 
-      default: this.form.get('default')?.value || false 
-    };
-  }
-
-  public isFormValid(): boolean {
-    return this.form.valid;
-  }
-}
-```
-
-**Inputs**:
-- None
-
-**Outputs**:
-- Closes dialog with `{ name: string, default: boolean }`
-
-**Fields**:
-- `name` (text, required, 3-50 chars) - Template name
-- `default` (checkbox) - Mark as default weekly schedule
-
----
-
 ## 5. Business Logic & Workflows
 
 ### Weekly Schedule Save Workflow
@@ -778,10 +383,6 @@ export class AddWeeklyScheduleDialog {
 User Creates Week Plan
     ↓ (drag-drop muscle groups)
 User Clicks "Save" Button
-    ↓
-AddWeeklyScheduleDialog Opens
-    ↓ (optional: get template name)
-User Submits Dialog
     ↓
 Frontend Builds WeeklySchedule DTO
     ├── Calculate dates for Mon-Sun
@@ -887,26 +488,18 @@ Item Now Shows in New Day
 export class WeekPageComponent {
   constructor(private scheduleService: ScheduleService) { }
 
-  protected openDialog(action: DialogAction) {
-    if (action == 'Save') {
-      // Calculate current week
-      let today = new Date();
-      let dayOfWeek = today.getDay();
-      let monday = new Date();
-      monday.setDate(today.getDate() + dayOfWeek - 1);
+  protected save(): void {
+    const monday = this.getMondayDate();
+    let tuesday = new Date(monday); tuesday.setDate(monday.getDate() + 1);
+    // ... through Sunday
 
-      // Build WeeklySchedule DTO
-      const weeklySchedule: WeeklySchedule = {
-        monday: { date: monday.toLocaleDateString('en-CA'), muscleGroupFilter: this.monday },
-        tuesday: { date: tueDate, muscleGroupFilter: this.tuesday },
-        // ... through Sunday
-      };
+    const weeklySchedule: WeeklySchedule = {
+      monday: { date: monday.toLocaleDateString('en-CA'), muscleGroupFilter: this.monday },
+      tuesday: { date: tuesday.toLocaleDateString('en-CA'), muscleGroupFilter: this.tuesday },
+      // ... through Sunday
+    };
 
-      // Save via API
-      this.scheduleService.apiSchedulePost({ body: weeklySchedule }).subscribe((isSuccess) => {
-        console.log("Schedule saved:", isSuccess);
-      });
-    }
+    this.scheduleService.apiSchedulePost({ body: weeklySchedule }).subscribe();
   }
 }
 ```
@@ -961,7 +554,6 @@ drop(event: CdkDropListDropped<MuscleGroup[]>): void {
 
 - **Week Page Component**: [week-page.component.ts](../src/app/modules/schedule/pages/week/week-page.component.ts)
 - **Week Page Template**: [week-page.component.html](../src/app/modules/schedule/pages/week/week-page.component.html)
-- **Schedule Dialog**: [add-weekly-schedule.ts](../src/app/modules/schedule/dialogs/add-weekly-schedule.ts)
 - **Schedule Service**: [src/app/api/services/schedule.service.ts](../src/app/api/services/schedule.service.ts) (auto-generated)
 - **Routes**: [schedule.routes.ts](../src/app/modules/schedule/schedule.routes.ts)
 

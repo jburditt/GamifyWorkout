@@ -114,7 +114,7 @@ See Schedule.cs, User.cs, WorkoutLog.cs, and BaseEntity.cs
 GET /api/schedule/today/muscle
 ```
 
-**Description**: Retrieve muscle groups assigned to today on the weekly schedule. (TODO: filter by current user).
+**Description**: Retrieve muscle groups assigned to today on the weekly schedule. Load the weekly schedule using today's date. If there is no weekly schedule for this week, load the default template instead. Return the muscle groups in the weekly schedule that match today's date.
 
 **Authentication**: Not enforced (TODO: should require JWT Bearer token)
 

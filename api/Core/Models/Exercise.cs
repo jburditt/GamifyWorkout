@@ -11,6 +11,7 @@ public class Exercise : BaseEntity
     public Muscle PrimaryMuscle { get; set; }
     public MuscleGroup? SecondaryMuscleGroup { get; set; }
     public Muscle? SecondaryMuscle { get; set; }
+    public List<Equipment> EquipmentNeeded { get; set; } = new();
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]

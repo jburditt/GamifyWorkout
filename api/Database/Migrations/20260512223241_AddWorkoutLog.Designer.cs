@@ -4,6 +4,7 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    partial class EfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260512223241_AddWorkoutLog")]
+    partial class AddWorkoutLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +31,6 @@ namespace Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ExerciseId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Icon")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,45 +40,8 @@ namespace Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExerciseId");
 
                     b.ToTable("Equipment");
-                });
-
-            modelBuilder.Entity("Core.Exercise", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PrimaryMuscle")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PrimaryMuscleGroup")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondaryMuscle")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondaryMuscleGroup")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("Core.Gym", b =>
@@ -195,13 +158,6 @@ namespace Database.Migrations
                     b.ToTable("WorkoutLog");
                 });
 
-            modelBuilder.Entity("Core.Equipment", b =>
-                {
-                    b.HasOne("Core.Exercise", null)
-                        .WithMany("EquipmentNeeded")
-                        .HasForeignKey("ExerciseId");
-                });
-
             modelBuilder.Entity("Core.GymEquipment", b =>
                 {
                     b.HasOne("Core.Equipment", null)
@@ -224,11 +180,6 @@ namespace Database.Migrations
                         .HasForeignKey("ScheduleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Core.Exercise", b =>
-                {
-                    b.Navigation("EquipmentNeeded");
                 });
 
             modelBuilder.Entity("Core.Schedule", b =>

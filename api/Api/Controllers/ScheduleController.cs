@@ -56,7 +56,7 @@ public class ScheduleController : ControllerBase
         return Ok(workoutLog);
     }
 
-    [HttpPost]
+    [HttpPost("weekly")]
     [Produces("application/json")]
     public ActionResult<bool> Post([FromBody] WeeklySchedule weeklySchedule)
     {

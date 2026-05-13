@@ -1,5 +1,5 @@
 import { AppComponent } from '@app/app.component';
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
@@ -38,7 +38,7 @@ bootstrapApplication(AppComponent, {
     //     deps: [ConfigService, HttpClient, AuthenticationService],
     //     multi: true,
     // },
-    ApiAuthenticationService,
+    provideZoneChangeDetection(),ApiAuthenticationService,
     provideOAuthService(),
     provideAnimations(),
     provideRouter(routes),

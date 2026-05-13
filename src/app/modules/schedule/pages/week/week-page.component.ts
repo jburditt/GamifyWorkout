@@ -1,4 +1,4 @@
-import { Component, input, forwardRef, inject } from '@angular/core';
+import { Component, input, forwardRef, inject, OnInit } from '@angular/core';
 import { WeekContainerComponent } from "@app/features/rpg/component/week-container/week-container.component";
 import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { CdkDropListGroup } from "@angular/cdk/drag-drop";
@@ -7,6 +7,7 @@ import { AddWeeklyScheduleDialog } from '../../dialogs/add-weekly-schedule';
 import { MatDialog } from '@angular/material/dialog';
 import { MuscleGroup, Schedule, WeeklySchedule } from '@app/api/models';
 import { ScheduleService } from '@app/api/services';
+import { catchError, EMPTY } from 'rxjs';
 
 type DialogAction = 'Save Template' | 'Save';
 
@@ -15,7 +16,7 @@ type DialogAction = 'Save Template' | 'Save';
   templateUrl: './week-page.component.html',
   styleUrl: './week-page.component.css'
 })
-export class WeekPageComponent {
+export class WeekPageComponent implements OnInit {
   activity: Array<MuscleGroup> = [MuscleGroup.Any, MuscleGroup.Cardio, MuscleGroup.Core, MuscleGroup.Chest, MuscleGroup.Back, MuscleGroup.Shoulders, MuscleGroup.Arms, MuscleGroup.Legs];
   monday: Array<MuscleGroup> = [];
   tuesday: Array<MuscleGroup> = [];
@@ -29,6 +30,41 @@ export class WeekPageComponent {
 
   constructor(private scheduleService: ScheduleService) { }
 
+  private getMondayDate(): Date {
+    const today = new Date();
+    // getDay() returns 0=Sun..6=Sat; treat Sunday as 7 so Monday is always offset 0
+    const dayOfWeek = today.getDay() === 0 ? 7 : today.getDay();
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - dayOfWeek + 1);
+    return monday;
+  }
+
+  ngOnInit(): void {
+    const monday = this.getMondayDate();
+    this.scheduleService.apiScheduleMondayGet({ monday: monday.toLocaleDateString('en-CA') })
+      .pipe(catchError(() => EMPTY))
+      .subscribe((response) => {
+        const schedule = response as unknown as WeeklySchedule;
+        this.monday = schedule.monday?.muscleGroupFilter ?? [];
+        this.tuesday = schedule.tuesday?.muscleGroupFilter ?? [];
+        this.wednesday = schedule.wednesday?.muscleGroupFilter ?? [];
+        this.thursday = schedule.thursday?.muscleGroupFilter ?? [];
+        this.friday = schedule.friday?.muscleGroupFilter ?? [];
+        this.saturday = schedule.saturday?.muscleGroupFilter ?? [];
+        this.sunday = schedule.sunday?.muscleGroupFilter ?? [];
+      });
+  }
+
+  protected clear(): void {
+    this.monday = [];
+    this.tuesday = [];
+    this.wednesday = [];
+    this.thursday = [];
+    this.friday = [];
+    this.saturday = [];
+    this.sunday = [];
+  }
+
   protected openDialog(action: DialogAction) {
     const dialogRef = this.dialog.open(AddWeeklyScheduleDialog);
 
@@ -36,11 +72,7 @@ export class WeekPageComponent {
       console.log(`Dialog name: ${result.name}`);
       console.log(`Dialog isDefault: ${result.default}`);
       if (result && action == 'Save') {
-        let today = new Date();
-        // getDay() returns 0=Sun..6=Sat; treat Sunday as 7 so Monday is always offset 0
-        let dayOfWeek = today.getDay() === 0 ? 7 : today.getDay();
-        let monday = new Date(today);
-        monday.setDate(today.getDate() - dayOfWeek + 1);
+        const monday = this.getMondayDate();
         let tuesday = new Date(monday); tuesday.setDate(monday.getDate() + 1);
         let wednesday = new Date(monday); wednesday.setDate(monday.getDate() + 2);
         let thursday = new Date(monday); thursday.setDate(monday.getDate() + 3);

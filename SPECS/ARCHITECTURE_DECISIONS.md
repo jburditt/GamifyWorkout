@@ -19,7 +19,7 @@ It explains why the current frontend/backend patterns were chosen, their intende
 
 ### Frontend
 
-- **Angular 20** as the single-page application framework.
+- **Angular 21** as the single-page application framework.
 - **Standalone components** for modular, tree-shakable UI and easier future migration.
 - **NgRx Store** for global feature state, especially RPG progression and app-wide data hydration.
 - **Angular Material** for consistent UI patterns across dialogs, tables, forms, and drag/drop.

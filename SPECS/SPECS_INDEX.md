@@ -6,6 +6,7 @@
 
 | Spec File | Title | Status | Coverage | Primary Dependencies |
 |---|---|---|---|---|
+| `CONSTITUTION.md` | Project Constitution | Completed | Vision, inviolable rules, architecture principles, workflow, known tech debt | All specs |
 | `SPEC_TEMPLATE.md` | Specification Template | Completed | Defines spec structure and content expectations | None |
 | `SPEC_GUIDE.md` | Specification Guide | Completed | How to read, write, and extend specs | `SPEC_TEMPLATE.md` |
 | `gym-management.spec.md` | Gym Management | Completed | Gyms, equipment assignment, gym/equipment APIs | `shared-services.spec.md`, `authentication.spec.md` |
@@ -54,6 +55,7 @@ When adding a new spec, include:
 
 ## Navigation Quick Links
 
+- [CONSTITUTION.md](./CONSTITUTION.md)
 - [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md)
 - [SPEC_GUIDE.md](./SPEC_GUIDE.md)
 - [gym-management.spec.md](./gym-management.spec.md)

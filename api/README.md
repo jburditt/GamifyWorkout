@@ -10,7 +10,7 @@ This demo focuses on two pages, see the menu items Inventory -> [Gym](/inventory
 # Tech Stack
 - .NET 9 OData API 
 - EntityFramework 8
-- Angular 20
+- Angular 21
 
 # System Design
 - *Azure Static Web App* - Gamify Workout website
